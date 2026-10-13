@@ -1,0 +1,21 @@
+<!doctype html><html><body><script type="module">
+import * as T from 'three';
+import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+const atlas=await fetch('/anatomy/atlas.json').then(r=>r.json());
+const zipped=await fetch('/anatomy/body.bin.gz').then(r=>r.arrayBuffer());
+const signature=new Uint8Array(zipped,0,2);
+const buffer=signature[0]===31&&signature[1]===139?await new Response(new Blob([zipped]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer():zipped;
+const renderer=new T.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.3;
+const scene=new T.Scene();scene.add(new T.HemisphereLight(0xfff5ea,0x655778,2));const light=new T.DirectionalLight(0xfff4e9,3);light.position.set(-2,3,5);scene.add(light);const fill=new T.DirectionalLight(0xeae4ff,1);fill.position.set(2,1,3);scene.add(fill);
+const colors={skeleton:'#dbd6c5',heart:'#b6335c',brain:'#d291b0',lungs:'#d9976a',liver:'#ac6552',stomach:'#e2b652',kidneys:'#cb657b',pancreas:'#c8bc64',spleen:'#9871b3',intestines:'#8bc3ba'};
+window.renders={};window.bounds={};
+for(const id of Object.keys(colors)){
+ const parts=atlas.parts.filter(p=>p.group===id).map(p=>{const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,p.positions,p.vertexCount*3),3));g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,p.normals,p.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,p.indices,p.indexCount),1));return g;});
+ const geometry=mergeGeometries(parts,false);geometry.computeBoundingBox();const box=geometry.boundingBox;const c=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());window.bounds[id]={center:c.toArray(),size:size.toArray()};
+ const mesh=new T.Mesh(geometry,new T.MeshPhysicalMaterial({color:colors[id],roughness:.38,metalness:.02,clearcoat:.25,side:T.DoubleSide}));scene.add(mesh);
+ const h=size.y*1.035,w=size.x*1.035;renderer.setSize(Math.round(id==='skeleton'?h?1200*w/h:500:640*w/h),id==='skeleton'?1200:640);
+ const cam=new T.OrthographicCamera(-w/2,w/2,h/2,-h/2,.01,20);cam.position.set(c.x,c.y,5);cam.lookAt(c.x,c.y,0);renderer.render(scene,cam);window.renders[id]=renderer.domElement.toDataURL('image/png');scene.remove(mesh);parts.forEach(g=>g.dispose());geometry.dispose();mesh.material.dispose();
+}
+window.done=true;
+</script></body></html>

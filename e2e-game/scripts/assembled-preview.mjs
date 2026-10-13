@@ -1,0 +1,3 @@
+import {chromium} from 'playwright';
+import {ORGANS} from '../src/game.ts';
+const browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage({viewport:{width:1440,height:1000}});await page.goto('http://127.0.0.1:5173');await page.getByRole('button',{name:'Start game',exact:true}).click();for(const o of ORGANS){await page.locator(`[data-organ="${o.id}"]`).click();const r=await page.getByTestId('body').boundingBox();await page.mouse.click(r.x+r.width*o.x/100,r.y+r.height*o.y/100);}await page.locator('.result-layer').evaluate(el=>el.style.visibility='hidden');await page.screenshot({path:'docs/assembled.png',fullPage:true});await browser.close();

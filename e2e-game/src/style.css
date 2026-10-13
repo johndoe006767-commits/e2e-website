@@ -1,0 +1,223 @@
+/* Visual direction: variance 5 / motion 4 / density 4. User-requested purple theme.
+   Layers: anatomy 1-12, game overlay 20, header 30, drag ghost 40, native dialog top layer.
+   Shape rule: controls 12px, large panels 24px; specimen collection is unboxed. */
+:root{font-family:'Avenir Next',Avenir,'Segoe UI',sans-serif;color:#fbf5fc;background:#632671;font-synthesis:none;font-weight:400;--muted:#e2cce6;--line:#e4bfe631;--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1)}
+*{box-sizing:border-box}body{margin:0;min-width:360px}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit;cursor:pointer}button:disabled{cursor:default}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid #f9d7a9;outline-offset:5px}button{transition:transform 140ms var(--ease-out),opacity 160ms var(--ease-out)}button:active:not(:disabled){transform:scale(.97)}a{color:inherit;text-decoration:none}img{user-select:none;-webkit-user-drag:none}.atmosphere{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:#702b79}.atmosphere>div{position:absolute;inset:0;background:linear-gradient(110deg,#722b763d,#64227036),url(/assets/purple-atmosphere.webp) center/cover no-repeat;opacity:.85}
+.app-shell{max-width:1500px;margin:auto;padding:0 52px;min-height:100dvh}.topbar{height:88px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:24px}.brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:19px;letter-spacing:-.8px;line-height:1.05}.brand-mark{font-size:46px;font-weight:500;letter-spacing:-7px;margin-right:6px;line-height:1}.brand-mark span{font-size:26px;color:#eab5ca;vertical-align:4px}.brand-sub{display:block;font-size:12px;letter-spacing:2.5px;font-weight:400;margin-top:5px}.top-caption{font-size:12px;color:var(--muted);letter-spacing:.15px}.header-actions{display:flex;gap:8px}.icon-button{display:inline-flex;width:40px;height:40px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:12px;background:#49205455;flex-shrink:0}.icon-button:disabled{opacity:.35}.game-heading{display:flex;justify-content:space-between;align-items:center;padding:30px 0 20px;gap:30px}.eyebrow{font-size:10px;letter-spacing:2.7px;font-weight:600;color:#e8c8e5;margin-bottom:10px}h1{font-size:clamp(27px,2.8vw,40px);line-height:1.12;font-weight:500;letter-spacing:-1.5px;margin:0}p{margin:0}.game-heading p{font-size:13px;color:var(--muted);margin-top:10px}.scoreboard{display:flex;align-items:center;flex-shrink:0}.stat{padding:0 26px;border-left:1px solid var(--line)}.stat:first-child{border:0}.stat:last-child{padding-right:0}.stat>span{display:flex;align-items:center;gap:6px;font-size:9px;letter-spacing:1.5px;color:var(--muted);white-space:nowrap;margin-bottom:8px}.stat strong{font-size:30px;font-variant-numeric:tabular-nums;line-height:1.1;font-weight:500;letter-spacing:-1px}.stat strong small{font-size:16px;color:#d9bbdf;letter-spacing:0}.hearts{display:flex;gap:5px;height:33px;align-items:center;color:#f2b9cf}.hearts .empty{opacity:.35}.urgent strong{color:#ffd5ad}.playfield{position:relative;display:grid;grid-template-columns:minmax(220px,1fr) minmax(220px,360px) minmax(220px,1fr);min-height:520px;height:calc(100dvh - 380px);max-height:770px;gap:20px;isolation:isolate}.organ-bank{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(5,1fr);gap:3px 18px;padding:22px 0 30px;align-items:center}.organ-piece{border:1px solid transparent;background:transparent;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:6px;position:relative;touch-action:none;min-height:80px;user-select:none;transition:opacity 180ms var(--ease-out),background 160ms ease,border-color 160ms ease,transform 140ms var(--ease-out)}.organ-piece:not(:disabled){cursor:grab}.organ-piece:active:not(:disabled){cursor:grabbing;transform:scale(.98)}.specimen{position:relative;display:flex;align-items:center;justify-content:center;height:clamp(51px,8vh,87px);width:100%}.specimen img{width:90px;height:100%;object-fit:contain;filter:drop-shadow(0 7px 7px #260b3640);transform:rotate(var(--tilt));pointer-events:none}.organ-piece[data-organ="esophagus"] img,.organ-piece[data-organ="trachea"] img{width:58px}.organ-name{font-size:11px;line-height:1.3;color:#f7eaf9}.organ-piece.selected{background:transparent;border-color:transparent}.organ-piece.placed img{opacity:.13;filter:grayscale(.5)}.organ-piece.placed .organ-name{opacity:.48}.placed-check{position:absolute;display:grid;place-items:center;width:30px;height:30px;border:1px solid #c5a1d456;border-radius:50%;color:#e6cfe9;background:#552961}.organ-piece.in-hand img{opacity:.18}.body-column{position:relative;display:flex;flex-direction:column;align-items:center;min-height:0}.body-caption{display:flex;width:100%;justify-content:space-between;align-items:center;padding:12px 10px;color:#debedf;font-size:10px}.body-caption span:first-child{letter-spacing:2px;font-size:9px}.body-stage{position:relative;flex:1;min-height:0;display:flex;justify-content:center;width:100%;align-items:center}.body-aura{position:absolute;inset:5% -6% 10%;border-radius:50%;background:radial-gradient(ellipse,#bf87c430,transparent 67%);pointer-events:none}.body{position:relative;aspect-ratio:0.37957;height:100%;max-height:100%;flex-shrink:0;touch-action:none}.body .skeleton{height:100%;width:100%;object-fit:fill;pointer-events:none;opacity:.95;filter:drop-shadow(0 5px 12px #3510394a)}.body.has-selection{cursor:crosshair}.body-organ{position:absolute;pointer-events:none;object-fit:fill;filter:drop-shadow(0 2px 2px #350b3d33)}.body.fade-organs .body-organ{opacity:.2!important}.side-label{position:absolute;top:32%;font-size:11px;color:#dbc0df80}.right-label{left:8%}.left-label{right:8%}.view-button{display:flex;align-items:center;gap:8px;border:none;background:transparent;font-size:10px;color:#e3c9e9;padding:12px 8px;white-space:nowrap}.view-button:disabled{opacity:.45}.keyboard-aim{display:none;position:absolute;transform:translate(-50%,-50%);width:22px;height:22px;border:1px solid #ffe3b7;border-radius:50%;background:#492253b3;text-align:center;line-height:18px;font-size:20px;color:#ffe3b7;z-index:13;pointer-events:none}.body:focus-visible .keyboard-aim{display:block}.bottom-bar{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:18px 0;gap:24px;min-height:92px}.feedback{display:flex;align-items:center;gap:13px;max-width:700px}.feedback-symbol{width:38px;height:38px;flex-shrink:0;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;color:#e7c5ed}.feedback strong{font-size:12px;font-weight:600}.feedback p{font-size:11px;line-height:1.6;color:var(--muted);margin-top:3px}.feedback.good .feedback-symbol{color:#f6e7c8}.feedback.bad .feedback-symbol{color:#ffc4c9}.feedback.hint .feedback-symbol{color:#ffe0a6}.game-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}.hint-button{height:40px;display:flex;align-items:center;gap:9px;background:#edcee515;border:1px solid #ebc9eb55;border-radius:12px;font-size:12px;padding:0 13px;white-space:nowrap}.hint-button>span{font-size:10px;background:#e7c3e923;display:grid;place-items:center;width:20px;height:20px;border-radius:6px}.hint-button:disabled{opacity:.4}footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:15px 0 20px;font-size:10px;color:#d6b9db}footer a{text-decoration:underline;text-underline-offset:3px}.footer-dot{margin:0 8px}.start-layer{position:absolute;inset:0;z-index:20;display:grid;place-items:center;background:#36123f4d;backdrop-filter:blur(6px);border-radius:24px}.start-panel{width:min(460px,90%);padding:34px 30px;text-align:center;border:1px solid #e4bbdf47;border-radius:24px;background:linear-gradient(145deg,#7e3d86f5,#522260fa);box-shadow:0 24px 80px #29122d55;display:flex;align-items:center;flex-direction:column;color:#fcf3fa}.start-symbol{display:grid;place-items:center;width:60px;height:60px;background:#efcae214;border:1px solid #e5bcdf36;border-radius:18px;margin-bottom:18px}h2{font-size:27px;line-height:1.16;letter-spacing:-.8px;font-weight:500;margin:12px 0 14px}.start-panel p{font-size:13px;line-height:1.75;color:#e9d5ed}.rule-row{display:flex;justify-content:center;gap:20px;margin:25px 0;font-size:11px;color:#f4dff3}.rule-row span{display:flex;align-items:center;gap:6px;white-space:nowrap}.primary{display:inline-flex;align-items:center;justify-content:center;gap:22px;min-height:46px;border:1px solid #f7e5ee;background:#f6e7f1;color:#512257;border-radius:12px;padding:0 22px;font-size:13px;font-weight:600;white-space:nowrap}.primary:disabled{opacity:.6}.start-panel .primary{width:100%;margin-top:7px}.start-note{font-size:9px;color:#d9bbdf;margin-top:16px}.pause-layer .primary{margin-top:25px}.result-count{font-size:64px;font-variant-numeric:tabular-nums;line-height:1;margin:20px 0 0;letter-spacing:-3px}.result-count span{font-size:24px;color:#d7b4de;letter-spacing:-1px}.result-layer .primary{margin-top:24px}.drag-ghost{position:fixed;top:0;left:0;width:96px;height:96px;z-index:40;pointer-events:none;will-change:transform}.drag-ghost img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 12px #230c3555)}.drop-point{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:7px;height:7px;background:#faf4fa;border:2px solid #54265c;border-radius:50%;box-shadow:0 0 0 2px #fdf2fa77}dialog{background:#652d72;color:#fbf5fc;border:1px solid #dbaadb66;border-radius:24px;padding:32px;max-width:520px;width:calc(100% - 40px);box-shadow:0 30px 100px #230c3455}dialog::backdrop{background:#210c2ecc;backdrop-filter:blur(5px)}dialog h2{margin-top:8px;padding-right:30px}dialog p,dialog li{font-size:13px;line-height:1.65;color:#efdaef}dialog ol{padding-left:20px;margin:22px 0}dialog li{padding-left:4px;margin:12px 0}dialog .keyboard-help{padding:14px;background:#e9c5eb10;border-radius:12px;margin:18px 0}dialog .small-copy{font-size:11px;color:#dbc2e0;margin-bottom:24px}.dialog-close{position:absolute;right:18px;top:18px}.dialog-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:26px}.secondary{background:transparent;border:1px solid #dcb6df70;padding:0 20px;min-height:46px;border-radius:12px;font-size:13px}.asset-error{margin-top:12px!important}.asset-error button{background:none;border:0;text-decoration:underline}
+@media(hover:hover) and (pointer:fine){.organ-piece:hover:not(:disabled){background:transparent;transform:translateY(-2px)}.icon-button:hover:not(:disabled),.hint-button:hover:not(:disabled){background:#e9c4e325}.primary:hover:not(:disabled){transform:translateY(-1px);background:#fceff7}.view-button:hover:not(:disabled){color:#fff3fb}}
+@media(min-width:1500px){.app-shell{padding:0 64px}.playfield{gap:45px}.specimen img{width:108px}.organ-name{font-size:12px}}
+@media(max-width:1100px){.app-shell{padding:0 28px}.stat{padding:0 16px}.stat strong{font-size:26px}.hearts{gap:2px}.playfield{grid-template-columns:minmax(170px,1fr) minmax(210px,280px) minmax(170px,1fr);gap:5px}.organ-bank{gap:3px 4px}.topbar{height:72px}.game-heading{padding-top:24px}.specimen img{width:76px}.game-heading p{font-size:12px}}
+@media(max-width:767px){.app-shell{padding:0 18px}.topbar{height:68px}.top-caption,.fullscreen{display:none}.brand{font-size:17px}.brand-mark{font-size:38px}.brand-sub{font-size:10px}.game-heading{flex-direction:column;align-items:flex-start;gap:23px;padding:25px 0 15px}h1{font-size:31px}.eyebrow{font-size:9px}.game-heading p{font-size:12px}.scoreboard{width:100%;justify-content:space-between}.stat{padding:0 16px}.stat:first-child{padding-left:0}.stat strong{font-size:26px}.stat>span{font-size:8px}.hearts svg{width:20px}.playfield{grid-template-columns:minmax(70px,1fr) minmax(150px,1.65fr) minmax(70px,1fr);gap:0;height:650px;min-height:650px;max-height:none}.organ-bank{grid-template-columns:1fr;grid-template-rows:repeat(10,1fr);gap:0;padding:12px 0 20px}.organ-piece{min-height:0;padding:3px 0;gap:2px;border-radius:10px}.specimen{height:39px}.specimen img{width:56px}.organ-name{font-size:9px;max-width:80px}.body-caption{padding:8px 0;justify-content:center}.body-caption span:first-child{font-size:7px;letter-spacing:1.4px}.body-caption span:last-child{display:none}.body{height:auto;width:100%;max-width:225px;aspect-ratio:.37957}.body-stage{align-items:flex-start;padding-top:16px}.body-aura{inset:0}.side-label{top:30%;font-size:9px}.right-label{left:-5%}.left-label{right:-5%}.view-button{font-size:8px;gap:5px;margin-top:auto;padding:6px 0}.view-button svg{width:14px}.bottom-bar{align-items:flex-start;flex-direction:column;gap:15px;padding:18px 0}.feedback p{font-size:11px}.feedback{min-height:60px}.game-actions{width:100%;justify-content:flex-end}.hint-button{margin-right:auto}.start-panel{padding:25px 20px;width:95%}.start-layer{inset:0 -6px}.start-panel h2{font-size:24px}.rule-row{gap:12px;font-size:10px}.start-note{font-size:9px}.start-panel p{font-size:12px}footer{font-size:8px;gap:10px}.footer-dot{margin:0 4px}.drag-ghost{width:96px;height:96px}}
+@media(prefers-reduced-motion:reduce){button,.organ-piece{transition:opacity 150ms ease}.organ-piece:hover:not(:disabled),.primary:hover:not(:disabled),button:active:not(:disabled){transform:none}}
+@media(prefers-reduced-transparency:reduce){.start-layer{backdrop-filter:none;background:#51245bee}.start-panel{background:#652d72}dialog::backdrop{backdrop-filter:none;background:#210c2ef5}}
+
+/* Focused game layout: the skeleton takes the space previously used by page copy. */
+.app-shell{padding:0 40px}
+.game-heading{height:86px;padding:16px 0;flex-direction:row;justify-content:space-between;align-items:center;gap:18px}
+.scoreboard{justify-content:flex-start;width:auto}
+.stat:first-child{padding-left:0}
+.playfield{height:calc(100dvh - 150px);min-height:560px;max-height:none;grid-template-columns:minmax(170px,1fr) minmax(260px,400px) minmax(170px,1fr)}
+.body-stage{padding:0}
+.bottom-bar{height:64px;min-height:64px;padding:10px 0;border:0;flex-direction:row;align-items:center}
+.game-actions{margin-left:auto;width:auto}
+.fullscreen{display:inline-flex}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.feedback.hint{max-width:740px;min-height:0}
+@media(max-width:767px){
+ .app-shell{padding:0 12px}
+ .game-heading{height:86px;gap:10px;padding:12px 0}
+ .stat{padding:0 10px}.stat strong{font-size:23px}.stat>span{font-size:7px;letter-spacing:1px}.hearts{gap:1px}.hearts svg{width:17px}
+ .playfield{height:max(650px,calc(100dvh - 150px));min-height:650px;grid-template-columns:minmax(60px,1fr) minmax(180px,2.7fr) minmax(60px,1fr);gap:0}
+ .body-stage{align-items:center}.body{width:100%;max-width:none;height:auto}.side-label{top:33%}
+ .bottom-bar{height:auto;min-height:64px;flex-wrap:wrap;gap:10px}.feedback.hint{flex-basis:100%;padding-top:8px}.game-actions{margin-left:auto}.hint-button{margin-right:0}
+}
+
+/* Three.js owns the body; native CSS handles hover feedback only.
+   10% increase from the restored body height, with a matching wider center lane. */
+.game-heading{height:64px;padding:7px 0}
+.playfield{height:max(616px,calc(110dvh - 165px));min-height:616px;grid-template-columns:minmax(160px,1fr) minmax(286px,440px) minmax(160px,1fr)}
+.body{cursor:grab;width:auto;height:100%;max-height:none}
+.body.rotating{cursor:grabbing}
+.body.has-selection{cursor:crosshair}
+.anatomy-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.three-ready .skeleton-placeholder{visibility:hidden}
+.checkpoints{position:absolute;inset:0;pointer-events:none;z-index:2}
+.blood-cell{position:absolute;left:0;top:0;width:7px;height:6px;border:1px solid #ffffff99;border-radius:50%;background:radial-gradient(ellipse at 48% 45%,#d7d3dc80 0 22%,#ffffffb3 55%,#eee9f099 80%);box-shadow:0 1px 2px #35103955;opacity:.7;pointer-events:none;transition:opacity 150ms ease}
+.blood-cell::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid transparent}
+.blood-cell.magnetized{background:#ffffffe6;opacity:1}
+.blood-cell.magnetized::after{border-color:#ffffff99;background:#ffffff0d}
+.blood-cell[hidden]{display:none}
+.drag-ghost.snapped .drop-point{opacity:0}
+.drag-ghost.snapped img{filter:drop-shadow(0 2px 5px #21082e66)}
+.bottom-bar{display:grid;grid-template-columns:1fr auto 1fr;position:relative;height:64px;gap:20px}
+.start-control{grid-column:2;grid-row:1;justify-self:center}
+.game-actions{grid-column:3;grid-row:1;justify-self:end;margin:0}
+.feedback.hint{grid-column:1 / 3;grid-row:1;max-width:720px}
+.scene-error{text-align:center;font-size:13px;padding:8px}.scene-error button{background:transparent;border:0;text-decoration:underline}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .organ-piece.floating:not(.placed):not(.in-hand) .specimen img{animation:organ-float 2.4s ease-in-out infinite}
+}
+@keyframes organ-float{0%,100%{transform:translateY(0) rotate(var(--tilt))}50%{transform:translateY(-7px) rotate(calc(var(--tilt) + 4deg))}}
+@media(min-width:768px) and (max-width:1100px){
+ .playfield{grid-template-columns:110px minmax(0,1fr) 110px}
+ .organ-bank{grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(10,1fr);gap:0;padding:0}
+ .organ-piece{min-height:0;padding:3px}.specimen{height:50px}
+ .body{width:min(100%,calc((110dvh - 165px)*.37957));height:auto}
+}
+@media(max-width:767px){
+ .game-heading{height:74px;padding:8px 0}
+ .playfield{grid-template-columns:56px minmax(0,1fr) 56px;height:max(680px,calc(100dvh - 138px));min-height:680px}
+ .body{width:100%;height:auto;max-width:none}.body-stage{align-items:center}
+ .bottom-bar{grid-template-columns:1fr auto;gap:10px;height:auto;min-height:64px}
+ .start-control{grid-column:1;justify-self:center}.game-actions{grid-column:2}
+ .start-control .primary{padding:0 12px;gap:8px;min-height:40px;font-size:12px}
+ .feedback.hint{grid-column:1 / -1;grid-row:2;padding:8px 0}
+ .blood-cell{width:6px;height:5px}
+}
+@media(min-width:1101px){
+ .app-shell main{position:relative}
+ .game-heading{position:absolute;inset:0 0 auto;z-index:10;pointer-events:none}
+ .game-heading .fullscreen{pointer-events:auto}
+ .organ-bank{padding-top:64px}
+}
+
+/* Balanced outer spacing; successful source slots retain their grid footprint. */
+.app-shell{padding-top:16px;padding-bottom:16px}
+@media(min-width:1101px){.playfield{height:max(616px,calc(100dvh - 96px))}}
+.organ-piece.placed{visibility:hidden;pointer-events:none}
+.placement-feedback{position:fixed;transform:translate(-50%,-50%);pointer-events:none;z-index:45}
+.placement-feedback img{width:100%;height:100%;object-fit:contain}
+.placement-feedback.success img{filter:drop-shadow(0 0 5px #ffd36a) drop-shadow(0 0 12px #e9b13bcc)}
+.placement-feedback.error img{filter:drop-shadow(0 0 5px #ff455c) drop-shadow(0 0 12px #ef284fcc)}
+.placement-feedback{animation:placement-fade 800ms var(--ease-out) both}
+@keyframes placement-fade{0%,60%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:no-preference){
+ .placement-feedback.error img{animation:placement-shake 260ms ease-in-out}
+}
+@keyframes placement-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
+
+/* Polish pass: preserve layout (variance 4 / motion 5 / density 4).
+   Controls acknowledge input; dialogs and clues ease state changes. Pointer tracking remains immediate. */
+:root{--motion-fast:140ms;--motion-enter:220ms}
+.icon-button{width:44px;height:44px}
+.hint-button{height:44px}
+.icon-button,.hint-button,.primary,.secondary{
+ transition:transform var(--motion-fast) var(--ease-out),opacity 160ms ease,background-color 160ms ease,border-color 160ms ease;
+}
+.icon-button,.hint-button{border-color:#e4bfe64d;background-color:#49205480}
+.secondary{white-space:nowrap}
+@media(hover:hover) and (pointer:fine){
+ .icon-button:hover:not(:disabled),.hint-button:hover:not(:disabled),.secondary:hover:not(:disabled){background-color:#82478c;border-color:#edcdef99;transform:translateY(-1px)}
+}
+.icon-button:active:not(:disabled),.hint-button:active:not(:disabled),.primary:active:not(:disabled),.secondary:active:not(:disabled){transform:scale(.97)}
+.specimen img{transition:opacity 160ms ease}
+.organ-name{transition:color 160ms ease,text-decoration-color 160ms ease;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px}
+.organ-piece.selected:not(.in-hand) .organ-name{color:#fff2cc;text-decoration-color:#fff2cc99}
+.hearts svg{transition:opacity 180ms ease}
+.start-control{opacity:1;visibility:visible;transition:opacity 160ms ease,visibility 160ms}
+.start-control.dismissed{opacity:0;visibility:hidden;pointer-events:none}
+.blood-cell::after{opacity:0;transition:opacity 140ms ease}
+.blood-cell.magnetized::after{opacity:1}
+.feedback.hint{animation:soft-enter 180ms var(--ease-out) both}
+.result-layer{animation:soft-fade 220ms var(--ease-out) both}
+.result-layer .start-panel{animation:panel-enter 240ms var(--ease-out) both}
+@keyframes soft-fade{from{opacity:0}to{opacity:1}}
+@keyframes soft-enter{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes panel-enter{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+/* Native dialog retains focus handling while discrete transitions support its closing frame. */
+dialog{opacity:0;transform:translateY(8px) scale(.98);transition:opacity 180ms var(--ease-out),transform 220ms var(--ease-out),display 220ms allow-discrete,overlay 220ms allow-discrete}
+dialog[open]{opacity:1;transform:translateY(0) scale(1)}
+dialog::backdrop{opacity:0;transition:opacity 180ms ease,display 220ms allow-discrete,overlay 220ms allow-discrete}
+dialog[open]::backdrop{opacity:1}
+@starting-style{dialog[open]{opacity:0;transform:translateY(8px) scale(.98)}dialog[open]::backdrop{opacity:0}}
+@media(prefers-reduced-motion:reduce){
+ .icon-button,.hint-button,.primary,.secondary{transition:opacity 140ms ease,background-color 140ms ease,border-color 140ms ease}
+ .icon-button:hover:not(:disabled),.hint-button:hover:not(:disabled),.primary:hover:not(:disabled),.secondary:hover:not(:disabled),button:active:not(:disabled){transform:none}
+ .feedback.hint,.result-layer .start-panel{animation:soft-fade 140ms ease both}
+ dialog,dialog[open]{transform:none;transition:opacity 140ms ease,display 140ms allow-discrete,overlay 140ms allow-discrete}
+ @starting-style{dialog[open]{transform:none}}
+}
+
+.orientation-label{position:absolute;bottom:0;left:50%;transform:translate(-50%,100%);font-size:11px;letter-spacing:.06em;color:#f1deef;white-space:nowrap;pointer-events:none}
+
+/* Readable checkpoints: cool teal against warm ivory, without continuous pulsing. */
+.blood-cell{width:8px;height:8px;border:1.5px solid #24545b;background:#8dd9ce;box-shadow:0 0 0 1px #ccfff04d,0 1px 3px #24102e80;opacity:.9;transition:opacity 140ms ease,background-color 140ms ease}
+.blood-cell.magnetized{background:#c5fff0;opacity:1}
+.organ-bank{grid-template-rows:repeat(7,minmax(0,1fr))}
+@media(min-width:1101px){.organ-bank{padding-top:72px}.specimen{height:clamp(42px,6.5vh,70px)}.specimen img{max-height:100%;width:86px}.organ-name{font-size:10px}}
+@media(max-width:1100px){.organ-bank{grid-template-rows:repeat(13,minmax(0,1fr))}.playfield{min-height:850px}.specimen{height:38px}.organ-name{font-size:9px}}
+button:focus-visible{outline:2px solid #b7f3e8;outline-offset:4px}
+
+/* The expanded collection owns its height, keeping controls below every specimen. */
+body{position:relative;isolation:isolate}
+.atmosphere{position:absolute;min-height:100%;}
+@media(max-width:767px){.playfield{height:max(1100px,calc(100dvh - 138px));min-height:1100px}.organ-bank{padding:0 0 12px}.organ-piece{min-width:0}}
+
+/* Completion is a one-shot performance; the score never hides the skeleton. */
+.celebration-particles{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:35}
+.is-complete .body-column{position:absolute;inset:0;pointer-events:none}
+.is-complete .body-stage{height:100%}
+.body[data-celebrating]{width:min(94vw,1100px);height:100%;aspect-ratio:auto;outline:none}
+.is-complete .side-label,.is-complete .body-aura{display:none}
+.is-complete .result-layer{inset:auto 16px 24px auto;display:block;width:280px;background:none;backdrop-filter:none;pointer-events:auto}
+.is-complete .start-panel{width:100%;padding:24px 20px;background:#552461ee;box-shadow:0 10px 40px #240d3433}
+.is-complete .start-panel h2{font-size:22px}.is-complete .start-panel p{font-size:11px}.is-complete .result-count{font-size:46px;margin:12px 0}
+@media(max-width:767px){.is-complete{height:calc(100dvh - 90px);min-height:690px}.is-complete .body-column{bottom:220px}.is-complete .result-layer{bottom:0;left:50%;right:auto;transform:translateX(-50%);width:280px}.is-complete .start-panel{padding:14px}.is-complete .start-panel>svg,.is-complete .start-panel p{display:none}.is-complete .result-count{margin:0;font-size:34px}.is-complete .start-panel h2{margin:8px 0}.is-complete .start-panel .primary{margin-top:8px}}
+.is-complete .organ-bank{display:none}
+.app-shell:has(.is-complete) .bottom-bar{display:none}
+
+.finish-game{position:absolute;right:0;top:10px;pointer-events:auto;min-height:40px;padding:0 12px;font-size:11px;background:#49205480}
+@media(max-width:1100px){.game-heading{position:relative}}
+
+/* Quiet, shared controls: soft materials, clear hierarchy, immediate feedback. */
+.primary,.secondary,.hint-button,.icon-button,.result-panel{
+ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+ font-optical-sizing:auto;
+}
+.primary,.secondary,.hint-button,.icon-button{border-radius:999px;touch-action:manipulation}
+.primary{min-height:46px;gap:10px;padding:0 22px;background:#f8eff8;border-color:transparent;color:#522258;font-size:13px;font-weight:600;box-shadow:0 2px 8px #220c2914}
+.start-control .primary{min-width:160px;min-height:46px;font-size:13px;gap:18px}
+.game-actions{gap:8px}
+.game-actions .icon-button,.hint-button{
+ background:#3e1a4b66;border:1px solid #fff2ff24;
+ backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+ box-shadow:inset 0 1px 0 #ffffff05;
+}
+.hint-button{padding:0 16px;gap:8px;font-size:13px;font-weight:500}
+.hint-button>span{background:none;border-radius:0;border-left:1px solid #ffffff26;width:auto;min-width:22px;height:16px;padding-left:10px;margin-left:3px;font-size:11px;font-variant-numeric:tabular-nums;color:#e5d1e9}
+.hint-button:disabled,.game-actions .icon-button:disabled{opacity:.5}
+.is-complete .result-layer{width:264px}
+.is-complete .result-panel{
+ padding:26px 24px 24px;border-radius:24px;border:1px solid #fff2ff26;
+ background:#41204ec9;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+ box-shadow:0 12px 36px #210d3026,inset 0 1px 0 #ffffff08;
+}
+.is-complete .result-panel h2{font-size:17px;font-weight:600;letter-spacing:-.025em;line-height:1.3;margin:0;color:#f9f0fa}
+.is-complete .result-panel .result-count{display:flex;align-items:baseline;justify-content:center;gap:6px;font-size:60px;font-weight:500;letter-spacing:-.055em;line-height:1.1;margin:20px 0 8px}
+.result-panel .result-count span{font-size:14px;font-weight:400;letter-spacing:0;color:#e0cde5}
+.is-complete .result-panel p{display:block;font-size:12px;line-height:1.5;color:#e0cde5}
+.is-complete .result-panel .primary{width:100%;margin-top:24px;gap:8px;min-height:44px}
+@media(hover:hover) and (pointer:fine){
+ .primary:hover:not(:disabled){transform:none;background-color:#fffaff}
+ .game-actions .icon-button:hover:not(:disabled),.hint-button:hover:not(:disabled){transform:none;background-color:#754080;border-color:#fff2ff40}
+}
+.primary:active:not(:disabled),.game-actions .icon-button:active:not(:disabled),.hint-button:active:not(:disabled){transform:scale(.97);transition-duration:100ms}
+.primary:focus-visible,.secondary:focus-visible,.icon-button:focus-visible,.hint-button:focus-visible{transform:none;transition:none}
+@media(max-width:767px){
+ .is-complete .result-layer{width:264px}
+ .is-complete .result-panel{padding:18px 22px}
+ .is-complete .result-panel .result-count{font-size:44px;margin:10px 0 4px}
+ .is-complete .result-panel .primary{margin-top:16px}
+ .start-control .primary{min-width:140px;padding:0 16px;gap:10px}
+ .hint-button{padding:0 12px}
+}
+@media(prefers-reduced-transparency:reduce){
+ .is-complete .result-panel,.game-actions .icon-button,.hint-button{background:#492453;backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+@media(prefers-contrast:more){
+ .is-complete .result-panel,.game-actions .icon-button,.hint-button{background:#381742;border-color:#e9d8ed;backdrop-filter:none;-webkit-backdrop-filter:none}
+ .result-panel .result-count span,.is-complete .result-panel p{color:#fff}
+}
+@media(prefers-reduced-motion:reduce){
+ .primary:active:not(:disabled),.game-actions .icon-button:active:not(:disabled),.hint-button:active:not(:disabled){transform:none}
+}
