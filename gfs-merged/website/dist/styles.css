@@ -1,0 +1,33 @@
+*{box-sizing:border-box}
+html{margin:0;background:#fff;color:#fff;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0}main{width:100%}
+.hero{position:relative;isolation:isolate;min-height:740px;height:88svh;overflow:hidden;background:#202024}
+#warehouse{position:absolute;inset:0;z-index:-3}
+#warehouse canvas{display:block;width:100%;height:100%}
+.tint{position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(180deg,rgba(12,12,17,.38) 0%,rgba(12,12,17,.32) 35%,rgba(12,12,17,.63) 66%,rgba(12,12,17,.94) 100%)}
+.identity{position:absolute;top:36px;left:4.5%;right:4.5%;display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.brand{flex-shrink:0;line-height:1}
+.az-logo{display:block;width:200px;height:64px;object-fit:contain;object-position:left top}
+.location{text-align:right;color:#e3e2e4;padding-top:3px;font-size:14px;line-height:1.5;letter-spacing:.015em}
+.location strong{display:block;font-size:22px;line-height:1.15;color:#fff;letter-spacing:-.035em;margin-bottom:7px}
+.location span{display:block}
+.hero-copy{position:absolute;left:4.5%;right:4.5%;bottom:60px;display:grid;grid-template-columns:1.35fr 1fr;align-items:end;gap:7%}
+.eyebrow{font-size:14px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 24px;color:#dedde0}
+h1{font-size:clamp(64px,6.5vw,112px);line-height:.97;letter-spacing:-.065em;font-weight:400;margin:0;text-wrap:balance}
+.context{max-width:440px;justify-self:end;padding-bottom:4px}
+.context p{font-size:clamp(16px,1.25vw,20px);line-height:1.55;color:#d3d1d7;margin:0 0 14px;text-wrap:pretty}
+.context p:first-child{color:white}
+.signature{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:27px;border-top:1px solid #ffffff36;padding-top:20px;font-size:14px;line-height:1.4;color:#fff}
+.signature span:first-child{color:#d3d1d7}
+.towers{position:relative;background:#fff;color:#45454b;padding-block:14px;overflow:hidden}
+.marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.marquee-track{display:flex;width:max-content;animation:tower-scroll 44s linear infinite;will-change:transform}
+.tower-group{display:flex;align-items:center;flex:none;gap:0;list-style:none;padding:0;margin:0}
+.tower-group li{display:flex;align-items:center;white-space:nowrap;font-size:14px;letter-spacing:.09em;font-weight:600;line-height:1.25;text-transform:uppercase}
+.tower-group li::after{content:"";width:3px;height:3px;border-radius:50%;background:#8a0051;margin-inline:68px;opacity:.6}
+@keyframes tower-scroll{to{transform:translateX(-25%)}}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+#error{display:none;position:absolute;left:4.5%;top:130px;right:4.5%;font-size:16px;line-height:1.5;color:#fff}
+@media(min-width:1800px){.hero-copy{bottom:72px}.context{max-width:510px}}
+@media(max-width:760px){.hero{height:90svh;min-height:760px}.identity{top:26px;left:6%;right:6%}.az-logo{width:145px;height:48px}.location{font-size:12px;max-width:180px;line-height:1.4}.location strong{font-size:18px;margin-bottom:5px}.identity{gap:18px}.hero-copy{left:6%;right:6%;bottom:36px;grid-template-columns:1fr;gap:26px}.eyebrow{font-size:12px;margin-bottom:17px}h1{font-size:clamp(56px,11vw,78px)}.context{justify-self:start;max-width:480px}.context p{font-size:16px;line-height:1.5;margin-bottom:10px}.signature{margin-top:18px;padding-top:16px}.towers{padding-block:13px}.tower-group li::after{margin-inline:48px}.tint{background:linear-gradient(180deg,#0c0c114d 0%,#0c0c113d 24%,#0c0c11b8 54%,#0c0c11f5 100%)}}
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none;width:100%;display:block}.tower-group{flex-wrap:wrap;justify-content:center;gap:22px 30px;padding:0 24px}.tower-group:not(:first-child){display:none}.tower-group li{font-size:14px}.tower-group li::after{display:none}.marquee{mask-image:none}}

@@ -1,0 +1,96 @@
+/* Shared plum palette. Warehouse geometry, camera and animation stay original. */
+:root { color-scheme: dark; --plum: #301d3f; --paper: #faf5fc; --secondary: #cbbbd4; --pink: #efb1d4; --border: #60496e; }
+html, body { background: var(--plum); color: var(--paper); }
+.hero { background: var(--plum); }
+.location, .eyebrow, .context p, .signature span:first-child { color: #e0d4e8; }
+.towers { background: #19161f; color: #a8eddb; border-block: 1px solid #a8eddb20; padding-block: 19px; }
+.tower-group li::after { display: none; }
+.tower-group li { padding-inline: 42px; }
+.tower-led { display: block; height: 17px; width: auto; opacity: .94; }
+.process-explorer { --ink: var(--paper); --muted: var(--secondary); --accent: var(--pink); --line: var(--border); background: var(--plum); }
+.journey-gallery, .stage-section, .work-section, .model-note { background: var(--plum); }
+.section-kicker, .gallery-intro p, .stage-card-meta, .gallery-footer, .stage-context p, .stage-context>span, .work-heading>div>p:last-child, .work-flow-caption, .model-note { color: var(--secondary); }
+.demo-label { color: #e7d3aa; border-color: #9c8462; }
+.gallery-footer i { background: #ab93b8; }
+/* A restrained web approximation of a translucent toolbar. */
+.journey-nav { background: #201b29ed; color: #ded5e5; border: 0; box-shadow: 0 1px 0 #ffffff12; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); min-height: 66px; padding-block: 10px; gap: 24px; }
+.overview-link { border-color: #ffffff20; color: #bcb1c8!important; font-size: 13px; }
+.journey-nav-stages { gap: 6px; }
+.journey-nav-stages button { min-height: 42px; padding: 10px 18px; border-radius: 7px; font-size: 13px; letter-spacing: -.01em; transition: background-color 180ms ease, color 180ms ease, transform 130ms cubic-bezier(.23,1,.32,1); }
+.journey-nav-stages button.is-active { color: #bcf4e6; background: #a8eddb16; border-color: #a8eddb38; }
+.journey-nav button:active { transform: scale(.97); }
+.journey-nav button:focus-visible { outline-color: #a8eddb; }
+.journey-gallery { justify-content: flex-start; gap: 38px; }
+.stage-gallery { max-height: 68svh; }
+.gallery-heading { display: block; }
+.stage-image-wrap, .stage-detail-image { background: #422c51; }
+.process-node, .activity-node { background: #3b284b; border-color: var(--border); }
+.process-node.is-active { background: #50345f; border-color: var(--pink); }
+.tower-tag, .process-top>span:last-child, .activity-number { color: var(--pink); }
+.process-bottom { color: var(--secondary); }
+.text-button { color: var(--pink)!important; border-color: #a77e9e; }
+.work-section { border-color: var(--border); }
+.activity-node.is-blocker { background: #563442; border-color: #f3b2a9; box-shadow: 0 0 0 4px #f3b2a918; }
+.blocker-detail { border-color: #ad777e; }
+.blocker-detail strong { color: #ffd2c9; }
+.blocker-detail p { color: #efd0ce; }
+.challenge-card { background: #4b3b43; border-color: #927854; }
+.challenge-icon { color: #f1d79f; border-color: #c7a56b; }
+.challenge-label, #challenge-explanation, .trace-link, .challenge-trace-arrow { color: #f1d79f; }
+.challenge-label>span { color: #d3bd99; }
+.process-explorer button:focus-visible, .activity-node:focus-visible { outline-color: #a8eddb; }
+.dependency-section { background: var(--plum); border-top: 1px solid var(--border); padding-top: 48px; }
+.dependency-kicker { margin: 0; padding-inline: 3.5%; }
+#dependency-frame { display: block; width: 100%; height: 950px; border: 0; background: var(--plum); }
+@media (hover:hover) and (pointer:fine) {
+  .stage-card:hover .stage-card-title { color: var(--pink); }
+  .process-node:hover { background: #493055; border-color: #bc8aa6; }
+  .journey-nav-stages button:hover { color: #faf5fc; background: #ffffff0c; }
+  .journey-nav-stages button.is-active:hover { color: #bcf4e6; background: #a8eddb22; }
+  .challenge-card:hover { background: #5a4549; }
+}
+@media (max-width:700px) { #dependency-frame { height: 1120px; } .dependency-kicker { padding-inline: 6%; } }
+
+@media (max-width:800px) {
+  .journey-nav { gap: 12px; padding-inline: 5%; min-height: 62px; }
+  .journey-nav-stages { justify-content: flex-start; }
+  .journey-nav-stages button { padding-inline: 14px; }
+  .stage-gallery { max-height: none; }
+  .tower-group li { padding-inline: 30px; }
+  .tower-led { height: 15px; }
+}
+@media (prefers-reduced-transparency:reduce) {
+  .journey-nav { background: #201b29; backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (prefers-contrast:more) {
+  .journey-nav { background: #201b29; border-bottom: 1px solid #bcb1c8; }
+  .journey-nav-stages button.is-active { border-color: #a8eddb; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .journey-nav button { transition: none; }
+  .journey-nav button:active { transform: none; }
+}
+
+/* Calm text navigation, with a lightweight selection marker. */
+.journey-nav { min-height: 68px; gap: 28px; padding-block: 10px; }
+.journey-nav .overview-link { color: #e0d5e8!important; padding: 12px 24px 12px 0; font-size: 13px; font-weight: 500; letter-spacing: 0; }
+.journey-nav-stages { min-width: 0; gap: 12px; align-items: center; }
+.journey-nav-stages button { position: relative; flex-shrink: 0; min-height: 44px; padding: 12px 10px; border: 0; border-radius: 5px; background: transparent; color: #cbbdd5; font-size: 14px; font-weight: 400; letter-spacing: -.015em; transition: color 160ms ease, background-color 160ms ease, transform 130ms cubic-bezier(.23,1,.32,1); }
+.journey-nav-stages button::after { content: ''; position: absolute; bottom: 3px; left: 10px; right: 10px; height: 2px; border-radius: 2px; background: #efb1d4; opacity: 0; transform: scaleX(.65); transition: opacity 160ms ease, transform 180ms cubic-bezier(.23,1,.32,1); }
+.journey-nav-stages button.is-active { color: #efb1d4; background: transparent; border-color: transparent; }
+.journey-nav-stages button.is-active::after { opacity: 1; transform: scaleX(1); }
+.journey-nav button:focus-visible { outline: 2px solid #efb1d4; outline-offset: 2px; }
+@media (hover:hover) and (pointer:fine) {
+  .journey-nav-stages button:hover { background: #ffffff06; color: #faf5fc; }
+  .journey-nav-stages button.is-active:hover { background: #ffffff06; color: #efb1d4; }
+}
+@media (max-width:800px) {
+  .journey-nav { min-height: 62px; gap: 14px; }
+  .journey-nav .overview-link { padding-right: 16px; }
+  .journey-nav-stages { gap: 8px; }
+  .journey-nav-stages button { font-size: 13px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .journey-nav button, .journey-nav button::after { transition: none; }
+}
+body.keyboard-nav .journey-nav button, body.keyboard-nav .journey-nav button::after { transition: none; }
