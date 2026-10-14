@@ -1,0 +1,216 @@
+/* Ported from e2e-draft1/src/tower-overview/process-activity-flow.css. */
+.activity-infusion {
+  position: relative;
+  margin: 22px 0 0;
+  isolation: isolate;
+}
+.infusion-tube {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: -1;
+  fill: none;
+}
+.infusion-tube-shell {
+  stroke: #ead7dd;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+.infusion-tube-blood {
+  stroke: #a92a4c;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 0 100000;
+}
+.infusion-blood-front {
+  fill: #ac3254;
+  stroke: #f5e4e9;
+  stroke-width: 2;
+}
+.infusion-start {
+  height: 212px;
+  position: relative;
+}
+.infusion-model {
+  position: absolute;
+  width: 180px;
+  height: 205px;
+  left: -22px;
+  top: -15px;
+  pointer-events: none;
+}
+.infusion-model canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.infusion-flow.testing-flow {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.infusion-flow.testing-flow > li {
+  position: relative;
+  border: 0;
+  padding: 0 0 62px 126px;
+  min-height: 126px;
+}
+.infusion-flow.testing-flow > li:last-child {
+  padding-bottom: 48px;
+}
+.infusion-flow details {
+  padding-top: 4px;
+}
+.infusion-flow summary {
+  min-height: 32px;
+}
+.infusion-checkpoint {
+  position: absolute;
+  left: 60px;
+  top: 8px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #b77b90;
+  border-radius: 50%;
+  background: var(--test-panel);
+  box-shadow: 0 0 0 4px var(--test-panel);
+}
+.infusion-flow [data-reached='true'] > .infusion-checkpoint {
+  background: #a92a4c;
+  border-color: #a92a4c;
+  box-shadow:
+    0 0 0 3px var(--test-panel),
+    0 0 0 4px #a92a4c;
+}
+.infusion-copy {
+  transform-origin: top left;
+}
+.infusion-end {
+  position: relative;
+  height: 270px;
+}
+.infusion-hand {
+  left: -33px;
+  top: 0;
+  width: 205px;
+  height: 260px;
+}
+.infusion-complete {
+  position: absolute;
+  left: 210px;
+  top: 115px;
+  font-size: 12px;
+  color: var(--test-accent);
+  opacity: 0;
+  transition: opacity 200ms var(--motion-out);
+}
+.activity-infusion[data-complete='true'] .infusion-complete {
+  opacity: 1;
+}
+.infusion-fallback {
+  display: none;
+}
+.activity-infusion[data-model-error='true'] .infusion-fallback {
+  display: block;
+  color: var(--test-accent);
+  padding-top: 70px;
+  font-size: 12px;
+}
+@media (max-width: 767px) {
+  .infusion-flow.testing-flow > li {
+    padding-left: 75px;
+    padding-bottom: 45px;
+    min-height: 120px;
+  }
+  .infusion-checkpoint {
+    left: 28px;
+  }
+  .infusion-model {
+    left: -38px;
+    width: 148px;
+  }
+  .infusion-hand {
+    left: -43px;
+    width: 158px;
+    height: 235px;
+  }
+  .infusion-complete {
+    left: 118px;
+    top: 105px;
+  }
+  .infusion-end {
+    height: 235px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .infusion-copy {
+    transform: none !important;
+  }
+  .infusion-complete {
+    transition: opacity 120ms ease;
+  }
+}
+.testing-dialog:has(.activity-infusion) {
+  overflow-anchor: none;
+}
+.activity-infusion {
+  overflow-anchor: none;
+}
+/* The first activity shares the bag's starting position. */
+.infusion-start { position:absolute; inset:0 auto auto 0; height:0; }
+.infusion-bag { width:120px; height:150px; left:8px; top:-14px; }
+.infusion-flow.testing-flow > li { min-height:154px; padding-bottom:48px; }
+.infusion-flow summary { display:flex; align-items:baseline; gap:12px; font-size:19px; line-height:1.45; font-weight:550; letter-spacing:-.025em; cursor:pointer; }
+.infusion-step { color:var(--test-accent); font-size:12px; font-weight:500; font-variant-numeric:tabular-nums; letter-spacing:.04em; flex:none; }
+.infusion-copy { padding-left:28px; max-width:62ch; }
+.infusion-copy p { font-size:15px; line-height:1.75; color:var(--test-muted); margin:15px 0; }
+.infusion-copy small { display:block; font-size:12px; line-height:1.6; color:var(--test-accent); margin:18px 0; }
+.infusion-copy .testing-challenges { border-left:2px solid #e4c9d2; padding:2px 0 2px 16px; margin-top:22px; background:none; }
+.infusion-copy .testing-challenges strong { font-size:11px; text-transform:uppercase; letter-spacing:.09em; color:var(--test-muted); }
+.infusion-copy .testing-challenges p { font-size:13px; margin:8px 0; }
+.infusion-end { height:195px; }
+.infusion-brain { left:-8px; top:0; width:152px; height:185px; }
+.infusion-complete { left:154px; top:76px; font-size:14px; }
+@media(max-width:767px) {
+ .infusion-bag { width:86px; height:122px; left:-7px; top:-10px; }
+ .infusion-flow.testing-flow > li { min-height:132px; padding-left:75px; }
+ .infusion-flow summary { font-size:16px; gap:8px; }
+ .infusion-copy { padding-left:0; }
+ .infusion-copy p { font-size:14px; }
+ .infusion-brain { width:112px; height:150px; left:-20px; }
+ .infusion-end { height:160px; }
+ .infusion-complete { left:105px; top:65px; }
+}
+.infusion-copy strong { font-weight:650; color:var(--test-text,#303431); }
+.infusion-copy .testing-challenges strong { text-transform:none; letter-spacing:0; font-size:13px; }
+/* Endpoint shares the last activity row, just as the bag shares the first. */
+.infusion-end { position:absolute; left:0; width:136px; height:185px; pointer-events:none; }
+.infusion-flow.testing-flow > li:last-child { min-height:195px; }
+.infusion-copy { max-width:88ch; }
+.infusion-copy p { font-weight:400; }
+.infusion-systems { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0; }
+.infusion-system { display:inline-flex; align-items:center; padding:5px 12px; border-radius:8px; border:1px solid #d4d8dc; background:#edf0f2; color:#46515b; font-size:13px; line-height:1.5; font-weight:400; }
+.infusion-system[data-system='SAP'] {color:#145e8e;background:#eaf4fc;border-color:#bddbf1}
+.infusion-system[data-system='Excel'] {color:#216b40;background:#eaf5ec;border-color:#bfdcc7}
+.infusion-system[data-system='SharePoint'] {color:#076e73;background:#e6f5f3;border-color:#b6deda}
+.infusion-system[data-system='Outlook'],.infusion-system[data-system='Box'],.infusion-system[data-system='Power Automate'] {color:#205eaa;background:#ebf2fc;border-color:#c3d7f2}
+.infusion-system[data-system='Teams'] {color:#55529a;background:#efedf9;border-color:#d1cdef}
+.infusion-system[data-system='PowerPoint'] {color:#a34327;background:#fbefe8;border-color:#efcdbd}
+@media(max-width:767px) { .infusion-end {width:75px;height:150px} .infusion-flow.testing-flow > li:last-child {min-height:160px} }
+
+.activity-infusion{--test-accent:var(--accent);--test-muted:var(--muted);--test-text:var(--text);--test-panel:var(--bg)}
+.infusion-flow summary{list-style:none}.infusion-flow summary::-webkit-details-marker{display:none}.infusion-flow summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+.infusion-tube-shell{stroke:#ead7dd55}.infusion-tube-blood{stroke:#df6b93}
+.infusion-copy .infusion-owner{font-size:12px;line-height:1.6;margin:14px 0;color:var(--muted)}
+.infusion-copy .infusion-collaboration{color:var(--accent);font-size:12px}
+@media(prefers-reduced-motion:reduce){.infusion-copy *{animation:none!important}}
+
+/* Quiet definition groups make activity metadata readable without button-like badges. */
+.infusion-metadata{display:grid;grid-template-columns:minmax(70px,.8fr) minmax(90px,.9fr) minmax(130px,1.5fr);gap:16px 24px;margin:24px 0 20px;padding:0;max-width:540px}
+.infusion-field{min-width:0}.infusion-metadata dt{font-size:11px;line-height:1.4;color:var(--muted);margin:0 0 7px}
+.infusion-metadata dd{font-size:14px;line-height:1.45;color:var(--text);margin:0;overflow-wrap:anywhere}
+.infusion-field-execution dd{color:var(--accent)}
+@media(max-width:1023px){.infusion-metadata{grid-template-columns:1fr 1fr;gap:18px 24px}.infusion-field-owner{grid-column:1/-1}}
+@media(max-width:767px){.infusion-metadata{margin:20px 0;gap:16px}.infusion-metadata dd{font-size:13px}}
