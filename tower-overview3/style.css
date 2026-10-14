@@ -1,0 +1,65 @@
+:root{color-scheme:dark;--bg:#331c41;--text:#f6f1f5;--muted:#cabbcf;--accent:#f1a3bc;--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100dvh}button{font:inherit;color:inherit;cursor:pointer;border:1px solid #8f7799;background:transparent;border-radius:999px;white-space:nowrap;transition:background 180ms ease,transform 140ms var(--ease-out),opacity 180ms ease}button:active{transform:scale(.98)}button:focus-visible,canvas:focus-visible{outline:2px solid var(--accent);outline-offset:5px}button:disabled{opacity:.4;cursor:wait}header{position:absolute;z-index:2;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:28px 42px;pointer-events:none}header img{width:174px;height:auto;filter:brightness(0) invert(1);opacity:.95}.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}h1{font-size:26px;font-weight:400;letter-spacing:-.8px;margin:9px 0 0}#experience{height:100dvh;min-height:640px;position:relative;overflow:hidden}canvas{width:100%;height:100%;display:block;touch-action:none}#labels{position:absolute;inset:0;pointer-events:none}.label{position:absolute;top:0;left:0;border:0;border-radius:0;text-align:left;padding:12px 0;pointer-events:auto;opacity:0;visibility:hidden}.label.left{text-align:right}.label small{display:block;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}.label strong{font-size:clamp(16px,1.65vw,25px);font-weight:400;letter-spacing:-.5px}.label span{display:block;font-size:11px;color:var(--accent);margin-top:9px}footer{position:absolute;z-index:2;bottom:24px;left:42px;right:42px;display:flex;justify-content:space-between;align-items:center;gap:16px}footer p{font-size:12px;color:var(--muted);width:250px}footer>button{padding:11px 18px;font-size:12px}.view-switch{display:flex;padding:4px;background:#2e1637;border:1px solid #72517e;border-radius:999px}.view-switch button{border:0;padding:12px 22px;font-size:12px}.view-switch button[aria-pressed=true]{background:#f0e7ef;color:#331c41}#loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;background:var(--bg);z-index:3;color:var(--muted);font-size:14px}.load-body{height:180px;width:45px;border-radius:45%;background:linear-gradient(0deg,transparent,#ffffff14,transparent);animation:breathe 2s ease infinite}#retry{padding:10px 24px}#detail{position:absolute;inset:0;pointer-events:none}#detail button{pointer-events:auto;padding:11px 19px;font-size:12px}#back{position:absolute;left:42px;top:126px}.detail-title{position:absolute;left:42px;top:40%;max-width:26%}.detail-title p{font-size:12px;color:var(--muted)}h2{font-size:clamp(25px,3vw,46px);font-weight:400;letter-spacing:-1.5px;line-height:1.12;margin-top:12px}.rotate-tools{position:absolute;bottom:106px;left:50%;transform:translateX(-50%);display:flex;gap:20px;align-items:center;font-size:12px;color:var(--muted)}[hidden]{display:none!important}body[data-detail=true] .view-switch,body[data-detail=true] footer p{visibility:hidden}@keyframes breathe{50%{opacity:.3}}@media(hover:hover) and (pointer:fine){button:hover{background:#ffffff0b}.label:hover{transform:translateY(-2px);color:var(--accent)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}}@media(max-width:767px){header{padding:22px 20px}header img{width:123px}h1{font-size:20px}.eyebrow{font-size:9px}footer{left:16px;right:16px;bottom:18px;flex-wrap:wrap;justify-content:center}footer p{width:100%;text-align:center;margin:0}.view-switch button{padding:11px 16px}footer>button{padding:11px}.label strong{font-size:12px;letter-spacing:-.2px}.label small{font-size:8px;margin-bottom:4px}.label span{display:none}.label,.label.left{text-align:center}#back{top:104px;left:20px}.detail-title{left:20px;top:160px;max-width:85%}.detail-title h2{font-size:28px}.detail-title p{margin:0}.rotate-tools{bottom:120px;white-space:nowrap}#experience{min-height:700px}}
+.keyboard-organ{position:absolute;left:20px;top:110px;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}.keyboard-organ:focus-visible{clip-path:none;width:auto;height:auto;padding:14px 22px;background:var(--bg);z-index:4}body[data-detail=true] .keyboard-organ{display:none}
+
+/* Compact brand placement; assembly controls remain a keyboard/touch alternative. */
+header{justify-content:flex-start;padding:25px 32px}header img{width:120px}footer{justify-content:center}body[data-detail=true] footer{visibility:hidden}
+@media(max-width:767px){header{padding:20px}header img{width:105px}}
+
+/* Unlabeled assembly track and quiet organ-inspection controls. */
+#assembly{appearance:none;-webkit-appearance:none;width:220px;height:28px;margin:0;background:transparent;cursor:pointer;touch-action:pan-y}
+#assembly::-webkit-slider-runnable-track{height:3px;background:#a089ac;border-radius:999px}
+#assembly::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:12px;height:12px;border:0;border-radius:50%;background:#f0e7ef;margin-top:-4.5px}
+#assembly::-moz-range-track{height:3px;background:#a089ac;border-radius:999px}
+#assembly::-moz-range-thumb{width:12px;height:12px;border:0;border-radius:50%;background:#f0e7ef}
+#assembly:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:999px}
+#detail #back{left:auto;right:32px;top:25px;height:30px;padding:0;border:0;border-radius:0;background:transparent;font-size:13px}
+.rotate-tools{bottom:24px;gap:0;justify-content:center}
+.detail-title{top:auto;bottom:25px;left:32px;max-width:35%}
+.detail-title p{margin:0;font-size:11px}.detail-title h2{font-size:24px;letter-spacing:-.6px;margin:7px 0 0}
+@media(max-width:767px){#detail #back{right:20px;top:20px;height:27px;font-size:12px}.rotate-tools{bottom:24px}.detail-title{top:auto;bottom:90px;left:20px;max-width:90%}.detail-title h2{font-size:22px}}
+
+/* Text controls retain generous invisible hit areas and keyboard focus rings. */
+#detail #back,#detail #reset{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:0;border-radius:0;background:transparent;color:var(--text);transition:color 160ms ease,transform 140ms var(--ease-out)}
+#detail #back{top:18px}#detail #reset{padding:10px 14px}
+.control-symbol{display:inline-flex;align-items:center;justify-content:center;width:18px;font-size:20px;line-height:1;font-family:Arial,Helvetica,sans-serif}
+.reset-symbol{font-size:24px}
+@media(hover:hover) and (pointer:fine){#detail #back:hover,#detail #reset:hover{background:transparent;color:var(--accent)}}
+@media(max-width:767px){#detail #back{top:12px}}
+@media(prefers-reduced-motion:reduce){#detail #back,#detail #reset{transition:none}}
+
+/* Reference-inspired process labels: soft name panels and circular + controls. */
+#process-neurons{position:absolute;inset:0;pointer-events:none}
+.process-node{position:absolute;left:0;top:0;display:flex;align-items:center;gap:10px;pointer-events:none;max-width:275px}
+.process-name{display:block;width:190px;padding:13px 16px;border:1px solid #fff4f9;border-radius:14px;background:#f5e8f0;color:#382b3e;font-size:14px;line-height:1.35;box-shadow:0 3px 14px #23102b20}
+#detail .process-plus{flex:none;display:grid;place-items:center;width:46px;height:46px;min-height:46px;padding:0;border:1px solid #fff4f9;border-radius:50%;background:#f5e8f0;color:#382b3e;font-size:30px;line-height:1;font-weight:300;pointer-events:auto;transition:transform 140ms var(--ease-out),background 160ms ease}
+.process-node[data-side="1"] .process-name{order:2}.process-node[data-side="1"] .process-plus{order:1}
+#detail .process-plus[aria-pressed="true"]{background:var(--accent)}
+.process-node.is-selected .process-name{border-color:var(--accent)}
+.demo-data{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.process-status{position:absolute;bottom:77px;left:50%;transform:translateX(-50%);max-width:70%;margin:0;text-align:center;font-size:12px;color:var(--muted);pointer-events:none}
+.process-status:empty{display:none}
+@media(hover:hover) and (pointer:fine){#detail .process-plus:hover{background:#f1d3e2;transform:scale(1.04)}}
+@media(max-width:767px){.process-node{width:calc(50vw - 24px);gap:7px;align-items:flex-start}.process-name{width:calc(100% - 43px);padding:9px 10px;font-size:11px;border-radius:12px}#detail .process-plus{width:36px;height:36px;min-height:36px;font-size:25px}.process-status{bottom:67px;max-width:calc(100% - 32px);font-size:10px}.demo-data{font-size:9px}}
+
+.process-leader{position:absolute;left:0;top:0;width:1px;height:1px;transform-origin:0 50%;background:#f1a3bc99;pointer-events:none}
+
+/* Section one keeps the anatomy; the process title has its own empty column. */
+#section-1{position:relative}.label:hover,.label:active{background:transparent}
+#process-section{display:grid;grid-template-columns:minmax(220px,28%) minmax(0,1fr);gap:6%;padding:72px 40px 60px;min-height:100dvh;overflow-anchor:none}
+.flow-heading h2{font-size:clamp(30px,3.1vw,52px);line-height:1.12;letter-spacing:-1.5px;margin:0;max-width:12ch;text-wrap:balance;outline:none}
+.flow-column{min-width:0}.flow-toolbar{display:flex;justify-content:flex-end;margin-bottom:28px}.flow-toolbar button{border:0;border-radius:0;min-height:44px;padding:8px 0;background:transparent;font-size:12px;color:var(--muted)}
+@media(max-width:767px){#process-section{grid-template-columns:1fr;padding:44px 20px 24px;gap:20px}.flow-heading h2{font-size:34px;max-width:17ch}.flow-toolbar{margin-bottom:18px}}
+
+/* Keep the selected process visible throughout its activity section. */
+.flow-heading{position:sticky;top:72px;align-self:start}
+@media(max-width:767px){
+ #process-section{display:block}
+ .flow-heading{top:0;z-index:2;background:var(--bg);padding:16px 0;margin-bottom:20px}
+ .flow-heading h2{font-size:26px;max-width:100%}
+}
+
+/* Body visibility is independent of the continuous assembly control. */
+#body-toggle{position:absolute;right:0;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:10px 16px;font-size:12px;background:var(--bg)}
+#body-toggle svg{flex:none}
+#body-toggle[aria-pressed=false]{color:var(--muted)}
+@media(max-width:767px){footer{flex-wrap:nowrap;justify-content:space-between;gap:20px}#body-toggle{position:static;flex:none;order:2;padding:10px 12px}#assembly{width:min(220px,calc(100vw - 180px));min-width:110px}}
