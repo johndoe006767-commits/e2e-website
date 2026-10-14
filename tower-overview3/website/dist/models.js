@@ -67,6 +67,13 @@ const cortexDepth = new THREE.ShaderMaterial({
 const distantCortex = material(0.018);
 distantCortex.side = THREE.FrontSide;
 
+// Semi-solid colour under each organ's additive glow, so organs read as opaque
+// in front of the see-through skeleton. 0 = glow only (original look), 1 = fully solid.
+const organOpacity = 0.7;
+function bodyMaterial(color) {
+  return new THREE.MeshStandardMaterial({ color, roughness: 0.6, metalness: 0, transparent: true, opacity: organOpacity, depthWrite: false });
+}
+
 export async function loadReplacement(id) {
  let root, network;
  if (id === 'brain') {
@@ -76,7 +83,7 @@ export async function loadReplacement(id) {
   const gltf = await loader.loadAsync('./assets/brain.glb');
   const bounds = new THREE.Box3();
   gltf.scene.updateMatrixWorld(true);
-  const corticalMeshes = [];
+  const corticalMeshes = [], outerMeshes = [];
   gltf.scene.traverse(mesh => {
     if (!mesh.isMesh) return;
     let owner = mesh;
@@ -91,10 +98,12 @@ export async function loadReplacement(id) {
     mesh.material = materials[cat];
     mesh.renderOrder = 1;
     if (cat === 'cortex') corticalMeshes.push(mesh);
+    if (cat === 'cerebellum' || cat === 'brainstem') outerMeshes.push(mesh);
     if (data.bx_core) bounds.expandByObject(mesh);
   });
   // A colorless nearest-surface pass keeps gyri readable. Interior layers are
   // drawn first and remain visible beneath the luminous cortical surface.
+  const brainBody = bodyMaterial(0xd89daf);
   for (const mesh of corticalMeshes) {
     const depth = new THREE.Mesh(mesh.geometry, cortexDepth);
     depth.renderOrder = 2;
@@ -102,7 +111,19 @@ export async function loadReplacement(id) {
     const distant = new THREE.Mesh(mesh.geometry, distantCortex);
     distant.renderOrder = 0;
     mesh.add(distant);
+    const body = new THREE.Mesh(mesh.geometry, brainBody);
+    body.renderOrder = 0.5; // under the internal glow (1) and the cortex glow (3)
+    mesh.add(body);
     mesh.renderOrder = 3;
+  }
+  // The cerebellum and brainstem sit outside the cortex, so they get the same solid colour.
+  for (const mesh of outerMeshes) {
+    const depth = new THREE.Mesh(mesh.geometry, cortexDepth);
+    depth.renderOrder = 2;
+    mesh.add(depth);
+    const body = new THREE.Mesh(mesh.geometry, brainBody);
+    body.renderOrder = 0.5;
+    mesh.add(body);
   }
   const center = bounds.getCenter(new THREE.Vector3());
   gltf.scene.position.sub(center);
@@ -125,6 +146,7 @@ export async function loadReplacement(id) {
       const backMaterial = material(0.13, config.color, 2.5);
       backMaterial.side = THREE.BackSide;
       backMaterial.uniforms.highlight.value.copy(highlight);
+      const organBody = bodyMaterial(config.color);
       for (const mesh of meshes) {
         mesh.material.dispose();
         mesh.material = surfaceMaterial;
@@ -135,6 +157,9 @@ export async function loadReplacement(id) {
         const back = new THREE.Mesh(mesh.geometry, backMaterial);
         back.renderOrder = 0;
         mesh.add(back);
+        const body = new THREE.Mesh(mesh.geometry, organBody);
+        body.renderOrder = 1; // between the back glow (0) and the surface glow (3); never 3
+        mesh.add(body);
       }
 
 
