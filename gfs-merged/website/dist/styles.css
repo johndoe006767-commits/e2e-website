@@ -7,7 +7,7 @@ body{margin:0}main{width:100%}
 .tint{position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(180deg,rgba(12,12,17,.38) 0%,rgba(12,12,17,.32) 35%,rgba(12,12,17,.63) 66%,rgba(12,12,17,.94) 100%)}
 .identity{position:absolute;top:36px;left:4.5%;right:4.5%;display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
 .brand{flex-shrink:0;line-height:1}
-.az-logo{display:block;width:200px;height:64px;object-fit:contain;object-position:left top}
+.az-logo{display:block;width:200px;height:64px;object-fit:contain;object-position:left top;filter:brightness(0) invert(1);opacity:.95}
 .location{text-align:right;color:#e3e2e4;padding-top:3px;font-size:14px;line-height:1.5;letter-spacing:.015em}
 .location strong{display:block;font-size:22px;line-height:1.15;color:#fff;letter-spacing:-.035em;margin-bottom:7px}
 .location span{display:block}

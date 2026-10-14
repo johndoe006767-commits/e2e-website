@@ -29,4 +29,4 @@ Use this `website` folder as the source/project directory. Publish `dist/` as th
 This project has not been registered with Sites. When first publishing, register it and save its returned project ID in `.openai/hosting.json`.
 The folder cleanup did not change or redeploy any hosted site.
 
-GFS retains its existing externally hosted AstraZeneca logo; its remaining runtime assets are local.
+All runtime assets are local, including the AstraZeneca logo in `dist/assets/astrazeneca.svg`. The previously linked astrazeneca.com image now returns HTTP 403.

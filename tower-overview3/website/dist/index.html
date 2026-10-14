@@ -2,11 +2,11 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#331c41"><title>Finance towers | AstraZeneca</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="process-flow.css"><script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script></head>
 <body>
 <section id="section-1" aria-label="Finance anatomy"><header><img src="./assets/astrazeneca.svg" alt="AstraZeneca" width="120" height="30"></header>
-<main id="experience" aria-label="Interactive finance anatomy"><canvas id="scene" aria-label="Human body, skeleton, heart and eight finance organs"></canvas><div id="labels"></div>
+<main id="experience" aria-label="Interactive finance anatomy"><canvas id="scene" aria-label="Skeleton, heart and eight finance organs"></canvas><div id="labels"></div>
 <div id="loading" role="status"><div class="load-body"></div><p id="load-message">Assembling your anatomy…</p><button id="retry" hidden>Try again</button></div>
 <section id="detail" hidden><div id="process-neurons" aria-label="Tower processes"></div><p id="process-status" class="process-status" role="status" aria-live="polite"></p><button id="back"><span class="control-symbol" aria-hidden="true">←</span><span>Back to overview</span></button><div class="detail-title"><p id="organ-name"></p><span class="demo-data">Illustrative processes</span><h2 id="tower-name"></h2></div><div class="rotate-tools"><button id="reset"><span class="control-symbol reset-symbol" aria-hidden="true">↺</span><span>Reset view</span></button></div></section>
 </main>
-<footer><button id="body-toggle" type="button" aria-pressed="true" aria-controls="scene" title="Show or hide the outer body layers. They fade as you disassemble." disabled><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><span id="body-toggle-label">Hide body</span></button><input id="assembly" type="range" min="0" max="1000" value="0" aria-label="Assemble or disassemble organs"></footer>
+<footer><input id="assembly" type="range" min="0" max="1000" value="0" aria-label="Assemble or disassemble organs"></footer>
 </section>
 <section id="process-section" aria-labelledby="flow-title" hidden>
 <div class="flow-heading"><h2 id="flow-title" tabindex="-1"></h2></div>
