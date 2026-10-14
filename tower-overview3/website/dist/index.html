@@ -4,7 +4,49 @@
 <section id="section-1" aria-label="Finance anatomy"><header><img src="./assets/astrazeneca.svg" alt="AstraZeneca" width="120" height="30"></header>
 <main id="experience" aria-label="Interactive finance anatomy"><canvas id="scene" aria-label="Skeleton, heart and eight finance organs"></canvas><div id="labels"></div>
 <div id="loading" role="status"><div class="load-body"></div><p id="load-message">Assembling your anatomy…</p><button id="retry" hidden>Try again</button></div>
-<section id="detail" hidden><div id="process-neurons" aria-label="Tower processes"></div><p id="process-status" class="process-status" role="status" aria-live="polite"></p><button id="back"><span class="control-symbol" aria-hidden="true">←</span><span>Back to overview</span></button><div class="detail-title"><p id="organ-name"></p><span class="demo-data">Illustrative processes</span><h2 id="tower-name"></h2></div><div class="rotate-tools"><button id="reset"><span class="control-symbol reset-symbol" aria-hidden="true">↺</span><span>Reset view</span></button></div></section>
+<section id="detail" hidden><div id="process-neurons" aria-label="Tower processes"></div><p id="process-status" class="process-status" role="status" aria-live="polite"></p><button id="back"><span class="control-symbol" aria-hidden="true">←</span><span>Back to overview</span></button><div class="detail-title"><p id="organ-name"></p><span class="demo-data">Illustrative processes</span><h2 id="tower-name"></h2></div><div class="rotate-tools"><button id="reset"><span class="control-symbol reset-symbol" aria-hidden="true">↺</span><span>Reset view</span></button></div>
+  <div id="tower-telemetry-hud" class="telemetry-hud" aria-label="Process Automation Vital Signs">
+    <div class="hud-header">
+      <div class="hud-title-wrap">
+        <span class="hud-eyebrow">BIOPROCESS VITAL SIGNS</span>
+        <div class="hud-tower-name" id="hud-tower-title">R2R TELEMETRY</div>
+      </div>
+      <div class="hud-score-badge">
+        <div class="hud-score-value" id="hud-score-pct">52%</div>
+        <div class="hud-score-label">HEALTH SCORE</div>
+      </div>
+    </div>
+    <div class="hud-ecg-container">
+      <svg class="hud-ecg-svg" viewBox="0 0 200 20" preserveAspectRatio="none">
+        <path class="hud-ecg-track" d="M0,10 L50,10 L54,3 L60,18 L65,5 L70,15 L74,10 L200,10" />
+        <path class="hud-ecg-pulse" d="M0,10 L50,10 L54,3 L60,18 L65,5 L70,15 L74,10 L200,10" />
+      </svg>
+    </div>
+    <div class="hud-bar-container">
+      <div class="hud-bar-segment seg-automated" id="hud-bar-auto" style="width: 0%;"></div>
+      <div class="hud-bar-segment seg-semi" id="hud-bar-semi" style="width: 0%;"></div>
+      <div class="hud-bar-segment seg-manual" id="hud-bar-manual" style="width: 0%;"></div>
+    </div>
+    <div class="hud-legend">
+      <div class="hud-legend-item"><span class="legend-dot dot-auto"></span><span id="hud-count-auto">14</span> Auto</div>
+      <div class="hud-legend-item"><span class="legend-dot dot-semi"></span><span id="hud-count-semi">32</span> Semi</div>
+      <div class="hud-legend-item"><span class="legend-dot dot-manual"></span><span id="hud-count-manual">42</span> Manual</div>
+    </div>
+    <div class="hud-chips">
+      <div class="hud-chip chip-tpi">
+        <span class="chip-icon">🔗</span>
+        <span class="chip-val" id="hud-count-tpi">4</span>
+        <span class="chip-lbl">TPIs</span>
+      </div>
+      <div class="hud-chip chip-pain">
+        <span class="chip-icon">⚠️</span>
+        <span class="chip-val" id="hud-count-pain">4</span>
+        <span class="chip-lbl">Pain Points</span>
+      </div>
+    </div>
+  </div>
+
+</section>
 </main>
 <footer><input id="assembly" type="range" min="0" max="1000" value="0" aria-label="Assemble or disassemble organs"></footer>
 </section>

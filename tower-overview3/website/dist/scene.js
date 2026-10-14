@@ -24,7 +24,7 @@ function overviewScale(o){return T.MathUtils.lerp(o.size,mobile?.17:.23,separati
 function retarget(instant=false){for(const o of organs){o.flight=true;o.from=o.root.position.clone();o.to=selected===o?new T.Vector3(0,.88,.8):overviewTarget(o);o.fromScale=o.root.scale.x;o.toScale=selected===o?Math.min(2.2,camera.right-camera.left)*.8:overviewScale(o);o.start=performance.now();o.duration=instant||reduced.matches?0:700;o.fromQuat=o.root.quaternion.clone();o.toQuat=new T.Quaternion();} }
 function setSeparation(value){if(!ready||selected)return;separationTarget=T.MathUtils.clamp(value,0,1);expanded=separationTarget>.5;$('#assembly').value=String(Math.round(separationTarget*1000));}
 function setView(value){setSeparation(value?1:0);}
-function select(o,trigger){if(!ready||selected)return;lastTrigger=trigger||o.label;$('#process-status').textContent='';selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';$('#detail').hidden=false;$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Scroll to rotate left or right. Drag or use arrow keys to rotate in all directions.`);retarget();}
+function select(o,trigger){if(!ready||selected)return;lastTrigger=trigger||o.label;$('#process-status').textContent='';selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';$('#detail').hidden=false;$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Scroll to rotate left or right. Drag or use arrow keys to rotate in all directions.`);retarget();}
 function close(){if(!selected)return;selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;retarget();lastTrigger?.focus({preventScroll:true});}
 // Exact tapered Catmull-Rom tubes and traveling flow shader from tower-overview2.
 function buildConnections(){organs.forEach((o,index)=>{
@@ -119,3 +119,51 @@ for(const config of configs){const b=document.createElement('button');b.textCont
 init();
 
 addEventListener('pagehide',()=>{cancelAnimationFrame(animation);sceneObserver.disconnect();renderer?.dispose();scene?.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){const materials=Array.isArray(o.material)?o.material:[o.material];materials.forEach(m=>m.dispose());}});});
+
+
+const TOWER_HEALTH = {
+  lungs: { name: 'R2R', auto: 14, semi: 32, manual: 42, tpis: 4, pain: 4 },
+  intestines: { name: 'O2C', auto: 24, semi: 38, manual: 26, tpis: 6, pain: 5 },
+  stomach: { name: 'P2P', auto: 20, semi: 30, manual: 36, tpis: 5, pain: 4 },
+  brain: { name: 'FP&A Commercial', auto: 32, semi: 44, manual: 16, tpis: 8, pain: 2 },
+  pancreas: { name: 'FP&A Operations', auto: 26, semi: 38, manual: 22, tpis: 5, pain: 3 },
+  liver: { name: 'CAPEX', auto: 16, semi: 28, manual: 34, tpis: 4, pain: 4 },
+  kidneys: { name: 'Controlling', auto: 22, semi: 34, manual: 24, tpis: 5, pain: 3 },
+  spleen: { name: 'Tax', auto: 12, semi: 22, manual: 40, tpis: 3, pain: 5 }
+};
+
+function updateTelemetryHUD(id) {
+  const d = TOWER_HEALTH[id] || { name: 'TOWER', auto: 20, semi: 30, manual: 30, tpis: 4, pain: 3 };
+  const total = d.auto + d.semi + d.manual;
+  const score = Math.round(((d.auto + 0.5 * d.semi) / total) * 100);
+
+  const title = document.getElementById('hud-tower-title');
+  const scoreVal = document.getElementById('hud-score-pct');
+  const barAuto = document.getElementById('hud-bar-auto');
+  const barSemi = document.getElementById('hud-bar-semi');
+  const barManual = document.getElementById('hud-bar-manual');
+  const countAuto = document.getElementById('hud-count-auto');
+  const countSemi = document.getElementById('hud-count-semi');
+  const countManual = document.getElementById('hud-count-manual');
+  const countTpi = document.getElementById('hud-count-tpi');
+  const countPain = document.getElementById('hud-count-pain');
+
+  if (title) title.textContent = d.name + ' TELEMETRY';
+  if (scoreVal) scoreVal.textContent = score + '%';
+  if (countAuto) countAuto.textContent = d.auto;
+  if (countSemi) countSemi.textContent = d.semi;
+  if (countManual) countManual.textContent = d.manual;
+  if (countTpi) countTpi.textContent = d.tpis;
+  if (countPain) countPain.textContent = d.pain;
+
+  if (barAuto && barSemi && barManual) {
+    barAuto.style.width = '0%';
+    barSemi.style.width = '0%';
+    barManual.style.width = '0%';
+    setTimeout(() => {
+      barAuto.style.width = ((d.auto / total) * 100) + '%';
+      barSemi.style.width = ((d.semi / total) * 100) + '%';
+      barManual.style.width = ((d.manual / total) * 100) + '%';
+    }, 60);
+  }
+}
