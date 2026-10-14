@@ -1,0 +1,3797 @@
+{
+  "isDemo": true,
+  "description": "Illustrative dummy data, not AstraZeneca documented processes.",
+  "journey": "Demand to Profit",
+  "towers": [
+    {
+      "id": "brain",
+      "name": "FP&A Commercial",
+      "processes": [
+        {
+          "id": "brain-1",
+          "name": "Demand and Revenue Forecast",
+          "journey": "Demand to Profit",
+          "stage": "Forecast demand",
+          "ownerTowerId": "brain",
+          "collaboratorTowerIds": [
+            "intestines",
+            "pancreas"
+          ],
+          "platforms": [
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "brain-1-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for demand and revenue forecast and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-1-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-1-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-1-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-1-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "intestines",
+                "pancreas"
+              ]
+            },
+            {
+              "id": "brain-1-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-1-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-1-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-1-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-1-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "brain-1-challenge-1",
+              "description": "Sales assumptions arrive in different formats.",
+              "activityId": "brain-1-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "brain-2",
+          "name": "Commercial Margin Planning",
+          "journey": "Demand to Profit",
+          "stage": "Plan profit",
+          "ownerTowerId": "brain",
+          "collaboratorTowerIds": [
+            "kidneys",
+            "spleen"
+          ],
+          "platforms": [
+            "SAP",
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "brain-2-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for commercial margin planning and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-2-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-2-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-2-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-2-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "kidneys",
+                "spleen"
+              ]
+            },
+            {
+              "id": "brain-2-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-2-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-2-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-2-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-2-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "brain",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "brain-2-challenge-1",
+              "description": "Pricing and tax assumptions are not synchronized.",
+              "activityId": "brain-2-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "brain-3",
+          "name": "FCF Control on Revenue and P&L",
+          "journey": "Demand to Profit",
+          "stage": "Review performance",
+          "ownerTowerId": "brain",
+          "collaboratorTowerIds": [
+            "lungs",
+            "intestines"
+          ],
+          "platforms": [
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "brain-3-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for fcf control on revenue and p&l and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-3-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-3-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-3-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-3-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "lungs",
+                "intestines"
+              ]
+            },
+            {
+              "id": "brain-3-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-3-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-3-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-3-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-3-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "brain",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "brain-3-challenge-1",
+              "description": "Cash and revenue reporting use different cut-off dates.",
+              "activityId": "brain-3-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "brain-4",
+          "name": "Demand-to-Profit Scenario Planning",
+          "journey": "Demand to Profit",
+          "stage": "Model scenarios",
+          "ownerTowerId": "brain",
+          "collaboratorTowerIds": [],
+          "platforms": [
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "brain-4-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for demand-to-profit scenario planning and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-4-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-4-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-4-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-4-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-4-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-4-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-4-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-4-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "brain-4-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "brain",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "brain-4-challenge-1",
+              "description": "Scenario versions are difficult to reconcile.",
+              "activityId": "brain-4-activity-4"
+            }
+          ],
+          "isDemo": true
+        }
+      ]
+    },
+    {
+      "id": "pancreas",
+      "name": "FP&A Operations",
+      "processes": [
+        {
+          "id": "pancreas-1",
+          "name": "Production Cost Forecast",
+          "journey": "Demand to Profit",
+          "stage": "Plan supply",
+          "ownerTowerId": "pancreas",
+          "collaboratorTowerIds": [
+            "brain",
+            "stomach"
+          ],
+          "platforms": [
+            "SAP",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "pancreas-1-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for production cost forecast and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-1-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-1-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-1-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-1-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "brain",
+                "stomach"
+              ]
+            },
+            {
+              "id": "pancreas-1-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-1-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-1-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-1-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-1-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "pancreas-1-challenge-1",
+              "description": "Supplier price changes reach the forecast late.",
+              "activityId": "pancreas-1-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "pancreas-2",
+          "name": "Inventory and Capacity Planning",
+          "journey": "Demand to Profit",
+          "stage": "Plan supply",
+          "ownerTowerId": "pancreas",
+          "collaboratorTowerIds": [
+            "intestines",
+            "liver"
+          ],
+          "platforms": [
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "pancreas-2-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for inventory and capacity planning and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-2-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-2-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-2-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-2-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "intestines",
+                "liver"
+              ]
+            },
+            {
+              "id": "pancreas-2-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-2-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-2-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-2-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-2-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "pancreas",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "pancreas-2-challenge-1",
+              "description": "Capacity assumptions differ across teams.",
+              "activityId": "pancreas-2-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "pancreas-3",
+          "name": "Operational Variance Analysis",
+          "journey": "Demand to Profit",
+          "stage": "Review performance",
+          "ownerTowerId": "pancreas",
+          "collaboratorTowerIds": [
+            "kidneys",
+            "lungs"
+          ],
+          "platforms": [
+            "SAP",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "pancreas-3-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for operational variance analysis and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-3-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-3-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-3-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-3-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "kidneys",
+                "lungs"
+              ]
+            },
+            {
+              "id": "pancreas-3-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-3-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-3-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-3-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-3-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "pancreas",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "pancreas-3-challenge-1",
+              "description": "Cost drivers are inconsistently classified.",
+              "activityId": "pancreas-3-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "pancreas-4",
+          "name": "Supply Profitability Review",
+          "journey": "Demand to Profit",
+          "stage": "Plan profit",
+          "ownerTowerId": "pancreas",
+          "collaboratorTowerIds": [],
+          "platforms": [
+            "Power Apps",
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "pancreas-4-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for supply profitability review and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-4-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-4-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-4-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-4-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-4-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-4-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-4-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-4-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "pancreas-4-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "pancreas",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "pancreas-4-challenge-1",
+              "description": "Operational assumptions require repeated clarification.",
+              "activityId": "pancreas-4-activity-4"
+            }
+          ],
+          "isDemo": true
+        }
+      ]
+    },
+    {
+      "id": "lungs",
+      "name": "R2R",
+      "processes": [
+        {
+          "id": "lungs-1",
+          "name": "Revenue and Cost Accounting",
+          "journey": "Demand to Profit",
+          "stage": "Record results",
+          "ownerTowerId": "lungs",
+          "collaboratorTowerIds": [
+            "intestines",
+            "stomach"
+          ],
+          "platforms": [
+            "SAP",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "lungs-1-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for revenue and cost accounting and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-1-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-1-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-1-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-1-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "intestines",
+                "stomach"
+              ]
+            },
+            {
+              "id": "lungs-1-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-1-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-1-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-1-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-1-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "lungs",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "lungs-1-challenge-1",
+              "description": "Upstream transactions arrive after cut-off.",
+              "activityId": "lungs-1-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "lungs-2",
+          "name": "Account Reconciliation",
+          "journey": "Demand to Profit",
+          "stage": "Close accounts",
+          "ownerTowerId": "lungs",
+          "collaboratorTowerIds": [],
+          "platforms": [
+            "BlackLine",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "lungs-2-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for account reconciliation and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-2-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-2-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-2-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-2-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-2-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-2-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-2-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-2-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-2-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "lungs",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "lungs-2-challenge-1",
+              "description": "Unmatched balances require manual investigation.",
+              "activityId": "lungs-2-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "lungs-3",
+          "name": "Financial Close and Consolidation",
+          "journey": "Demand to Profit",
+          "stage": "Close accounts",
+          "ownerTowerId": "lungs",
+          "collaboratorTowerIds": [
+            "kidneys",
+            "spleen"
+          ],
+          "platforms": [
+            "Crown",
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "lungs-3-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for financial close and consolidation and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-3-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-3-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-3-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-3-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "kidneys",
+                "spleen"
+              ]
+            },
+            {
+              "id": "lungs-3-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-3-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-3-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-3-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-3-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "lungs",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "lungs-3-challenge-1",
+              "description": "Close dependencies are not visible across towers.",
+              "activityId": "lungs-3-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "lungs-4",
+          "name": "Profit Reporting",
+          "journey": "Demand to Profit",
+          "stage": "Report profit",
+          "ownerTowerId": "lungs",
+          "collaboratorTowerIds": [
+            "brain",
+            "pancreas"
+          ],
+          "platforms": [
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "lungs-4-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for profit reporting and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-4-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-4-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-4-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-4-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "brain",
+                "pancreas"
+              ]
+            },
+            {
+              "id": "lungs-4-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-4-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-4-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-4-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "lungs-4-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "lungs",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "lungs-4-challenge-1",
+              "description": "Reporting hierarchies differ between planning and actuals.",
+              "activityId": "lungs-4-activity-4"
+            }
+          ],
+          "isDemo": true
+        }
+      ]
+    },
+    {
+      "id": "intestines",
+      "name": "O2C",
+      "processes": [
+        {
+          "id": "intestines-1",
+          "name": "Customer Order Validation",
+          "journey": "Demand to Profit",
+          "stage": "Capture demand",
+          "ownerTowerId": "intestines",
+          "collaboratorTowerIds": [
+            "brain"
+          ],
+          "platforms": [
+            "SAP",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "intestines-1-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for customer order validation and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-1-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-1-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-1-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-1-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "brain"
+              ]
+            },
+            {
+              "id": "intestines-1-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-1-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-1-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-1-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-1-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "intestines-1-challenge-1",
+              "description": "Incomplete customer data blocks order release.",
+              "activityId": "intestines-1-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "intestines-2",
+          "name": "Billing and Revenue Handoff",
+          "journey": "Demand to Profit",
+          "stage": "Bill customers",
+          "ownerTowerId": "intestines",
+          "collaboratorTowerIds": [
+            "lungs",
+            "spleen"
+          ],
+          "platforms": [
+            "SAP",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "intestines-2-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for billing and revenue handoff and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-2-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-2-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-2-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-2-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "lungs",
+                "spleen"
+              ]
+            },
+            {
+              "id": "intestines-2-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-2-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-2-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-2-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-2-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "intestines",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "intestines-2-challenge-1",
+              "description": "Invoice tax codes require rework.",
+              "activityId": "intestines-2-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "intestines-3",
+          "name": "Collections and Dispute Resolution",
+          "journey": "Demand to Profit",
+          "stage": "Collect cash",
+          "ownerTowerId": "intestines",
+          "collaboratorTowerIds": [
+            "brain",
+            "kidneys"
+          ],
+          "platforms": [
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "intestines-3-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for collections and dispute resolution and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-3-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-3-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-3-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-3-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "brain",
+                "kidneys"
+              ]
+            },
+            {
+              "id": "intestines-3-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-3-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-3-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-3-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-3-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "intestines",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "intestines-3-challenge-1",
+              "description": "Dispute evidence is spread across teams.",
+              "activityId": "intestines-3-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "intestines-4",
+          "name": "Cash Application",
+          "journey": "Demand to Profit",
+          "stage": "Collect cash",
+          "ownerTowerId": "intestines",
+          "collaboratorTowerIds": [],
+          "platforms": [
+            "BlackLine",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "intestines-4-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for cash application and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-4-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-4-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-4-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-4-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-4-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-4-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-4-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-4-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "intestines-4-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "intestines",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "intestines-4-challenge-1",
+              "description": "Remittance details are missing from receipts.",
+              "activityId": "intestines-4-activity-4"
+            }
+          ],
+          "isDemo": true
+        }
+      ]
+    },
+    {
+      "id": "stomach",
+      "name": "P2P",
+      "processes": [
+        {
+          "id": "stomach-1",
+          "name": "Purchase Requisition Review",
+          "journey": "Demand to Profit",
+          "stage": "Source supply",
+          "ownerTowerId": "stomach",
+          "collaboratorTowerIds": [
+            "pancreas",
+            "liver"
+          ],
+          "platforms": [
+            "Power Apps",
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "stomach-1-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for purchase requisition review and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-1-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-1-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-1-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-1-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "pancreas",
+                "liver"
+              ]
+            },
+            {
+              "id": "stomach-1-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-1-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-1-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-1-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-1-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "stomach",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "stomach-1-challenge-1",
+              "description": "Requests lack complete cost allocations.",
+              "activityId": "stomach-1-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "stomach-2",
+          "name": "Purchase Order Management",
+          "journey": "Demand to Profit",
+          "stage": "Source supply",
+          "ownerTowerId": "stomach",
+          "collaboratorTowerIds": [],
+          "platforms": [
+            "SAP",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "stomach-2-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for purchase order management and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-2-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-2-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-2-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-2-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-2-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-2-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-2-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-2-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-2-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "stomach-2-challenge-1",
+              "description": "Supplier master records are inconsistent.",
+              "activityId": "stomach-2-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "stomach-3",
+          "name": "Supplier Invoice Matching",
+          "journey": "Demand to Profit",
+          "stage": "Pay suppliers",
+          "ownerTowerId": "stomach",
+          "collaboratorTowerIds": [
+            "lungs",
+            "spleen"
+          ],
+          "platforms": [
+            "SAP",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "stomach-3-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for supplier invoice matching and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-3-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-3-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-3-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-3-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "lungs",
+                "spleen"
+              ]
+            },
+            {
+              "id": "stomach-3-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-3-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-3-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-3-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-3-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "stomach",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "stomach-3-challenge-1",
+              "description": "Receipt and invoice quantities do not match.",
+              "activityId": "stomach-3-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "stomach-4",
+          "name": "Supplier Payment Planning",
+          "journey": "Demand to Profit",
+          "stage": "Pay suppliers",
+          "ownerTowerId": "stomach",
+          "collaboratorTowerIds": [
+            "kidneys",
+            "pancreas"
+          ],
+          "platforms": [
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "stomach-4-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for supplier payment planning and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-4-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-4-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-4-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-4-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "kidneys",
+                "pancreas"
+              ]
+            },
+            {
+              "id": "stomach-4-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-4-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-4-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-4-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "stomach-4-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "stomach",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "stomach-4-challenge-1",
+              "description": "Payment timing is not aligned with cash forecasts.",
+              "activityId": "stomach-4-activity-4"
+            }
+          ],
+          "isDemo": true
+        }
+      ]
+    },
+    {
+      "id": "liver",
+      "name": "CAPEX",
+      "processes": [
+        {
+          "id": "liver-1",
+          "name": "Investment Business Case",
+          "journey": "Demand to Profit",
+          "stage": "Plan investment",
+          "ownerTowerId": "liver",
+          "collaboratorTowerIds": [
+            "brain",
+            "pancreas"
+          ],
+          "platforms": [
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "liver-1-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for investment business case and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-1-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-1-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-1-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-1-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "brain",
+                "pancreas"
+              ]
+            },
+            {
+              "id": "liver-1-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-1-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-1-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-1-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-1-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "liver",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "liver-1-challenge-1",
+              "description": "Business cases use different return assumptions.",
+              "activityId": "liver-1-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "liver-2",
+          "name": "Capital Approval",
+          "journey": "Demand to Profit",
+          "stage": "Approve investment",
+          "ownerTowerId": "liver",
+          "collaboratorTowerIds": [
+            "kidneys"
+          ],
+          "platforms": [
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "liver-2-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for capital approval and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-2-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-2-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-2-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-2-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "kidneys"
+              ]
+            },
+            {
+              "id": "liver-2-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-2-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-2-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-2-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-2-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "liver",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "liver-2-challenge-1",
+              "description": "Approval evidence is split across systems.",
+              "activityId": "liver-2-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "liver-3",
+          "name": "Asset Capitalization",
+          "journey": "Demand to Profit",
+          "stage": "Record investment",
+          "ownerTowerId": "liver",
+          "collaboratorTowerIds": [
+            "stomach",
+            "lungs"
+          ],
+          "platforms": [
+            "SAP",
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "liver-3-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for asset capitalization and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-3-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-3-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-3-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-3-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "stomach",
+                "lungs"
+              ]
+            },
+            {
+              "id": "liver-3-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-3-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-3-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-3-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-3-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "liver",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "liver-3-challenge-1",
+              "description": "Asset readiness dates are not recorded consistently.",
+              "activityId": "liver-3-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "liver-4",
+          "name": "Investment Benefits Review",
+          "journey": "Demand to Profit",
+          "stage": "Review returns",
+          "ownerTowerId": "liver",
+          "collaboratorTowerIds": [],
+          "platforms": [
+            "Crown",
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "liver-4-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for investment benefits review and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-4-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-4-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-4-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-4-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-4-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-4-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-4-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-4-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "liver-4-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "liver",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "liver-4-challenge-1",
+              "description": "Actual benefits are difficult to trace to approved cases.",
+              "activityId": "liver-4-activity-4"
+            }
+          ],
+          "isDemo": true
+        }
+      ]
+    },
+    {
+      "id": "spleen",
+      "name": "Tax",
+      "processes": [
+        {
+          "id": "spleen-1",
+          "name": "Transaction Tax Validation",
+          "journey": "Demand to Profit",
+          "stage": "Validate tax",
+          "ownerTowerId": "spleen",
+          "collaboratorTowerIds": [
+            "intestines",
+            "stomach"
+          ],
+          "platforms": [
+            "SAP",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "spleen-1-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for transaction tax validation and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-1-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-1-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-1-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-1-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "intestines",
+                "stomach"
+              ]
+            },
+            {
+              "id": "spleen-1-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-1-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-1-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-1-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-1-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "spleen",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "spleen-1-challenge-1",
+              "description": "Tax classifications differ across transaction sources.",
+              "activityId": "spleen-1-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "spleen-2",
+          "name": "Transfer Pricing Review",
+          "journey": "Demand to Profit",
+          "stage": "Plan profit",
+          "ownerTowerId": "spleen",
+          "collaboratorTowerIds": [
+            "brain",
+            "kidneys"
+          ],
+          "platforms": [
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "spleen-2-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for transfer pricing review and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-2-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-2-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-2-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-2-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "brain",
+                "kidneys"
+              ]
+            },
+            {
+              "id": "spleen-2-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-2-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-2-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-2-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-2-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "spleen",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "spleen-2-challenge-1",
+              "description": "Intercompany assumptions are updated at different times.",
+              "activityId": "spleen-2-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "spleen-3",
+          "name": "Tax Provision and Reconciliation",
+          "journey": "Demand to Profit",
+          "stage": "Close accounts",
+          "ownerTowerId": "spleen",
+          "collaboratorTowerIds": [
+            "lungs"
+          ],
+          "platforms": [
+            "BlackLine",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "spleen-3-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for tax provision and reconciliation and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-3-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-3-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-3-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-3-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "lungs"
+              ]
+            },
+            {
+              "id": "spleen-3-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-3-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-3-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-3-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-3-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "spleen",
+              "platform": "BlackLine",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "spleen-3-challenge-1",
+              "description": "Tax adjustments lack consistent supporting evidence.",
+              "activityId": "spleen-3-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "spleen-4",
+          "name": "Tax Filing Preparation",
+          "journey": "Demand to Profit",
+          "stage": "Report tax",
+          "ownerTowerId": "spleen",
+          "collaboratorTowerIds": [],
+          "platforms": [
+            "Crown",
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "spleen-4-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for tax filing preparation and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-4-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-4-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-4-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-4-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-4-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-4-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-4-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-4-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "spleen-4-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "spleen",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "spleen-4-challenge-1",
+              "description": "Filing data requires repeated manual consolidation.",
+              "activityId": "spleen-4-activity-4"
+            }
+          ],
+          "isDemo": true
+        }
+      ]
+    },
+    {
+      "id": "kidneys",
+      "name": "Controlling",
+      "processes": [
+        {
+          "id": "kidneys-1",
+          "name": "Profitability Allocation",
+          "journey": "Demand to Profit",
+          "stage": "Allocate costs",
+          "ownerTowerId": "kidneys",
+          "collaboratorTowerIds": [
+            "brain",
+            "pancreas"
+          ],
+          "platforms": [
+            "SAP",
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "kidneys-1-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for profitability allocation and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-1-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-1-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-1-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-1-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "brain",
+                "pancreas"
+              ]
+            },
+            {
+              "id": "kidneys-1-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-1-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-1-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-1-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-1-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "kidneys",
+              "platform": "SAP",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "kidneys-1-challenge-1",
+              "description": "Allocation drivers are not refreshed consistently.",
+              "activityId": "kidneys-1-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "kidneys-2",
+          "name": "Budget and Spend Control",
+          "journey": "Demand to Profit",
+          "stage": "Control spend",
+          "ownerTowerId": "kidneys",
+          "collaboratorTowerIds": [
+            "stomach",
+            "liver"
+          ],
+          "platforms": [
+            "Power Apps"
+          ],
+          "executionMode": "Automated",
+          "activities": [
+            {
+              "id": "kidneys-2-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Collect the latest inputs for budget and spend control and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-2-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-2-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-2-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-2-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "stomach",
+                "liver"
+              ]
+            },
+            {
+              "id": "kidneys-2-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-2-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-2-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-2-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-2-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "kidneys",
+              "platform": "Power Apps",
+              "executionMode": "Automated",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "kidneys-2-challenge-1",
+              "description": "Commitments are not always visible before approval.",
+              "activityId": "kidneys-2-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "kidneys-3",
+          "name": "Management Performance Review",
+          "journey": "Demand to Profit",
+          "stage": "Review performance",
+          "ownerTowerId": "kidneys",
+          "collaboratorTowerIds": [
+            "lungs",
+            "brain"
+          ],
+          "platforms": [
+            "Crown",
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "kidneys-3-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for management performance review and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-3-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-3-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-3-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-3-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": [
+                "lungs",
+                "brain"
+              ]
+            },
+            {
+              "id": "kidneys-3-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-3-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-3-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-3-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-3-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "kidneys",
+              "platform": "Crown",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "kidneys-3-challenge-1",
+              "description": "Commentary does not consistently explain variances.",
+              "activityId": "kidneys-3-activity-4"
+            }
+          ],
+          "isDemo": true
+        },
+        {
+          "id": "kidneys-4",
+          "name": "Financial Control Assessment",
+          "journey": "Demand to Profit",
+          "stage": "Control profit",
+          "ownerTowerId": "kidneys",
+          "collaboratorTowerIds": [],
+          "platforms": [
+            "Excel"
+          ],
+          "executionMode": "Manual",
+          "activities": [
+            {
+              "id": "kidneys-4-activity-1",
+              "name": "Receive inputs",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Collect the latest inputs for financial control assessment and confirm the reporting period.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-4-activity-2",
+              "name": "Validate source data",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Check completeness, formats and source totals before the data moves forward.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-4-activity-3",
+              "name": "Check the baseline",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Compare the current inputs with the approved prior-period baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-4-activity-4",
+              "name": "Resolve exceptions",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Investigate missing values and reconcile differences with the source team.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-4-activity-5",
+              "name": "Coordinate dependencies",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Align assumptions and hand-offs with collaborating towers.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-4-activity-6",
+              "name": "Prepare calculations",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Apply the agreed calculation rules and document the underlying assumptions.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-4-activity-7",
+              "name": "Review results",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Review movements and explain material differences against the baseline.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-4-activity-8",
+              "name": "Approve the outcome",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Obtain the process owner\u2019s sign-off and record the approval trail.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-4-activity-9",
+              "name": "Publish the output",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Release the approved output to downstream teams supporting Demand to Profit.",
+              "collaboratorTowerIds": []
+            },
+            {
+              "id": "kidneys-4-activity-10",
+              "name": "Archive evidence",
+              "ownerTowerId": "kidneys",
+              "platform": "Excel",
+              "executionMode": "Manual",
+              "description": "Retain source files, calculations and approvals for future review.",
+              "collaboratorTowerIds": []
+            }
+          ],
+          "challenges": [
+            {
+              "id": "kidneys-4-challenge-1",
+              "description": "Control evidence is collected through separate spreadsheets.",
+              "activityId": "kidneys-4-activity-4"
+            }
+          ],
+          "isDemo": true
+        }
+      ]
+    }
+  ]
+}
