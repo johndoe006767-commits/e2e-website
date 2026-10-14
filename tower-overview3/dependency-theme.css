@@ -1,0 +1,19 @@
+/* Colour-only overrides. Original animation scripts and timing are preserved. */
+:root {
+  --bg: #301d3f;
+  --text: #faf5fc;
+  --muted: #cbbbd4;
+  --in: #a8eddb;
+  --out: #efb1d4;
+}
+body {
+  background: #301d3f url('./assets/plum-reference.png') repeat;
+}
+.activity { background-color: #3b284b; }
+.activity[aria-pressed=true] {
+  background-color: #50365e;
+  border-color: #decce9;
+}
+.neural-ready .activity[aria-pressed=true] span {
+  background-color: #301d3fa6;
+}
