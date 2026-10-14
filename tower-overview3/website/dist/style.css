@@ -57,3 +57,14 @@ header{justify-content:flex-start;padding:25px 32px}header img{width:120px}foote
  .flow-heading{top:0;z-index:2;background:var(--bg);padding:16px 0;margin-bottom:20px}
  .flow-heading h2{font-size:26px;max-width:100%}
 }
+
+/* Clinical Lab Background */
+body {
+  background: linear-gradient(rgba(26, 11, 34, 0.65), rgba(26, 11, 34, 0.65)),
+              url('assets/lab-bg.jpg') no-repeat center center fixed !important;
+  background-size: cover !important;
+}
+
+canvas {
+  background: transparent !important;
+}
