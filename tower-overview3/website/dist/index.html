@@ -46,6 +46,58 @@
     </div>
   </div>
 
+    <div id="tower-telemetry-hud" class="telemetry-hud" aria-label="Process Automation Vital Signs">
+      <div class="hud-header">
+        <div class="hud-title-wrap">
+          <span class="hud-eyebrow">BIOPROCESS VITAL SIGNS</span>
+          <div class="hud-tower-name" id="hud-tower-title">O2C TELEMETRY</div>
+        </div>
+        <div class="hud-header-actions">
+          <button id="hud-handoff-btn" class="hud-action-btn" type="button" title="View Input/Output Flow Dependencies">
+            <span class="btn-icon">⇄</span>
+            <span>Handoffs</span>
+          </button>
+          <div class="hud-score-badge">
+            <div class="hud-score-value" id="hud-score-pct">38%</div>
+            <div class="hud-score-label">HEALTH SCORE</div>
+          </div>
+        </div>
+      </div>
+      <div class="hud-ecg-container">
+        <svg class="hud-ecg-svg" viewBox="0 0 200 20" preserveAspectRatio="none">
+          <path class="hud-ecg-track" d="M0,10 L50,10 L54,3 L60,18 L65,5 L70,15 L74,10 L200,10" />
+          <path class="hud-ecg-pulse" d="M0,10 L50,10 L54,3 L60,18 L65,5 L70,15 L74,10 L200,10" />
+        </svg>
+      </div>
+      <div class="hud-bar-container" title="Click any segment to drill down into activities">
+        <div class="hud-bar-segment seg-automated hud-filter-btn" data-filter="Automated" id="hud-bar-auto" style="width: 0%;"></div>
+        <div class="hud-bar-segment seg-semi hud-filter-btn" data-filter="Semi-automated" id="hud-bar-semi" style="width: 0%;"></div>
+        <div class="hud-bar-segment seg-manual hud-filter-btn" data-filter="Manual" id="hud-bar-manual" style="width: 0%;"></div>
+      </div>
+      <div class="hud-legend">
+        <button class="hud-legend-item hud-filter-btn" type="button" data-filter="Automated">
+          <span class="legend-dot dot-auto"></span><span id="hud-count-auto">8</span> Auto ↗
+        </button>
+        <button class="hud-legend-item hud-filter-btn" type="button" data-filter="Semi-automated">
+          <span class="legend-dot dot-semi"></span><span id="hud-count-semi">14</span> Semi ↗
+        </button>
+        <button class="hud-legend-item hud-filter-btn" type="button" data-filter="Manual">
+          <span class="legend-dot dot-manual"></span><span id="hud-count-manual">18</span> Manual ↗
+        </button>
+      </div>
+      <div class="hud-chips">
+        <button class="hud-chip chip-tpi hud-filter-btn" type="button" data-filter="TPI">
+          <span class="chip-icon">🔗</span>
+          <span class="chip-val" id="hud-count-tpi">8</span>
+          <span class="chip-lbl">TPIs ↗</span>
+        </button>
+        <button class="hud-chip chip-pain hud-filter-btn" type="button" data-filter="Pain">
+          <span class="chip-icon">⚠️</span>
+          <span class="chip-val" id="hud-count-pain">15</span>
+          <span class="chip-lbl">Pain Points ↗</span>
+        </button>
+      </div>
+    </div>
 </section>
 </main>
 <footer><input id="assembly" type="range" min="0" max="1000" value="0" aria-label="Assemble or disassemble organs"></footer>
@@ -59,4 +111,35 @@
 <ol id="flow-activities" class="testing-flow infusion-flow"></ol>
 <div class="infusion-end"><div id="flow-brain" class="infusion-model infusion-brain" role="img" aria-label="Organ receiving the process flow"></div></div>
 </div></div></section>
-<script type="module" src="scene.js?v=20261014-hb2"></script></body></html>
+<script type="module" src="scene.js?v=20261014-hb2"></script>
+<section id="handoff-overlay" class="handoff-overlay" hidden aria-modal="true" role="dialog" aria-label="Process Handoffs and Synaptic Dependencies">
+  <div class="handoff-backdrop"></div>
+  <div class="handoff-container">
+    <div class="handoff-topbar">
+      <div class="handoff-title-block">
+        <span class="handoff-eyebrow">SYNAPTIC TOWER FLOWS</span>
+        <h2>Handoffs & Dependencies <span class="handoff-subtitle">Who hands what in, and where each flow sends it</span></h2>
+      </div>
+      <button id="handoff-close-btn" class="handoff-close-btn" type="button">
+        <span>← Return to Model</span>
+      </button>
+    </div>
+    <div class="handoff-diagram-wrap">
+      <div class="handoff-col col-upstream">
+        <div class="col-header"><h3>Hands In</h3><small>Upstream Stakeholders</small></div>
+        <div class="entity-list" id="handoff-upstream-list"></div>
+      </div>
+      <div class="handoff-stage-center">
+        <div class="col-header"><h3>Order to Cash Flows</h3><small>Central Processing Synapses</small></div>
+        <div class="flows-list" id="handoff-center-flows"></div>
+      </div>
+      <div class="handoff-col col-downstream">
+        <div class="col-header"><h3>Receives</h3><small>Downstream Destinations</small></div>
+        <div class="entity-list" id="handoff-downstream-list"></div>
+      </div>
+      <svg id="handoff-svg-canvas" class="handoff-svg-canvas"></svg>
+    </div>
+  </div>
+</section>
+
+</body></html>

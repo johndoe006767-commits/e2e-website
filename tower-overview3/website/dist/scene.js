@@ -26,7 +26,7 @@ function overviewScale(o){return T.MathUtils.lerp(o.size,mobile?.17:.23,separati
 function retarget(instant=false){for(const o of organs){o.flight=true;o.from=o.root.position.clone();o.to=selected===o?new T.Vector3(-.65,.88,.8):overviewTarget(o);o.fromScale=o.root.scale.x;o.toScale=selected===o?Math.min(2.2,camera.right-camera.left)*.48:overviewScale(o);o.start=performance.now();o.duration=instant||reduced.matches?0:700;o.fromQuat=o.root.quaternion.clone();o.toQuat=new T.Quaternion();} }
 function setSeparation(value){if(!ready||selected)return;separationTarget=T.MathUtils.clamp(value,0,1);expanded=separationTarget>.5;$('#assembly').value=String(Math.round(separationTarget*1000));}
 function setView(value){setSeparation(value?1:0);}
-function select(o,trigger){if(!ready||selected)return;lastTrigger=trigger||o.label;$('#process-status').textContent='';selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';$('#detail').hidden=false;$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Scroll to rotate left or right. Drag or use arrow keys to rotate in all directions.`);retarget();}
+function select(o,trigger){if(!ready||selected)return;lastTrigger=trigger||o.label;$('#process-status').textContent='';selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';$('#detail').hidden=false;$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);setupHUDInteractions();$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Scroll to rotate left or right. Drag or use arrow keys to rotate in all directions.`);retarget();}
 function close(){if(!selected)return;selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;retarget();lastTrigger?.focus({preventScroll:true});}
 // Exact tapered Catmull-Rom tubes and traveling flow shader from tower-overview2.
 function buildConnections(){organs.forEach((o,index)=>{
@@ -168,4 +168,246 @@ function updateTelemetryHUD(id) {
       barManual.style.width = ((d.manual / total) * 100) + '%';
     }, 60);
   }
+}
+
+
+// ============================================================
+// HANDOFF SYNAPSE ENGINE & DRILL-DOWN FILTERING
+// ============================================================
+
+const O2C_HANDOFF_DATA = {
+  upstream: [
+    { id: 'distributors', label: 'Distributors', color: '#b08968' },
+    { id: 'dmt', label: 'DMT', color: '#0077b6' },
+    { id: 'controlling', label: 'Controlling', color: '#e76f51' },
+    { id: 'distribution', label: 'Distribution', color: '#2a9d8f' },
+    { id: 'approver', label: 'Approver', color: '#9b5de5' },
+    { id: 'local_market', label: 'Local market', color: '#cb997e' },
+    { id: 'customer', label: 'Customer', color: '#a3704c' },
+    { id: 'billing', label: 'Billing', color: '#6c757d' },
+    { id: 'p2p', label: 'P2P', color: '#f3722c' },
+    { id: 'collections', label: 'Collections', color: '#577590' },
+    { id: 'tax', label: 'Tax', color: '#43aa8b' },
+    { id: 'hr', label: 'HR', color: '#b5179e' },
+    { id: 'bank', label: 'Bank', color: '#495057' },
+    { id: 'requester', label: 'Requester', color: '#8d99ae' }
+  ],
+  flows: [
+    { id: 'flow-1', title: 'Flow 1 · EDI orders', meta: '6 in · 1 out', up: ['distributors','dmt','controlling','distribution'], down: ['order_block'] },
+    { id: 'flow-2', title: 'Flow 2 · Customer PO, returns and rebates', meta: '1 in · 1 out', up: ['customer'], down: ['order_block'] },
+    { id: 'flow-3', title: 'Order block release', meta: '3 in · 2 out', up: ['distribution','approver','local_market'], down: ['distribution','billing'] },
+    { id: 'flow-4', title: 'Billing', meta: '1 in · 2 out', up: ['billing'], down: ['collections','tax'] },
+    { id: 'flow-5', title: 'Collection - payment follow-up and escalation', meta: '2 in · 1 out', up: ['local_market','customer'], down: ['collections'] },
+    { id: 'flow-6', title: 'Disputes and deductions management', meta: '4 in · 2 out', up: ['customer','billing','p2p'], down: ['cash_collections_review','cash_app'] },
+    { id: 'flow-7', title: 'Payment allocation - matched payments', meta: '2 in · 1 out', up: ['collections','bank'], down: ['cash_banking'] },
+    { id: 'flow-8', title: 'Flow A - Payment process: automated payment run', meta: '4 in · 1 out', up: ['tax','hr','bank'], down: ['bank'] },
+    { id: 'flow-9', title: 'Flow A - Payment process: manual payment route', meta: '1 in · 1 out', up: ['requester'], down: ['bank'] },
+    { id: 'flow-10', title: 'Flow B - Bank statement process', meta: '1 in · 1 out', up: ['bank'], down: ['r2r_reporting'] }
+  ],
+  downstream: [
+    { id: 'order_block', label: 'Order block release', color: '#6c757d' },
+    { id: 'distribution', label: 'Distribution', color: '#2a9d8f' },
+    { id: 'billing', label: 'Billing', color: '#495057' },
+    { id: 'collections', label: 'Collections', color: '#6c757d' },
+    { id: 'tax', label: 'Tax', color: '#43aa8b' },
+    { id: 'cash_app', label: 'Cash Application', color: '#495057' },
+    { id: 'cash_collections_review', label: 'Cash collections review', color: '#6c757d' },
+    { id: 'cash_banking', label: 'Cash & Banking', color: '#495057' },
+    { id: 'bank', label: 'Bank', color: '#495057' },
+    { id: 'r2r_reporting', label: 'R2R Reporting', color: '#4361ee' }
+  ]
+};
+
+function renderHandoffDiagram() {
+  const upList = document.getElementById('handoff-upstream-list');
+  const downList = document.getElementById('handoff-downstream-list');
+  const flowsList = document.getElementById('handoff-center-flows');
+  const svg = document.getElementById('handoff-svg-canvas');
+  if (!upList || !downList || !flowsList || !svg) return;
+
+  upList.innerHTML = '';
+  downList.innerHTML = '';
+  flowsList.innerHTML = '';
+
+  O2C_HANDOFF_DATA.upstream.forEach(u => {
+    const el = document.createElement('div');
+    el.className = 'handoff-node-entity';
+    el.id = `up-node-${u.id}`;
+    el.innerHTML = `<span class="entity-pill" style="background:${u.color}"></span><span>${u.label}</span>`;
+    el.onmouseenter = () => highlightDependencies('up', u.id);
+    el.onmouseleave = clearHandoffHighlights;
+    upList.appendChild(el);
+  });
+
+  O2C_HANDOFF_DATA.flows.forEach(f => {
+    const el = document.createElement('div');
+    el.className = 'handoff-flow-card';
+    el.id = `flow-node-${f.id}`;
+    el.innerHTML = `<div class="flow-title">${f.title}</div><div class="flow-meta">${f.meta}</div>`;
+    el.onmouseenter = () => highlightDependencies('flow', f.id);
+    el.onmouseleave = clearHandoffHighlights;
+    flowsList.appendChild(el);
+  });
+
+  O2C_HANDOFF_DATA.downstream.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'handoff-node-entity';
+    el.id = `down-node-${d.id}`;
+    el.innerHTML = `<span class="entity-pill" style="background:${d.color}"></span><span>${d.label}</span>`;
+    el.onmouseenter = () => highlightDependencies('down', d.id);
+    el.onmouseleave = clearHandoffHighlights;
+    downList.appendChild(el);
+  });
+
+  setTimeout(drawSynapseConnections, 80);
+}
+
+function drawSynapseConnections() {
+  const svg = document.getElementById('handoff-svg-canvas');
+  const container = document.querySelector('.handoff-diagram-wrap');
+  if (!svg || !container) return;
+
+  const cRect = container.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${cRect.width} ${cRect.height}`);
+  svg.innerHTML = '';
+
+  O2C_HANDOFF_DATA.flows.forEach(f => {
+    const flowEl = document.getElementById(`flow-node-${f.id}`);
+    if (!flowEl) return;
+    const fR = flowEl.getBoundingClientRect();
+    const fInX = fR.left - cRect.left;
+    const fOutX = fR.right - cRect.left;
+    const fY = fR.top + fR.height / 2 - cRect.top;
+
+    // Upstream to Center
+    (f.up || []).forEach(uId => {
+      const upEl = document.getElementById(`up-node-${uId}`);
+      if (!upEl) return;
+      const uR = upEl.getBoundingClientRect();
+      const uX = uR.right - cRect.left;
+      const uY = uR.top + uR.height / 2 - cRect.top;
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const dx = (fInX - uX) * 0.55;
+      path.setAttribute('d', `M ${uX} ${uY} C ${uX + dx} ${uY}, ${fInX - dx} ${fY}, ${fInX} ${fY}`);
+      path.setAttribute('class', `synapse-path link-up-${uId} link-flow-${f.id}`);
+      svg.appendChild(path);
+    });
+
+    // Center to Downstream
+    (f.down || []).forEach(dId => {
+      const downEl = document.getElementById(`down-node-${dId}`);
+      if (!downEl) return;
+      const dR = downEl.getBoundingClientRect();
+      const dX = dR.left - cRect.left;
+      const dY = dR.top + dR.height / 2 - cRect.top;
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const dx = (dX - fOutX) * 0.55;
+      path.setAttribute('d', `M ${fOutX} ${fY} C ${fOutX + dx} ${fY}, ${dX - dx} ${dY}, ${dX} ${dY}`);
+      path.setAttribute('class', `synapse-path link-down-${dId} link-flow-${f.id}`);
+      svg.appendChild(path);
+    });
+  });
+}
+
+function highlightDependencies(type, id) {
+  const allPaths = document.querySelectorAll('.synapse-path');
+  allPaths.forEach(p => {
+    if (p.classList.contains(`link-${type}-${id}`)) {
+      p.classList.add('active');
+      p.classList.remove('dimmed');
+    } else {
+      p.classList.remove('active');
+      p.classList.add('dimmed');
+    }
+  });
+}
+
+function clearHandoffHighlights() {
+  document.querySelectorAll('.synapse-path').forEach(p => {
+    p.classList.remove('active');
+    p.classList.remove('dimmed');
+  });
+}
+
+// Drill-Down: Scroll down to #process-section and highlight matched execution mode
+function drillDownToProcess(mode) {
+  const section = document.getElementById('process-section');
+  if (!section) return;
+
+  // If section is hidden because no process is active, select the first available process for the tower
+  if (section.hidden && selected) {
+    const organObj = organs.find(o => o.id === selected.id);
+    if (organObj?.processNeurons?.nodes?.length) {
+      organObj.processNeurons.nodes[0].button.click();
+    }
+  }
+
+  setTimeout(() => {
+    section.hidden = false;
+    section.scrollIntoView({ behavior: 'smooth' });
+
+    // Filter/Highlight list items
+    const activities = document.querySelectorAll('#flow-activities > li');
+    activities.forEach(li => {
+      const details = li.querySelector('details');
+      const text = li.innerText.toLowerCase();
+      let match = false;
+
+      if (mode === 'Automated' && text.includes('automated')) match = true;
+      else if (mode === 'Semi-automated' && text.includes('semi')) match = true;
+      else if (mode === 'Manual' && text.includes('manual')) match = true;
+      else if (mode === 'Pain' && li.querySelector('.testing-challenges')) match = true;
+      else if (mode === 'TPI') match = true; // highlight all integrations
+
+      if (match) {
+        li.style.outline = '2px solid #00f0ff';
+        li.style.boxShadow = '0 0 16px rgba(0,240,255,0.4)';
+        if (details) details.open = true;
+      } else {
+        li.style.outline = 'none';
+        li.style.boxShadow = 'none';
+      }
+    });
+  }, 100);
+}
+
+// Global Event Listeners for HUD actions
+document.addEventListener('DOMContentLoaded', () => {
+  setupHUDInteractions();
+});
+
+function setupHUDInteractions() {
+  // Handoff open/close
+  const handoffBtn = document.getElementById('hud-handoff-btn');
+  const handoffOverlay = document.getElementById('handoff-overlay');
+  const handoffClose = document.getElementById('handoff-close-btn');
+
+  if (handoffBtn && handoffOverlay) {
+    handoffBtn.onclick = (e) => {
+      e.stopPropagation();
+      handoffOverlay.hidden = false;
+      renderHandoffDiagram();
+    };
+  }
+
+  if (handoffClose && handoffOverlay) {
+    handoffClose.onclick = () => {
+      handoffOverlay.hidden = true;
+    };
+  }
+
+  // Drilldown buttons
+  document.querySelectorAll('.hud-filter-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const filter = btn.dataset.filter;
+      if (filter) drillDownToProcess(filter);
+    };
+  });
+
+  window.addEventListener('resize', () => {
+    if (handoffOverlay && !handoffOverlay.hidden) drawSynapseConnections();
+  });
 }

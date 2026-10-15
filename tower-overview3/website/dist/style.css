@@ -83,7 +83,7 @@ canvas {
   border-radius: 14px;
   padding: 16px 18px;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 240, 255, 0.12);
-  z-index: 10;
+  z-index: 100;
   color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   pointer-events: auto;
@@ -331,7 +331,7 @@ body[data-detail=true] .hb-legend{opacity:0!important;visibility:hidden!importan
   border-radius: 18px;
   padding: 24px 28px;
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.75), 0 0 32px rgba(0, 240, 255, 0.18);
-  z-index: 10;
+  z-index: 100;
   color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   pointer-events: auto;
@@ -516,3 +516,293 @@ body[data-detail=true] .hb-legend{opacity:0!important;visibility:hidden!importan
 .chip-icon { font-size: 17px; }
 .chip-val { font-weight: 900; font-size: 18px; }
 .chip-lbl { font-size: 14px; }
+
+
+/* --- Interactive Telemetry HUD Controls --- */
+.hud-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(0, 150, 255, 0.28));
+  border: 1.5px solid rgba(0, 240, 255, 0.6);
+  color: #00f0ff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.25);
+}
+
+.hud-action-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.35), rgba(0, 150, 255, 0.45));
+  border-color: #00f0ff;
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 22px rgba(0, 240, 255, 0.5);
+}
+
+.hud-filter-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  transition: all 0.22s ease;
+}
+
+.hud-legend-item.hud-filter-btn {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+
+.hud-legend-item.hud-filter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.hud-chip.hud-filter-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.2);
+}
+
+.hud-bar-segment.hud-filter-btn:hover {
+  filter: brightness(1.35);
+}
+
+/* --- Fullscreen Synaptic Handoff Overlay --- */
+.handoff-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.handoff-overlay[hidden] {
+  display: none !important;
+}
+
+.handoff-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(35, 15, 45, 0.94), rgba(10, 8, 20, 0.98));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.handoff-container {
+  position: relative;
+  width: 95vw;
+  max-width: 1440px;
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.handoff-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.handoff-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #00f0ff;
+  text-transform: uppercase;
+}
+
+.handoff-title-block h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 3px 0 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.handoff-subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.handoff-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.handoff-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #00f0ff;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+}
+
+.handoff-diagram-wrap {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 240px 1fr 240px;
+  gap: 40px;
+  padding: 24px 32px;
+  overflow-y: auto;
+}
+
+.handoff-svg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.handoff-col, .handoff-stage-center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.col-header {
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.col-header h3 {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0;
+  color: #00f0ff;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.col-header small {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.entity-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+  gap: 10px;
+}
+
+.handoff-node-entity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.handoff-node-entity:hover, .handoff-node-entity.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: #00f0ff;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
+  transform: translateX(4px);
+}
+
+.col-downstream .handoff-node-entity:hover, .col-downstream .handoff-node-entity.active {
+  transform: translateX(-4px);
+}
+
+.entity-pill {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.flows-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+  gap: 12px;
+}
+
+.handoff-flow-card {
+  background: linear-gradient(135deg, rgba(8, 90, 95, 0.85), rgba(12, 125, 130, 0.85));
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 10px;
+  padding: 10px 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.handoff-flow-card:hover, .handoff-flow-card.active {
+  background: linear-gradient(135deg, rgba(14, 130, 138, 0.95), rgba(18, 175, 185, 0.95));
+  border-color: #00f0ff;
+  transform: scale(1.03);
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.45);
+}
+
+.flow-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.flow-meta {
+  font-size: 11px;
+  font-weight: 600;
+  color: #b2ebf2;
+  margin-top: 3px;
+}
+
+/* Synaptic connection line paths */
+.synapse-path {
+  fill: none;
+  stroke: rgba(0, 240, 255, 0.18);
+  stroke-width: 2.5;
+  transition: all 0.3s ease;
+}
+
+.synapse-path.active {
+  stroke: #00f0ff;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.8));
+}
+
+.synapse-path.dimmed {
+  opacity: 0.15;
+}
