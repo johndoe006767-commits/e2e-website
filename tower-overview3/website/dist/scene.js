@@ -125,7 +125,7 @@ addEventListener('pagehide',()=>{cancelAnimationFrame(animation);sceneObserver.d
 
 const TOWER_HEALTH = {
   lungs: { name: 'R2R', auto: 14, semi: 32, manual: 42, tpis: 4, pain: 4 },
-  intestines: { name: 'O2C', auto: 24, semi: 38, manual: 26, tpis: 6, pain: 5 },
+  intestines: { name: 'O2C', auto: 8, semi: 14, manual: 18, tpis: 8, pain: 15 },
   stomach: { name: 'P2P', auto: 20, semi: 30, manual: 36, tpis: 5, pain: 4 },
   brain: { name: 'FP&A Commercial', auto: 32, semi: 44, manual: 16, tpis: 8, pain: 2 },
   pancreas: { name: 'FP&A Operations', auto: 26, semi: 38, manual: 22, tpis: 5, pain: 3 },
