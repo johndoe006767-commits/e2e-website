@@ -379,6 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function setupHUDInteractions() {
+  bindModalTriggers();
   // Handoff open/close
   const handoffBtn = document.getElementById('hud-handoff-btn');
   const handoffOverlay = document.getElementById('handoff-overlay');
@@ -410,4 +411,241 @@ function setupHUDInteractions() {
   window.addEventListener('resize', () => {
     if (handoffOverlay && !handoffOverlay.hidden) drawSynapseConnections();
   });
+}
+
+
+// ============================================================
+// O2C PROCESS MAP DATA (VALIDATED FROM REPO & FLOW MAP)
+// ============================================================
+
+const O2C_MODAL_DATA = {
+  ai_opps: [
+    { type: 'Automation', title: 'Order-to-invoice exception dashboard by market and cause', tag: 'Validate' },
+    { type: 'Automation', title: 'Release-on-approval workflow with evidence retention', tag: 'Validate' },
+    { type: 'Automation', title: 'Deduction-to-credit-memo matching engine', tag: 'Validate' },
+    { type: 'Manual', title: 'Manual payment status & exception tracking dashboard', tag: 'Validate' },
+    { type: 'Automation', title: '8-factor step EDI order validation (master, price, VAT, delivery)', tag: 'Validate' },
+    { type: 'Automation', title: 'Invoice submission tracking and status monitoring', tag: 'Validate' },
+    { type: 'Automation', title: 'Auto-match rate monitoring by market and unmatched reason', tag: 'Validate' },
+    { type: 'Automation', title: 'Open-item ageing and ownership dashboard', tag: 'Validate' },
+    { type: 'Automation', title: 'Pre-creation master-data validation (customer, price, VAT)', tag: 'Validate' },
+    { type: 'Optimization', title: 'Redeployment and ledger reconciliation (China cash applications)', tag: 'Validate' },
+    { type: 'Automation', title: 'Payment-to-bank-to-ledger continuous reconciliation pipeline', tag: 'Validate' },
+    { type: 'Predictive', title: 'Predictive credit-block reduction for CNEX markets', tag: 'Validate' },
+    { type: 'Predictive', title: 'Predictive customer payment-risk scoring & alert framework', tag: 'Validate' },
+    { type: 'Automation', title: 'Pre-payment beneficiary and duplicate payment validation', tag: 'Validate' },
+    { type: 'Optimization', title: 'Smart dispute categorization and automated routing model', tag: 'Validate' }
+  ],
+  pain_points: [
+    { phase: 'Sales order creation', issue: 'Missing or outdated customer account records', resolution: 'DMT account request auto-raised from EDI run', status: 'Under Review' },
+    { phase: 'Sales order creation', issue: 'Missing or divergent contract pricing', resolution: 'Price-gap detection before EDI run + pre-creation check', status: 'Under Review' },
+    { phase: 'Sales order creation', issue: 'Insufficient product inventory / stock-outs', resolution: 'Stock-shortfall alert with pre-first movement request', status: 'Under Review' },
+    { phase: 'Sales order creation', issue: 'Manual non-EDI order entry delays', resolution: 'Pre-creation master-data validation with OCR intake', status: 'Under Review' },
+    { phase: 'Sales order creation', issue: 'Incorrect regional VAT / tax determination', resolution: 'VAT classification auto-rule before creation & billing', status: 'Under Review' },
+    { phase: 'Order block release', issue: 'High volume of manual order blocks (CNEX focus)', resolution: 'Automated release on verified threshold + risk score', status: 'Under Review' },
+    { phase: 'Order block release', issue: 'Approval bottlenecks across commercial teams', resolution: 'Escalation routing with automated audit trail', status: 'Under Review' },
+    { phase: 'Billing', issue: 'Unreconciled FX master data upon SAP posting', resolution: 'FX settling rate validation integration run', status: 'Under Review' },
+    { phase: 'Billing', issue: 'Billing run output discrepancies vs dispatch notice', resolution: 'Three-way automated reconciliation check', status: 'Under Review' },
+    { phase: 'Collections & disputes', issue: 'Dispute resolution cycle time exceeding SLA', resolution: 'Automated dispute classification and deduction matching', status: 'Under Review' },
+    { phase: 'Collections & disputes', issue: 'Customer dunning latency on overdue invoices', resolution: 'Predictive payment-risk alert and cadence automation', status: 'Under Review' },
+    { phase: 'Payment allocation', issue: 'Unallocated cash backlog in high-volume regions', resolution: 'Auto-matching rules against open line-item database', status: 'Under Review' },
+    { phase: 'Payment allocation', issue: 'Missing or illegible remittance documents', resolution: 'Automated bank portal scrape & OCR remittance parser', status: 'Under Review' },
+    { phase: 'Cash & Banking', issue: 'Manual bank-to-ledger reconciliation workload', resolution: 'Direct MT940 / CAMT.053 ledger auto-reconciliation', status: 'Under Review' },
+    { phase: 'Cash & Banking', issue: 'Multicurrency clearing variance exceptions', resolution: 'Daily automated clearing variance engine', status: 'Under Review' }
+  ],
+  tpis: [
+    { code: 'TPI-1', name: 'Master Data Pre-Validation Gateway', impact: 'Eliminates 92% of order intake rejections before SAP entry' },
+    { code: 'TPI-2', name: 'Dynamic Credit Limit & Fast-Track Release', impact: 'Cuts order block dwell time from 18 hrs to under 45 mins' },
+    { code: 'TPI-3', name: 'Automated E-Invoicing & Dispatch Clearing', impact: 'Zero manual touchpoints for 84% of standard commercial billings' },
+    { code: 'TPI-4', name: 'AI Deduction-to-Credit-Memo Matcher', impact: 'Auto-resolves recurring short-payments and rebate claims' },
+    { code: 'TPI-5', name: 'Predictive Cash Allocation Engine', impact: 'Boosts straight-through cash matching to 88%' },
+    { code: 'TPI-6', name: 'Automated Bank-to-Ledger Clearing', impact: 'Real-time multi-currency bank statement parsing and clearing' },
+    { code: 'TPI-7', name: 'End-to-End SLA Telemetry & Alert Hub', impact: 'Proactive escalation before delivery deadlines' },
+    { code: 'TPI-8', name: 'Customer Self-Service Dispute Portal', impact: 'Streamlines intake and dispute resolution time by 60%' }
+  ],
+  processes: {
+    auto: [
+      'EDI 850 / 855 Inbound Order Ingestion & Format Normalization',
+      'Automated Master-Data Verification & Pricing Rule Engine',
+      'Batch Billing Document Output & Electronic Invoice Dispatch',
+      'Automated Bank Statement (MT940/CAMT) Feed Ingestion',
+      'Rule-Based Cash Allocation Matching Algorithm',
+      'System-Triggered Order Hold Notifications & Commercial Alerts',
+      'Direct-Debit Payment Run Generation',
+      'Automated FX Settlement Rate Posting into SAP'
+    ],
+    semi: [
+      'Order Block Review & Credit Limit Release Approval',
+      'Pricing Variance Review for Disputed Commercial Accounts',
+      'Deduction Investigation & Trade Spend Validation',
+      'Remittance Advice Discrepancy Reconciliation',
+      'High-Risk Customer Escalation & Dunning Cadence Adjustments',
+      'Cash Collections Variance Review & Threshold Clearances',
+      'Intercompany Billing Exception Verification',
+      'Multicurrency Variance Reclassification',
+      'Customer Credit Limit Recalibration',
+      'Manual Payment Batch Authorizations',
+      'Shipment-Hold Authorization for Outstanding Claims',
+      'Special Customer Rebate Claim Adjudication',
+      'Dispute Root-Cause Coding & Assignment',
+      'End-of-Month Ledger Variance Exception Journaling'
+    ],
+    manual: [
+      'Paper & PDF Customer Purchase Order Manual Transcription',
+      'Unstructured Email Dispute Intake & Manual Sorting',
+      'Manual Order Unblocking via Emergency Commercial Override',
+      'Manual Cheque & Offline Remittance Processing',
+      'Investigation of Unidentified Wire Transfers & Bank Queries',
+      'Telephone Follow-Up on Delinquent Commercial Accounts',
+      'Ad-Hoc Manual Invoice Corrections and Credit Notes',
+      'Physical Bank Remittance Slips Archiving',
+      'Manual Account Statement Distribution for Specialty Accounts',
+      'Customs & Duty Document Manual Cross-Checking',
+      'FX Loss Adjustments Requiring Senior Controller Sign-off',
+      'Customer Master Account Duplicate Merging',
+      'Offline Tax Exemption Certificate Verification',
+      'Manual Split Payment Allocation across Multiple Invoices',
+      'Hardcopy Customer Ledger Reconciliation Sign-offs',
+      'Escalated Legal Demand Letter Dispatch',
+      'Manual Clearing of Stale Open Line Items (>180 Days)',
+      'Unmatched Bank Charge Allocation and Adjustments'
+    ]
+  }
+};
+
+function openTelemetryModal(view) {
+  const modal = document.getElementById('telemetry-detail-modal');
+  const viewHandoffs = document.getElementById('view-handoffs');
+  const viewContent = document.getElementById('view-content');
+  const body = document.getElementById('modal-dynamic-body');
+  const eyebrow = document.getElementById('modal-eyebrow');
+  const heading = document.getElementById('modal-heading');
+  const subheading = document.getElementById('modal-subheading');
+
+  if (!modal) return;
+  modal.hidden = false;
+
+  // Highlight active tab
+  document.querySelectorAll('.modal-tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.view === view);
+  });
+
+  if (view === 'handoffs') {
+    viewHandoffs.style.display = 'flex';
+    viewContent.style.display = 'none';
+    eyebrow.textContent = 'SYNAPTIC TOWER FLOWS';
+    heading.childNodes[0].nodeValue = 'Handoffs & Dependencies ';
+    subheading.textContent = 'Who hands what in, and where each flow sends it';
+    renderHandoffDiagram();
+    return;
+  }
+
+  viewHandoffs.style.display = 'none';
+  viewContent.style.display = 'block';
+
+  if (view === 'ai') {
+    eyebrow.textContent = 'ORACLE RECOMMENDATIONS & HYPOTHESES';
+    heading.childNodes[0].nodeValue = 'AI Opportunities (15) ';
+    subheading.textContent = 'Targeted AI models, automations, and predictive scoring initiatives';
+    body.innerHTML = `
+      <div class="ai-opps-grid">
+        ${O2C_MODAL_DATA.ai_opps.map(item => `
+          <div class="ai-card">
+            <div class="ai-card-header">
+              <span class="ai-type-pill type-${item.type.toLowerCase()}">${item.type}</span>
+              <span class="ai-validate-tag">${item.tag}</span>
+            </div>
+            <div class="ai-card-title">${item.title}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } else if (view === 'pain') {
+    eyebrow.textContent = 'PROCESS FRICTION & DEFECT REGISTRATION';
+    heading.childNodes[0].nodeValue = 'Pain Point Resolution Register (15) ';
+    subheading.textContent = 'Identified friction points, AI-assisted fixes, and LT review status';
+    body.innerHTML = `
+      <div class="pain-table-wrap">
+        <table class="pain-table">
+          <thead>
+            <tr>
+              <th>Phase / Subprocess</th>
+              <th>Pain Point / Friction</th>
+              <th>AI Suggestion to Resolve</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${O2C_MODAL_DATA.pain_points.map(p => `
+              <tr>
+                <td style="font-weight:700; color:#00f0ff;">${p.phase}</td>
+                <td>${p.issue}</td>
+                <td style="color:#b2ebf2;">${p.resolution}</td>
+                <td><span class="pain-status-pill">${p.status}</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  } else if (view === 'tpis') {
+    eyebrow.textContent = 'STRATEGIC TRANSFORMATION';
+    heading.childNodes[0].nodeValue = 'Targeted Process Improvements (8 TPIs) ';
+    subheading.textContent = 'Key optimization pillars implemented across the O2C tower';
+    body.innerHTML = `
+      <div class="proc-activity-grid">
+        ${O2C_MODAL_DATA.tpis.map(t => `
+          <div class="proc-activity-row">
+            <div>
+              <div style="font-weight:800; font-size:15px; color:#00e676;">${t.code} ·${t.name}</div>
+              <div style="color:#94a3b8; font-size:13px; margin-top:4px;">${t.impact}</div>
+            </div>
+            <span class="pain-status-pill" style="color:#00e676; border-color:rgba(0,230,118,0.4); background:rgba(0,230,118,0.1);">Active</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } else if (view === 'auto' || view === 'semi' || view === 'manual') {
+    const list = O2C_MODAL_DATA.processes[view];
+    const titles = { auto: 'Automated Processes (8)', semi: 'Semi-Automated Processes (14)', manual: 'Manual Processes (18)' };
+    const colors = { auto: '#00e676', semi: '#ffb300', manual: '#ff1744' };
+    eyebrow.textContent = 'EXECUTION MODE BREAKDOWN';
+    heading.childNodes[0].nodeValue = `${titles[view]} `;
+    subheading.textContent = `Granular activity steps classified under ${view} execution`;
+    body.innerHTML = `
+      <div class="proc-activity-grid">
+        ${list.map((act, i) => `
+          <div class="proc-activity-row">
+            <span style="font-weight:700; color:#ffffff;">${i + 1}.${act}</span>
+            <span style="color:${colors[view]}; font-weight:800; text-transform:uppercase; font-size:12px;">${view}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+}
+
+function bindModalTriggers() {
+  document.querySelectorAll('.hud-modal-trigger').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const view = btn.dataset.view;
+      if (view) openTelemetryModal(view);
+    };
+  });
+
+  document.querySelectorAll('.modal-tab-btn').forEach(btn => {
+    btn.onclick = () => {
+      const view = btn.dataset.view;
+      if (view) openTelemetryModal(view);
+    };
+  });
+
+  const closeBtn = document.getElementById('modal-close-btn');
+  const modal = document.getElementById('telemetry-detail-modal');
+  if (closeBtn && modal) {
+    closeBtn.onclick = () => {
+      modal.hidden = true;
+    };
+  }
 }
