@@ -2,7 +2,7 @@ import * as T from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {loadReplacement} from './models.js';
 import {buildVesselNetwork} from './vessels.js';
-import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js';
+import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261016-fit';
 import {initProcessFlow} from './process-flow.js';
 import {healthMetrics,cardMarkup,legendMarkup,metricsSentence,countUp,resetCounts,accentFor} from './health.js?v=20261014-hb2';
 const $=s=>document.querySelector(s);
@@ -19,15 +19,43 @@ const organs=[],ray=new T.Raycaster(),pointer=new T.Vector2(),p=new T.Vector3();
 function ease(x){ // Skill's cubic-bezier(.77,0,.175,1), inverted on its x axis.
  let lo=0,hi=1,t=x;for(let i=0;i<12;i++){t=(lo+hi)/2;const v=3*(1-t)*(1-t)*t*.77+3*(1-t)*t*t*.175+t*t*t;if(v<x)lo=t;else hi=t;}return 3*(1-t)*t*t+t*t*t;
 }
-function resize(){w=innerWidth;h=Math.max(innerHeight,innerWidth<768?700:640);mobile=w<768;renderer.setSize(w,h);const half=1.10;camera.left=-half*w/h;camera.right=half*w/h;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();if(ready){buildConnections();retarget(true);}}
+let detail=null;
+// The canvas always matches #experience (its CSS height, not the window), so DOM and 3D share one coordinate space.
+function fitCanvas(){const nw=innerWidth,nh=$('#experience').clientHeight||Math.max(innerHeight,640);if(nw===w&&nh===h)return false;w=nw;h=nh;mobile=w<768;renderer.setSize(w,h);const half=1.10;camera.left=-half*w/h;camera.right=half*w/h;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();return true;}
+function resize(){fitCanvas();if(ready){buildConnections();retarget(true);}}
+// Zoomed-in layout: measure the HUD, title and controls, then give the organ the largest free square,
+// with the process cards in columns beside it (wide screens) or in rows above and below it (narrow ones).
+function detailLayout(){
+  const box=$('#experience').getBoundingClientRect(),rel=el=>{const r=el.getBoundingClientRect();return {l:r.left-box.left,t:r.top-box.top,r:r.right-box.left,b:r.bottom-box.top};};
+  const hud=rel($('#tower-telemetry-hud')),title=rel($('.detail-title')),tools=rel($('.rotate-tools'));
+  const beside=hud.l>w/2,gap=20,pad=beside?24:16;
+  const L=pad,R=beside?hud.l-24:w-pad,top=beside?72:hud.b+14,bottom=Math.min(title.t,tools.t)-12,W=R-L,H=bottom-top;
+  const host=$('#process-neurons'),nodes=selected.processNeurons.nodes;
+  const tallest=cw=>{host.style.setProperty('--card-w',`${cw}px`);let m=0;for(const n of nodes){const was=n.label.hidden;n.label.hidden=false;m=Math.max(m,n.label.offsetHeight);n.label.hidden=was;}return m;};
+  const colW=Math.round(Math.max(170,Math.min(250,W*.22))),colD=Math.min(H*.94,W-2*(colW+gap),760);
+  const rowW=Math.floor(Math.min(300,(W-12)/2)),rowH=tallest(rowW),rowD=Math.min(W,H-2*(rowH+12),760);
+  let l;
+  if(colD>=rowD*.85&&colD>=160){
+    const D=colD,x0=L+(W-(2*colW+2*gap+D))/2;
+    l={mode:'columns',cw:colW,D,cx:x0+colW+gap+D/2,cy:top+H/2,T:top,B:bottom,leftX:x0,rightX:x0+colW+2*gap+D};
+  }else{
+    const D=Math.max(120,rowD),cy=top+H/2,cx=L+W/2;
+    l={mode:'rows',cw:rowW,D,cx,cy,T:top,B:bottom,rowX:cx-(2*rowW+12)/2,above:cy-D/2-12,below:cy+D/2+12};
+  }
+  host.style.setProperty('--card-w',`${l.cw}px`);
+  const span=camera.top-camera.bottom;
+  l.target=new T.Vector3(camera.left+l.cx/w*(camera.right-camera.left),camera.position.y+camera.top-l.cy/h*span,.8);
+  l.scale=l.D*span/h;
+  return l;
+}
 function separatedPosition(o){const x=mobile?camera.right*.68:Math.min(camera.right*.49,1.12);return new T.Vector3(o.side*x,1.48-o.row*.355,.20);}
 function overviewTarget(o){return o.home.clone().lerp(separatedPosition(o),separation);}
 function overviewScale(o){return T.MathUtils.lerp(o.size,mobile?.17:.23,separation);}
-function retarget(instant=false){for(const o of organs){o.flight=true;o.from=o.root.position.clone();o.to=selected===o?new T.Vector3(-.65,.88,.8):overviewTarget(o);o.fromScale=o.root.scale.x;o.toScale=selected===o?Math.min(2.2,camera.right-camera.left)*.48:overviewScale(o);o.start=performance.now();o.duration=instant||reduced.matches?0:700;o.fromQuat=o.root.quaternion.clone();o.toQuat=new T.Quaternion();} }
+function retarget(instant=false){detail=selected?detailLayout():null;for(const o of organs){o.flight=true;o.from=o.root.position.clone();o.to=selected===o?detail.target.clone():overviewTarget(o);o.fromScale=o.root.scale.x;o.toScale=selected===o?detail.scale:overviewScale(o);o.start=performance.now();o.duration=instant||reduced.matches?0:700;o.fromQuat=o.root.quaternion.clone();o.toQuat=new T.Quaternion();} }
 function setSeparation(value){if(!ready||selected)return;separationTarget=T.MathUtils.clamp(value,0,1);expanded=separationTarget>.5;$('#assembly').value=String(Math.round(separationTarget*1000));}
 function setView(value){setSeparation(value?1:0);}
-function select(o,trigger){if(!ready||selected)return;lastTrigger=trigger||o.label;$('#process-status').textContent='';selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';$('#detail').hidden=false;$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);setupHUDInteractions();$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Scroll to rotate left or right. Drag or use arrow keys to rotate in all directions.`);retarget();}
-function close(){if(!selected)return;selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;retarget();lastTrigger?.focus({preventScroll:true});}
+function select(o,trigger){if(!ready||selected)return;lastTrigger=trigger||o.label;$('#process-status').textContent='';selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';$('#detail').hidden=false;if(fitCanvas())buildConnections();$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);setupHUDInteractions();$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Scroll to rotate left or right. Drag or use arrow keys to rotate in all directions.`);retarget();}
+function close(){if(!selected)return;selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;if(fitCanvas())buildConnections();retarget();lastTrigger?.focus({preventScroll:true});}
 // Exact tapered Catmull-Rom tubes and traveling flow shader from tower-overview2.
 function buildConnections(){organs.forEach((o,index)=>{
  if(o.vein){scene.remove(o.vein);o.vein.geometry.dispose();o.vein.material.dispose();}
@@ -85,11 +113,11 @@ const [atlasResponse,bodyResponse,processResponse]=await Promise.all([fetch('./d
 const grouped=new Map(),homes=new Map();for(const part of atlas.parts){const bounds=new T.Box3(new T.Vector3(...part.bounds[0]),new T.Vector3(...part.bounds[1]));if(!homes.has(part.group))homes.set(part.group,bounds);else homes.get(part.group).union(bounds);if(!['skeleton','heart'].includes(part.group))continue;const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,part.positions,part.vertexCount*3),3));g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,part.normals,part.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,part.indices,part.indexCount),1));const id=part.group==='skeleton'&&part.bounds[0][1]>1.45?'skull':part.group;if(!grouped.has(id))grouped.set(id,[]);grouped.get(id).push(g);}
 for(const [id,pieces]of grouped){const geo=mergeGeometries(pieces,false);pieces.forEach(g=>g.dispose());const mat=new T.MeshPhysicalMaterial({color:id==='heart'?0xc72e66:0xe1ddd2,roughness:.45,metalness:.02,clearcoat:.16,depthTest:false,transparent:true,opacity:1});const mesh=new T.Mesh(geo,mat);mesh.renderOrder=id==='heart'?11:-1/* skeleton draws first, behind organs, vessels and heart */;if(id==='heart'){geo.computeBoundingBox();const c=geo.boundingBox.getCenter(new T.Vector3());geo.translate(-c.x,-c.y,-c.z);mesh.position.copy(c);heart=mesh;heart.position.z=.23;scene.add(mesh);}else{bones.add(mesh);if(id==='skull')skull=mesh;}}
 for(const [id,name,organ,side,row,size] of configs){const {model,geometry,network}=await loadReplacement(id);geometry.computeBoundingBox();const visibleBounds=geometry.boundingBox.clone();const root=new T.Group();root.add(model);root.updateMatrixWorld(true);const box=visibleBounds;const center=box.getCenter(new T.Vector3());model.position.sub(center);const max=Math.max(...box.getSize(new T.Vector3()).toArray());model.scale.multiplyScalar(1/max);model.position.multiplyScalar(1/max);const home=homes.get(id).getCenter(new T.Vector3());home.z=Math.max(home.z,.13);if(id==='brain')home.z=.015;root.position.copy(home);root.scale.setScalar(size);scene.add(root);
-const label=document.createElement('button');const m=healthMetrics(TOWER_HEALTH[id]);label.className=`label ${side<0?'left':'right'}${m?' card':''}`;if(m)label.style.setProperty('--accent-c',accentFor(id));label.innerHTML=`<small>${organ}</small><strong>${name}</strong>${m?cardMarkup(m,120+row*70+(side>0?35:0)):''}<span class="cta">Explore tower ↗</span>`;label.setAttribute('aria-label',`Explore ${name}, ${organ}.${m?' '+metricsSentence(m):''}`);$('#labels').append(label);
+const label=document.createElement('button');const m=healthMetrics(TOWER_HEALTH[id]);label.className=`label ${side<0?'left':'right'}${m?' card':''}`;if(m)label.style.setProperty('--accent-c',accentFor(id));label.innerHTML=`<small>${organ}</small><strong>${name}</strong>${m?cardMarkup(m,120+row*70+(side>0?35:0)):''}<span class="cta">Explore tower<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>`;label.setAttribute('aria-label',`Explore ${name}, ${organ}.${m?' '+metricsSentence(m):''}`);$('#labels').append(label);
 const o={id,name,organ,side,row,size,root,home,label,m,hb:label.querySelector('.hb'),hbOn:false,from:home.clone(),to:home.clone(),fromScale:size,toScale:size,start:0,duration:0,fromQuat:new T.Quaternion(),toQuat:new T.Quaternion(),hoverAmount:0};root.traverse(m=>{if(m.isMesh)m.userData.organ=o;});label.onclick=()=>select(o,label);label.onpointerenter=()=>{if(fine.matches)hover=o;};label.onpointerleave=()=>{hover=null;};
 o.processNeurons=createProcessNeurons(o,network,processData.towers.find(t=>t.id===id).processes,$('#process-neurons'));geometry.dispose();organs.push(o);$('#load-message').textContent=`Preparing ${organ.toLowerCase()}…`;}
 initProcessFlow(processData);
-ready=true;resize();$('#loading').hidden=true;addEventListener('resize',resize);frame(performance.now());
+ready=true;resize();$('#loading').hidden=true;addEventListener('resize',resize);new ResizeObserver(()=>{if($('#experience').clientHeight!==h)resize();}).observe($('#experience'));frame(performance.now());
 }catch(error){fail(error);}}
 function frame(now){if(!sceneInView){last=now;animation=requestAnimationFrame(frame);return;}const dt=Math.min((now-last)/1000,.05);last=now;time+=dt;separation=reduced.matches?separationTarget:T.MathUtils.lerp(separation,separationTarget,1-Math.exp(-dt*12));if(Math.abs(separation-separationTarget)<.0001)separation=separationTarget;const beat=reduced.matches?1:1.12+Math.pow(Math.max(0,Math.sin(time*6)),8)*.035;heart.scale.setScalar(beat);
 const bodyAlpha=selected?0:1;for(const mesh of bones.children){const target=(mesh===skull?T.MathUtils.lerp(.20,1,separation):1)*skeletonOpacity;mesh.material.opacity+=(target*bodyAlpha-mesh.material.opacity)*Math.min(1,dt*10);mesh.visible=mesh.material.opacity>.01;}heart.visible=!selected;
@@ -107,7 +135,7 @@ o.vesselUniforms.uHoverOffset.value.copy(o.root.position).sub(overviewTarget(o))
 const visible=separation>.55&&!selected;const labelAlpha=T.MathUtils.smoothstep(separation,.55,.9);
 o.label.style.visibility=visible?'visible':'hidden';o.label.style.opacity=visible?String(labelAlpha):'0';o.label.tabIndex=visible?0:-1;if(o.hb){if(!o.hbOn&&visible&&labelAlpha>=.6){o.hbOn=true;o.hb.classList.add('on');countUp(o.hb,reduced.matches);}else if(o.hbOn&&separation<.5){o.hbOn=false;o.hb.classList.remove('on');resetCounts(o.hb);}}if(o===organs[0]&&hbLegend){hbLegend.style.opacity=visible?String(labelAlpha):'0';hbLegend.style.visibility=visible?'visible':'hidden';}
 if(visible){p.copy(o.root.position).project(camera);const x=(p.x+1)*w/2,y=(1-p.y)*h/2;let lx,ly;if(mobile){lx=x-o.label.offsetWidth/2;ly=y+27;}else{const gap=o.root.scale.x/2*h/2.2+18;lx=o.side<0?x-gap-o.label.offsetWidth:x+gap;ly=y-o.label.offsetHeight/2;}lx=Math.max(12,Math.min(w-o.label.offsetWidth-12,lx));o.label.style.translate=`${lx}px ${ly}px`;}}
-for(const o of organs)updateProcessNeurons(o,selected===o&&(o.duration===0||now-o.start>o.duration*.85),camera,w,h,time,reduced.matches);
+for(const o of organs)updateProcessNeurons(o,selected===o&&(o.duration===0||now-o.start>o.duration*.85),camera,w,h,time,reduced.matches,detail);
 renderer.render(scene,camera);animation=requestAnimationFrame(frame);}
 function hit(event){const rect=$('#scene').getBoundingClientRect();pointer.set((event.clientX-rect.left)/w*2-1,-(event.clientY-rect.top)/h*2+1);ray.setFromCamera(pointer,camera);return ray.intersectObjects(organs.map(o=>o.root),true).find(x=>x.object.visible&&x.object.userData.organ)?.object.userData.organ;}
 $('#assembly').addEventListener('input',e=>setSeparation(Number(e.target.value)/1000));$('#back').onclick=close;$('#retry').onclick=()=>location.reload();$('#reset').onclick=()=>{if(selected){selected.fromQuat=selected.root.quaternion.clone();selected.toQuat.identity();selected.rotationTarget.identity();selected.from.copy(selected.root.position);selected.fromScale=selected.root.scale.x;selected.start=performance.now();selected.duration=reduced.matches?0:250;}};
@@ -649,3 +677,4 @@ function bindModalTriggers() {
     };
   }
 }
+document.fonts?.ready.then(()=>{if(selected)retarget(true);});

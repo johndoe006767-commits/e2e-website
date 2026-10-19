@@ -70,204 +70,6 @@ canvas {
 }
 
 
-/* Telemetry HUD Styling */
-.telemetry-hud {
-  position: absolute;
-  top: 76px;
-  right: 28px;
-  width: 320px;
-  background: rgba(13, 20, 36, 0.82);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(0, 240, 255, 0.32);
-  border-radius: 14px;
-  padding: 16px 18px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 240, 255, 0.12);
-  z-index: 100;
-  color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  pointer-events: auto;
-  animation: hudSlideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes hudSlideDown {
-  from { opacity: 0; transform: translateY(-16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.hud-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.hud-eyebrow {
-  display: block;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #00f0ff;
-  text-transform: uppercase;
-}
-
-.hud-tower-name {
-  font-size: 17px;
-  font-weight: 700;
-  color: #ffffff;
-  margin-top: 2px;
-}
-
-.hud-score-badge {
-  text-align: right;
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  padding: 4px 10px;
-  border-radius: 8px;
-}
-
-.hud-score-value {
-  font-size: 18px;
-  font-weight: 800;
-  color: #00e676;
-  line-height: 1.1;
-}
-
-.hud-score-label {
-  font-size: 8px;
-  letter-spacing: 0.08em;
-  color: #94a3b8;
-  text-transform: uppercase;
-}
-
-/* ECG Pulse */
-.hud-ecg-container {
-  height: 14px;
-  margin: 6px 0 10px 0;
-  overflow: hidden;
-}
-
-.hud-ecg-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.hud-ecg-track {
-  fill: none;
-  stroke: rgba(0, 240, 255, 0.18);
-  stroke-width: 1.5;
-}
-
-.hud-ecg-pulse {
-  fill: none;
-  stroke: #00e676;
-  stroke-width: 1.8;
-  stroke-dasharray: 60 140;
-  animation: ecgSweep 2.2s linear infinite;
-}
-
-@keyframes ecgSweep {
-  from { stroke-dashoffset: 200; }
-  to { stroke-dashoffset: 0; }
-}
-
-/* Health Bar */
-.hud-bar-container {
-  display: flex;
-  height: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-  margin-bottom: 12px;
-}
-
-.hud-bar-segment {
-  height: 100%;
-  transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.seg-automated {
-  background: linear-gradient(90deg, #00b0ff, #00e676);
-  box-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
-}
-
-.seg-semi {
-  background: linear-gradient(90deg, #ffb300, #ff9100);
-  box-shadow: 0 0 10px rgba(255, 179, 0, 0.4);
-}
-
-.seg-manual {
-  background: linear-gradient(90deg, #ff5252, #ff1744);
-  box-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
-}
-
-/* Legend */
-.hud-legend {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #cbd5e1;
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.hud-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.legend-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-}
-
-.dot-auto { background: #00e676; box-shadow: 0 0 6px #00e676; }
-.dot-semi { background: #ffb300; box-shadow: 0 0 6px #ffb300; }
-.dot-manual { background: #ff1744; box-shadow: 0 0 6px #ff1744; }
-
-/* Chips */
-.hud-chips {
-  display: flex;
-  gap: 10px;
-}
-
-.hud-chip {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 11px;
-}
-
-.chip-tpi {
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.35);
-  color: #e0f7fa;
-}
-
-.chip-pain {
-  background: rgba(255, 23, 68, 0.12);
-  border: 1px solid rgba(255, 23, 68, 0.4);
-  color: #ffebee;
-  animation: pulsePain 2.5s infinite ease-in-out;
-}
-
-@keyframes pulsePain {
-  0%, 100% { box-shadow: 0 0 0 rgba(255, 23, 68, 0); }
-  50% { box-shadow: 0 0 12px rgba(255, 23, 68, 0.35); }
-}
-
-.chip-val {
-  font-weight: 800;
-  font-size: 13px;
-}
 /* Tower health bars (data/tower-metrics.json): step mix, pain points and TPIs on each organ card. */
 :root{--hb-man:#da1b25;--hb-hyb:#d47a06;--hb-auto:#2f6fce;--hb-pain:#d52538;--hb-tpi:#1a8749;--hb-track:rgba(255,255,255,.12);--hb-tbc:#8f7799}
 .label.card{width:clamp(178px,15vw,226px);padding:9px 14px 10px;border:1px solid color-mix(in srgb,var(--accent-c,#cabbcf) 58%,transparent);border-radius:12px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent-c,#cabbcf) 15%,rgba(40,22,54,.86)),rgba(40,22,54,.86) 70%);box-shadow:0 12px 30px rgba(12,4,20,.38);text-align:left;white-space:normal;line-height:1.2;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
@@ -317,268 +119,6 @@ body[data-detail=true] .hb-legend{opacity:0!important;visibility:hidden!importan
 @media(forced-colors:active){.label.card{border-color:CanvasText}.hb-bar-tbc,.hb-pill.hb-tbc{border-color:CanvasText}}
 
 
-/* Telemetry HUD - Detail View Only */
-.telemetry-hud {
-  position: absolute;
-  top: 50%;
-  right: max(36px, calc(26% - 245px));
-  transform: translateY(-50%);
-  width: min(490px, 92vw);
-  background: rgba(10, 16, 30, 0.92);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  border: 1.5px solid rgba(0, 240, 255, 0.4);
-  border-radius: 18px;
-  padding: 24px 28px;
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.75), 0 0 32px rgba(0, 240, 255, 0.18);
-  z-index: 100;
-  color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  pointer-events: auto;
-  animation: hudCenterFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes hudCenterFade {
-  from { opacity: 0; transform: translateY(calc(-50% - 16px)); }
-  to { opacity: 1; transform: translateY(-50%); }
-}
-
-.hud-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
-
-.hud-eyebrow {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: #00f0ff;
-  text-transform: uppercase;
-}
-
-.hud-tower-name {
-  font-size: 26px;
-  font-weight: 800;
-  color: #ffffff;
-  margin-top: 4px;
-  letter-spacing: -0.01em;
-}
-
-.hud-score-badge {
-  text-align: right;
-  background: rgba(0, 240, 255, 0.15);
-  border: 1.5px solid rgba(0, 240, 255, 0.45);
-  padding: 8px 16px;
-  border-radius: 12px;
-}
-
-.hud-score-value {
-  font-size: 28px;
-  font-weight: 900;
-  color: #00e676;
-  line-height: 1.1;
-}
-
-.hud-score-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #94a3b8;
-  text-transform: uppercase;
-  margin-top: 3px;
-}
-
-.hud-ecg-container {
-  height: 24px;
-  margin: 12px 0 16px 0;
-  overflow: hidden;
-}
-
-.hud-ecg-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.hud-ecg-track {
-  fill: none;
-  stroke: rgba(0, 240, 255, 0.22);
-  stroke-width: 2;
-}
-
-.hud-ecg-pulse {
-  fill: none;
-  stroke: #00e676;
-  stroke-width: 2.5;
-  stroke-dasharray: 60 140;
-  animation: ecgSweep 2.2s linear infinite;
-}
-
-@keyframes ecgSweep {
-  from { stroke-dashoffset: 200; }
-  to { stroke-dashoffset: 0; }
-}
-
-.hud-bar-container {
-  display: flex;
-  height: 22px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 11px;
-  overflow: hidden;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.65);
-  margin-bottom: 16px;
-}
-
-.hud-bar-segment {
-  height: 100%;
-  transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.seg-automated {
-  background: linear-gradient(90deg, #00b0ff, #00e676);
-  box-shadow: 0 0 16px rgba(0, 230, 118, 0.6);
-}
-
-.seg-semi {
-  background: linear-gradient(90deg, #ffb300, #ff9100);
-  box-shadow: 0 0 16px rgba(255, 179, 0, 0.5);
-}
-
-.seg-manual {
-  background: linear-gradient(90deg, #ff5252, #ff1744);
-  box-shadow: 0 0 16px rgba(255, 23, 68, 0.5);
-}
-
-.hud-legend {
-  display: flex;
-  justify-content: space-between;
-  font-size: 15px;
-  font-weight: 600;
-  color: #e2e8f0;
-  margin-bottom: 18px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.hud-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.legend-dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-}
-
-.dot-auto { background: #00e676; box-shadow: 0 0 9px #00e676; }
-.dot-semi { background: #ffb300; box-shadow: 0 0 9px #ffb300; }
-.dot-manual { background: #ff1744; box-shadow: 0 0 9px #ff1744; }
-
-.hud-chips {
-  display: flex;
-  gap: 14px;
-}
-
-.hud-chip {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.chip-tpi {
-  background: rgba(0, 240, 255, 0.12);
-  border: 1.5px solid rgba(0, 240, 255, 0.4);
-  color: #e0f7fa;
-}
-
-.chip-pain {
-  background: rgba(255, 23, 68, 0.14);
-  border: 1.5px solid rgba(255, 23, 68, 0.48);
-  color: #ffebee;
-  animation: pulsePain 2.5s infinite ease-in-out;
-}
-
-@keyframes pulsePain {
-  0%, 100% { box-shadow: 0 0 0 rgba(255, 23, 68, 0); }
-  50% { box-shadow: 0 0 14px rgba(255, 23, 68, 0.4); }
-}
-
-.chip-icon { font-size: 17px; }
-.chip-val { font-weight: 900; font-size: 18px; }
-.chip-lbl { font-size: 14px; }
-
-
-/* --- Interactive Telemetry HUD Controls --- */
-.hud-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.hud-action-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(0, 150, 255, 0.28));
-  border: 1.5px solid rgba(0, 240, 255, 0.6);
-  color: #00f0ff;
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.25);
-}
-
-.hud-action-btn:hover {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.35), rgba(0, 150, 255, 0.45));
-  border-color: #00f0ff;
-  color: #ffffff;
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 0 22px rgba(0, 240, 255, 0.5);
-}
-
-.hud-filter-btn {
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-family: inherit;
-  transition: all 0.22s ease;
-}
-
-.hud-legend-item.hud-filter-btn {
-  padding: 4px 8px;
-  border-radius: 6px;
-  border: 1px solid transparent;
-}
-
-.hud-legend-item.hud-filter-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
-}
-
-.hud-chip.hud-filter-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(1.2);
-}
-
-.hud-bar-segment.hud-filter-btn:hover {
-  filter: brightness(1.35);
-}
-
 /* --- Fullscreen Synaptic Handoff Overlay --- */
 .handoff-overlay {
   position: fixed;
@@ -611,7 +151,7 @@ body[data-detail=true] .hb-legend{opacity:0!important;visibility:hidden!importan
   flex-direction: column;
   z-index: 2;
   color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: inherit;
 }
 
 .handoff-topbar {
@@ -1002,3 +542,121 @@ body[data-detail=true] .hb-legend{opacity:0!important;visibility:hidden!importan
   border-color: #00f0ff;
   background: rgba(18, 25, 44, 1);
 }
+
+/* Bundled font so every browser and operating system renders the same text and line breaks.
+   Inter, SIL Open Font License: assets/fonts/INTER-LICENSE.txt */
+@font-face{font-family:'Inter';src:url('assets/fonts/inter-latin-wght-normal.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+body,button,input,select,textarea{font-family:'Inter',Arial,Helvetica,sans-serif}
+.ico{display:inline-block;flex:none;width:1em;height:1em;vertical-align:-.14em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ico-fill{fill:currentColor;stroke:none}
+.ico-ne{width:.8em;height:.8em;margin-left:.25em;opacity:.8}
+.control-symbol .ico{width:16px;height:16px;vertical-align:-3px}
+
+/* Telemetry HUD (zoomed-in view). One responsive definition: its own right-hand column on wide screens,
+   a compact band under the header on narrower ones. scene.js measures this box to place the organ and cards. */
+.telemetry-hud{position:absolute;z-index:20;top:50%;right:32px;transform:translateY(-50%);box-sizing:border-box;width:clamp(300px,26vw,400px);max-height:calc(100% - 150px);overflow-y:auto;padding:18px 20px;border:1px solid rgba(0,240,255,.4);border-radius:16px;background:rgba(10,16,30,.92);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 20px 44px rgba(0,0,0,.6),0 0 26px rgba(0,240,255,.14);color:#fff;pointer-events:auto;animation:hudFade .45s cubic-bezier(.16,1,.3,1) both}
+@keyframes hudFade{from{opacity:0}to{opacity:1}}
+#tower-telemetry-hud button{min-height:0;margin:0;font:inherit;color:inherit;white-space:normal;cursor:pointer}
+.hud-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.hud-title-wrap{flex:1 1 auto;min-width:0}
+.hud-eyebrow{display:block;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#00f0ff}
+.hud-tower-name{margin-top:3px;font-size:clamp(17px,1.45vw,21px);font-weight:800;line-height:1.15;letter-spacing:-.01em;overflow-wrap:anywhere}
+.hud-header-actions{display:flex;flex:none;flex-direction:column;align-items:flex-end;gap:8px}
+.hud-score-badge{padding:6px 12px;border:1px solid rgba(0,240,255,.45);border-radius:10px;background:rgba(0,240,255,.13);text-align:right}
+.hud-score-value{font-size:22px;font-weight:900;line-height:1.05;color:#00e676}
+.hud-score-label{margin-top:2px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8}
+#tower-telemetry-hud .hud-action-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border:1px solid rgba(0,240,255,.6);border-radius:9px;background:linear-gradient(135deg,rgba(0,240,255,.18),rgba(0,150,255,.28));color:#00f0ff;font-size:12px;font-weight:700;letter-spacing:.03em;box-shadow:0 0 12px rgba(0,240,255,.22);transition:background .2s ease,color .2s ease,box-shadow .2s ease}
+#tower-telemetry-hud .hud-action-btn:hover{background:linear-gradient(135deg,rgba(0,240,255,.35),rgba(0,150,255,.45));color:#fff;box-shadow:0 0 20px rgba(0,240,255,.45)}
+.btn-icon{display:inline-flex}
+.hud-ecg-container{height:18px;margin:2px 0 12px;overflow:hidden}
+.hud-ecg-svg{display:block;width:100%;height:100%}
+.hud-ecg-track{fill:none;stroke:rgba(0,240,255,.22);stroke-width:2}
+.hud-ecg-pulse{fill:none;stroke:#00e676;stroke-width:2.5;stroke-dasharray:60 140;animation:ecgSweep 2.2s linear infinite}
+@keyframes ecgSweep{from{stroke-dashoffset:200}to{stroke-dashoffset:0}}
+.hud-bar-container{display:flex;height:16px;margin-bottom:12px;overflow:hidden;border-radius:8px;background:rgba(255,255,255,.1);box-shadow:inset 0 2px 5px rgba(0,0,0,.6)}
+.hud-bar-segment{height:100%;cursor:pointer;transition:width 1.2s cubic-bezier(.2,.8,.2,1),filter .2s ease}
+.hud-bar-segment:hover{filter:brightness(1.3)}
+.seg-automated{background:linear-gradient(90deg,#00b0ff,#00e676);box-shadow:0 0 14px rgba(0,230,118,.55)}
+.seg-semi{background:linear-gradient(90deg,#ffb300,#ff9100);box-shadow:0 0 14px rgba(255,179,0,.45)}
+.seg-manual{background:linear-gradient(90deg,#ff5252,#ff1744);box-shadow:0 0 14px rgba(255,23,68,.45)}
+.hud-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.14);font-size:13px;font-weight:600;color:#e2e8f0}
+#tower-telemetry-hud .hud-legend-item{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;padding:4px 6px;white-space:nowrap;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:transparent;transition:background .2s ease,border-color .2s ease}
+#tower-telemetry-hud .hud-legend-item:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35)}
+.hud-legend .ico-ne{display:none}
+.legend-dot,.tab-dot{display:inline-block;flex:none;width:9px;height:9px;border-radius:50%}
+.tab-dot{margin-right:6px}
+.dot-auto{background:#00e676;box-shadow:0 0 8px #00e676}
+.dot-semi{background:#ffb300;box-shadow:0 0 8px #ffb300}
+.dot-manual{background:#ff1744;box-shadow:0 0 8px #ff1744}
+.hud-chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#tower-telemetry-hud .hud-chip{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:6px;row-gap:2px;min-width:0;padding:8px 4px;border-radius:10px;font-size:12px;font-weight:600;text-align:center;transition:filter .2s ease,transform .2s ease}
+#tower-telemetry-hud .hud-chip:hover{filter:brightness(1.2);transform:translateY(-1px)}
+.chip-icon{display:inline-flex;font-size:15px}
+.chip-val{font-size:17px;font-weight:900;line-height:1}
+.chip-lbl{flex-basis:100%;white-space:nowrap;font-size:11.5px}
+#tower-telemetry-hud .chip-tpi{border:1px solid rgba(0,240,255,.4);background:rgba(0,240,255,.12);color:#e0f7fa}
+#tower-telemetry-hud .chip-pain{border:1px solid rgba(255,23,68,.48);background:rgba(255,23,68,.14);color:#ffebee;animation:pulsePain 2.5s ease-in-out infinite}
+@keyframes pulsePain{0%,100%{box-shadow:0 0 0 rgba(255,23,68,0)}50%{box-shadow:0 0 12px rgba(255,23,68,.4)}}
+
+/* Process cards beside the organ: scene.js sets --card-w so the cards always fit their gutter. */
+#process-neurons{--card-w:240px}
+.process-node,.process-node[data-side]{width:var(--card-w);max-width:none}
+.process-node .process-name{flex:1 1 auto;width:auto;min-width:0;padding:clamp(8px,calc(var(--card-w)*.05),13px) clamp(10px,calc(var(--card-w)*.06),16px);font-size:clamp(11px,calc(var(--card-w)*.058),14px);overflow-wrap:break-word}
+
+@media(max-width:1099px){
+  .telemetry-hud{top:72px;left:50%;right:auto;transform:translateX(-50%);width:min(640px,calc(100% - 32px));max-height:none;padding:12px 14px;border-radius:14px}
+  .hud-header{align-items:center;margin-bottom:8px}
+  .hud-header-actions{flex-direction:row;align-items:center}
+  .hud-tower-name{font-size:17px}
+  .hud-ecg-container{display:none}
+  .hud-bar-container{height:12px;margin-bottom:8px}
+  .hud-legend{gap:4px;margin-bottom:8px;padding-bottom:8px;font-size:12px}
+  #tower-telemetry-hud .hud-legend-item{padding:3px 8px}
+  .hud-chips{gap:6px}
+  #tower-telemetry-hud .hud-chip{padding:6px 4px;font-size:11px}
+  .chip-val{font-size:15px}
+}
+@media(max-width:480px){
+  .telemetry-hud{top:64px;padding:10px 12px}
+  .hud-eyebrow{display:none}
+  .hud-tower-name{font-size:15px}
+  .hud-score-badge{padding:4px 8px}
+  .hud-score-value{font-size:17px}
+  .hud-score-label{font-size:8px}
+  #tower-telemetry-hud .hud-action-btn{padding:6px 8px}
+  #tower-telemetry-hud .hud-action-btn>span:last-child{display:none}
+  .hud-legend{font-size:11px}
+  #tower-telemetry-hud .hud-legend-item{gap:5px;padding:3px 6px}
+  .chip-lbl{font-size:10px}
+  .chip-val{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.process-node,.process-leader{transition:none!important}.telemetry-hud{animation:none}}
+
+/* Detail modal: stays inside the viewport on tablets and phones. */
+.handoff-container{width:min(95vw,1440px);height:min(92vh,92dvh)}
+.handoff-topbar{flex-wrap:wrap;gap:12px}
+.modal-top-actions{flex-wrap:wrap;min-width:0}
+.modal-tabs{max-width:100%;overflow-x:auto;scrollbar-width:none}
+.modal-tab-btn{display:inline-flex;align-items:center;gap:5px;flex:none;white-space:nowrap}
+.handoff-close-btn{display:inline-flex;align-items:center;gap:6px}
+.ai-opps-grid{grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))}
+.pain-table-wrap{overflow-x:auto}
+@media(max-width:900px){
+  .handoff-container{width:100vw;height:100dvh}
+  .handoff-topbar{padding:12px 16px}
+  .handoff-title-block h2{flex-wrap:wrap;gap:4px 10px;font-size:20px}
+  .handoff-diagram-wrap{grid-template-columns:1fr;gap:20px;padding:16px}
+  .handoff-svg-canvas{display:none}
+  .modal-content-scroll{padding:16px 16px 32px}
+  .proc-activity-row{flex-wrap:wrap;gap:8px}
+}
+/* Phones: the stage is exactly the screen height, so nothing is pushed below the fold. */
+@media(max-width:767px){#experience{min-height:520px}}
+@media(max-width:767px){
+  .detail-title{top:auto;bottom:18px;left:20px;max-width:calc(100% - 170px)}
+  .detail-title h2{margin-top:3px;font-size:18px;line-height:1.15}
+  .rotate-tools{left:auto;right:8px;bottom:14px;transform:none}
+}
+@media(max-width:767px) and (max-height:720px){.hb-legend{bottom:42px;gap:3px 8px;font-size:8.5px}footer{bottom:8px}}
+#flow-back .ico,.handoff-close-btn .ico{margin-right:6px}
+.modal-tabs::-webkit-scrollbar{display:none}

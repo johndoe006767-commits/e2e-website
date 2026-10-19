@@ -28,41 +28,37 @@ export function createProcessNeurons(organ, group, processes, host) {
   return {group,nodes};
 }
 
-export function updateProcessNeurons(organ, active, camera, width, height, time, reduced) {
+export function updateProcessNeurons(organ, active, camera, width, height, time, reduced, layout) {
   const network=organ.processNeurons;
   network.group.visible=active;
   if(active)organ.root.updateMatrixWorld(true);
-  const mobile=width<768;
   for(const node of network.nodes){
     node.label.hidden=!active;node.leader.hidden=!active;node.button.tabIndex=active?0:-1;
     if(!active)continue;
     node.neuron.getWorldPosition(node.world).project(camera);
     node.x=(node.world.x+1)*width/2;node.y=(1-node.world.y)*height/2;
-    node.side=node.x<width/2?-1:1;
   }
-  if(!active)return;
-  // Resolve labels into two readable columns while retaining surface anchors.
-  // On narrow screens the labels form two rows above and below the organ.
-  for(const side of [-1,1]){
-    const sorted=network.nodes.filter(n=>n.side===side).sort((a,b)=>a.y-b.y);
-    let previous=72;
-    for(const node of sorted){
-      node.label.dataset.side=String(side);
-      const rectWidth=node.label.offsetWidth,rectHeight=node.label.offsetHeight;
-      let left=side<0?node.x-rectWidth-30:node.x+30;
-      let top=Math.max(86,Math.min(height-135,node.y-rectHeight/2));
-      top=Math.max(previous,top);previous=top+rectHeight+16;
-      left=Math.max(16,Math.min(width-rectWidth-16,left));
-      node.left=left;node.top=top;node.label.style.transform=`translate3d(${left}px,${top}px,0)`;
+  if(!active||!layout)return;
+  // scene.js reserves space beside the organ (columns) or above and below it (rows); the cards
+  // follow their neurons inside that space, so they never cover the organ, the HUD or the controls.
+  const nodes=network.nodes,gap=12,half=Math.ceil(nodes.length/2);
+  const place=(node,left,top,side)=>{node.left=left;node.top=top;node.label.dataset.side=String(side);node.label.style.transform=`translate3d(${left}px,${top}px,0)`;};
+  if(layout.mode==='columns'){
+    const byX=[...nodes].sort((a,b)=>a.x-b.x);
+    for(const [side,column] of [[-1,byX.slice(0,half)],[1,byX.slice(half)]]){
+      column.sort((a,b)=>a.y-b.y);
+      let next=layout.T;
+      for(const node of column){node.h=node.label.offsetHeight;node.top=Math.max(next,Math.min(layout.B-node.h,node.y-node.h/2));next=node.top+node.h+gap;}
+      const over=next-gap-layout.B;
+      for(const node of column)place(node,side<0?layout.leftX:layout.rightX,Math.max(layout.T,node.top-Math.max(0,over)),side);
     }
-  }
-  if(mobile){
-    network.nodes.forEach((node,i)=>{
-      const row=i<2?0:1,col=i%2;
-      const left=16+col*(width/2-8);
-      const top=row===0?94:height-224;
-      node.left=left;node.top=top;node.label.style.transform=`translate3d(${left}px,${top}px,0)`;
-      node.label.dataset.side='1';
+  }else{
+    const byY=[...nodes].sort((a,b)=>a.y-b.y);
+    [byY.slice(0,half),byY.slice(half)].forEach((row,r)=>{
+      row.sort((a,b)=>a.x-b.x).forEach((node,i)=>{
+        const h=node.label.offsetHeight;
+        place(node,layout.rowX+i*(layout.cw+gap),r===0?layout.above-h:layout.below,1);
+      });
     });
   }
   for(const node of network.nodes){

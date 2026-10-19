@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#331c41"><title>Finance towers | AstraZeneca</title><link rel="stylesheet" href="style.css?v=20261014-hb2"><link rel="stylesheet" href="process-flow.css"><script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script></head>
-<body>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#331c41"><title>Finance towers | AstraZeneca</title><link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="style.css?v=20261016-fit"><link rel="stylesheet" href="process-flow.css"><script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script></head>
+<body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol><symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8M3 3v5h5"/></symbol><symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 7h15M16 3l4 4-4 4M20 17H5M8 13l-4 4 4 4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol><symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 2 20h20zM12 9v5M12 17.5v.1"/></symbol></svg>
 <section id="section-1" aria-label="Finance anatomy"><header><img src="./assets/astrazeneca.svg" alt="AstraZeneca" width="120" height="30"></header>
 <main id="experience" aria-label="Interactive finance anatomy"><canvas id="scene" aria-label="Skeleton, heart and eight finance organs"></canvas><div id="labels"></div><div id="hb-legend" class="hb-legend" aria-hidden="true"></div>
 <div id="loading" role="status"><div class="load-body"></div><p id="load-message">Assembling your anatomy…</p><button id="retry" hidden>Try again</button></div>
-<section id="detail" hidden><div id="process-neurons" aria-label="Tower processes"></div><p id="process-status" class="process-status" role="status" aria-live="polite"></p><button id="back"><span class="control-symbol" aria-hidden="true">←</span><span>Back to overview</span></button><div class="detail-title"><p id="organ-name"></p><span class="demo-data">Illustrative processes</span><h2 id="tower-name"></h2></div><div class="rotate-tools"><button id="reset"><span class="control-symbol reset-symbol" aria-hidden="true">↺</span><span>Reset view</span></button></div>
+<section id="detail" hidden><div id="process-neurons" aria-label="Tower processes"></div><p id="process-status" class="process-status" role="status" aria-live="polite"></p><button id="back"><span class="control-symbol" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg></span><span>Back to overview</span></button><div class="detail-title"><p id="organ-name"></p><span class="demo-data">Illustrative processes</span><h2 id="tower-name"></h2></div><div class="rotate-tools"><button id="reset"><span class="control-symbol reset-symbol" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-reset"/></svg></span><span>Reset view</span></button></div>
       <div id="tower-telemetry-hud" class="telemetry-hud" aria-label="Process Automation Vital Signs">
       <div class="hud-header">
         <div class="hud-title-wrap">
@@ -13,7 +13,7 @@
         </div>
         <div class="hud-header-actions">
           <button id="hud-handoff-btn" class="hud-action-btn hud-modal-trigger" data-view="handoffs" type="button" title="View Input/Output Flow Dependencies">
-            <span class="btn-icon">⇄</span>
+            <span class="btn-icon"><svg class="ico" aria-hidden="true"><use href="#i-swap"/></svg></span>
             <span>Handoffs</span>
           </button>
           <div class="hud-score-badge">
@@ -35,65 +35,30 @@
       </div>
       <div class="hud-legend">
         <button class="hud-legend-item hud-modal-trigger" type="button" data-view="auto">
-          <span class="legend-dot dot-auto"></span><span id="hud-count-auto">8</span> Auto ↗
+          <span class="legend-dot dot-auto"></span><span id="hud-count-auto">8</span> Auto<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg>
         </button>
         <button class="hud-legend-item hud-modal-trigger" type="button" data-view="semi">
-          <span class="legend-dot dot-semi"></span><span id="hud-count-semi">14</span> Semi ↗
+          <span class="legend-dot dot-semi"></span><span id="hud-count-semi">14</span> Semi<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg>
         </button>
         <button class="hud-legend-item hud-modal-trigger" type="button" data-view="manual">
-          <span class="legend-dot dot-manual"></span><span id="hud-count-manual">18</span> Manual ↗
+          <span class="legend-dot dot-manual"></span><span id="hud-count-manual">18</span> Manual<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg>
         </button>
       </div>
       <div class="hud-chips">
         <button class="hud-chip chip-tpi hud-modal-trigger" type="button" data-view="tpis">
-          <span class="chip-icon">🔗</span>
+          <span class="chip-icon"><svg class="ico" aria-hidden="true"><use href="#i-link"/></svg></span>
           <span class="chip-val" id="hud-count-tpi">8</span>
-          <span class="chip-lbl">TPIs ↗</span>
+          <span class="chip-lbl">TPIs<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>
         </button>
         <button class="hud-chip chip-ai hud-modal-trigger" type="button" data-view="ai">
-          <span class="chip-icon">⚡</span>
+          <span class="chip-icon"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-bolt"/></svg></span>
           <span class="chip-val" id="hud-count-ai">15</span>
-          <span class="chip-lbl">AI Opps ↗</span>
+          <span class="chip-lbl">AI Opps<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>
         </button>
         <button class="hud-chip chip-pain hud-modal-trigger" type="button" data-view="pain">
-          <span class="chip-icon">⚠️</span>
+          <span class="chip-icon"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg></span>
           <span class="chip-val" id="hud-count-pain">15</span>
-          <span class="chip-lbl">Pain Points ↗</span>
-        </button>
-      </div>
-    </div>
-      <div class="hud-ecg-container">
-        <svg class="hud-ecg-svg" viewBox="0 0 200 20" preserveAspectRatio="none">
-          <path class="hud-ecg-track" d="M0,10 L50,10 L54,3 L60,18 L65,5 L70,15 L74,10 L200,10" />
-          <path class="hud-ecg-pulse" d="M0,10 L50,10 L54,3 L60,18 L65,5 L70,15 L74,10 L200,10" />
-        </svg>
-      </div>
-      <div class="hud-bar-container" title="Click any segment to drill down into activities">
-        <div class="hud-bar-segment seg-automated hud-filter-btn" data-filter="Automated" id="hud-bar-auto" style="width: 0%;"></div>
-        <div class="hud-bar-segment seg-semi hud-filter-btn" data-filter="Semi-automated" id="hud-bar-semi" style="width: 0%;"></div>
-        <div class="hud-bar-segment seg-manual hud-filter-btn" data-filter="Manual" id="hud-bar-manual" style="width: 0%;"></div>
-      </div>
-      <div class="hud-legend">
-        <button class="hud-legend-item hud-filter-btn" type="button" data-filter="Automated">
-          <span class="legend-dot dot-auto"></span><span id="hud-count-auto">8</span> Auto ↗
-        </button>
-        <button class="hud-legend-item hud-filter-btn" type="button" data-filter="Semi-automated">
-          <span class="legend-dot dot-semi"></span><span id="hud-count-semi">14</span> Semi ↗
-        </button>
-        <button class="hud-legend-item hud-filter-btn" type="button" data-filter="Manual">
-          <span class="legend-dot dot-manual"></span><span id="hud-count-manual">18</span> Manual ↗
-        </button>
-      </div>
-      <div class="hud-chips">
-        <button class="hud-chip chip-tpi hud-filter-btn" type="button" data-filter="TPI">
-          <span class="chip-icon">🔗</span>
-          <span class="chip-val" id="hud-count-tpi">8</span>
-          <span class="chip-lbl">TPIs ↗</span>
-        </button>
-        <button class="hud-chip chip-pain hud-filter-btn" type="button" data-filter="Pain">
-          <span class="chip-icon">⚠️</span>
-          <span class="chip-val" id="hud-count-pain">15</span>
-          <span class="chip-lbl">Pain Points ↗</span>
+          <span class="chip-lbl">Pain Points<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>
         </button>
       </div>
     </div>
@@ -103,14 +68,14 @@
 </section>
 <section id="process-section" aria-labelledby="flow-title" hidden>
 <div class="flow-heading"><h2 id="flow-title" tabindex="-1"></h2></div>
-<div class="flow-column"><div class="flow-toolbar"><button id="flow-back">← Back to model</button></div>
+<div class="flow-column"><div class="flow-toolbar"><button id="flow-back"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg>Back to model</button></div>
 <div id="activity-infusion" class="activity-infusion">
 <svg class="infusion-tube" aria-hidden="true"><path class="infusion-tube-shell"/><path class="infusion-tube-blood"/></svg>
 <div class="infusion-start"><div id="flow-bag" class="infusion-model infusion-bag" role="img" aria-label="IV blood bag"></div></div>
 <ol id="flow-activities" class="testing-flow infusion-flow"></ol>
 <div class="infusion-end"><div id="flow-brain" class="infusion-model infusion-brain" role="img" aria-label="Organ receiving the process flow"></div></div>
 </div></div></section>
-<script type="module" src="scene.js?v=20261014-hb2"></script>
+<script type="module" src="scene.js?v=20261016-fit"></script>
 
 <section id="telemetry-detail-modal" class="handoff-overlay" hidden aria-modal="true" role="dialog">
   <div class="handoff-backdrop"></div>
@@ -123,16 +88,16 @@
       <div class="modal-top-actions">
         <!-- Interactive switcher pills -->
         <div class="modal-tabs">
-          <button class="modal-tab-btn" data-view="handoffs">⇄ Handoffs</button>
-          <button class="modal-tab-btn" data-view="ai">⚡ AI Opps (15)</button>
-          <button class="modal-tab-btn" data-view="pain">⚠️ Pain Points (15)</button>
-          <button class="modal-tab-btn" data-view="tpis">🔗 TPIs (8)</button>
-          <button class="modal-tab-btn" data-view="auto">● Auto (8)</button>
-          <button class="modal-tab-btn" data-view="semi">● Semi (14)</button>
-          <button class="modal-tab-btn" data-view="manual">● Manual (18)</button>
+          <button class="modal-tab-btn" data-view="handoffs"><svg class="ico" aria-hidden="true"><use href="#i-swap"/></svg>Handoffs</button>
+          <button class="modal-tab-btn" data-view="ai"><svg class="ico ico-fill" aria-hidden="true"><use href="#i-bolt"/></svg>AI Opps (15)</button>
+          <button class="modal-tab-btn" data-view="pain"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg>Pain Points (15)</button>
+          <button class="modal-tab-btn" data-view="tpis"><svg class="ico" aria-hidden="true"><use href="#i-link"/></svg>TPIs (8)</button>
+          <button class="modal-tab-btn" data-view="auto"><span class="tab-dot dot-auto"></span>Auto (8)</button>
+          <button class="modal-tab-btn" data-view="semi"><span class="tab-dot dot-semi"></span>Semi (14)</button>
+          <button class="modal-tab-btn" data-view="manual"><span class="tab-dot dot-manual"></span>Manual (18)</button>
         </div>
         <button id="modal-close-btn" class="handoff-close-btn" type="button">
-          <span>← Return to Model</span>
+          <span><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg>Return to Model</span>
         </button>
       </div>
     </div>
