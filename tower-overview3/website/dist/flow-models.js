@@ -1,8 +1,8 @@
 import * as T from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
-import {replacementModels} from './models.js';
-import {organs} from './organs.js';
+import {replacementModels} from './models.js?v=20261019-az';
+import {colorsFor} from './organs.js?v=20261019-az';
 
 // Same rounded IV-bag geometry as e2e-draft1's process endpoint.
 function roundedGeometry(w,h,d,r){
@@ -37,7 +37,7 @@ export function createFlowModel(host,kind,onConnection){
   // Reuse only the supplied organ surface, without duplicating its neurons.
   const source=replacementModels.get(kind),parts=[];source.updateWorldMatrix(true,true);const inverse=new T.Matrix4().copy(source.parent.matrixWorld).invert();
   source.traverse(o=>{if(o.isMesh&&o.renderOrder===3){parts.push(o.geometry.clone().applyMatrix4(new T.Matrix4().multiplyMatrices(inverse,o.matrixWorld)));}});
-  const g=mergeGeometries(parts,false);parts.forEach(p=>p.dispose());g.computeBoundingBox();const box=g.boundingBox,center=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());g.translate(-center.x,-center.y,-center.z);g.scale(2.8/size.y,2.8/size.y,2.8/size.y);const color=kind==='brain'?'#d89daf':organs.find(o=>o.id===kind).color;mesh(g,material(color));model.rotation.set(.05,-.32,0);
+  const g=mergeGeometries(parts,false);parts.forEach(p=>p.dispose());g.computeBoundingBox();const box=g.boundingBox,center=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());g.translate(-center.x,-center.y,-center.z);g.scale(2.8/size.y,2.8/size.y,2.8/size.y);const color=colorsFor(kind).base;mesh(g,material(color));model.rotation.set(.05,-.32,0);
  }
  function render(){
   const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;

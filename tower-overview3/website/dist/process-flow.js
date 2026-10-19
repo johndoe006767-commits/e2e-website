@@ -1,5 +1,5 @@
-import {createFlowModel} from './flow-models.js';
-import {organs} from './organs.js';
+import {createFlowModel} from './flow-models.js?v=20261019-az';
+import {organs} from './organs.js?v=20261019-az';
 const $=s=>document.querySelector(s);
 // Native-DOM port of e2e-draft1's ActivityInfusion. The document replaces its dialog scroll host.
 export function initProcessFlow(data){

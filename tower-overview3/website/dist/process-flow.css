@@ -214,3 +214,5 @@
 .infusion-field-execution dd{color:var(--accent)}
 @media(max-width:1023px){.infusion-metadata{grid-template-columns:1fr 1fr;gap:18px 24px}.infusion-field-owner{grid-column:1/-1}}
 @media(max-width:767px){.infusion-metadata{margin:20px 0;gap:16px}.infusion-metadata dd{font-size:13px}}
+/* AstraZeneca light theme */
+.infusion-tube-shell{stroke:#9DB0AC88}.infusion-tube-blood{stroke:#830051}.infusion-copy .testing-challenges{border-left-color:#9DB0AC}

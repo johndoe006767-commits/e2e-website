@@ -1,16 +1,19 @@
 import * as T from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {loadReplacement} from './models.js';
-import {buildVesselNetwork} from './vessels.js';
-import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261016-fit';
-import {initProcessFlow} from './process-flow.js';
-import {healthMetrics,cardMarkup,legendMarkup,metricsSentence,countUp,resetCounts,accentFor} from './health.js?v=20261014-hb2';
+import {loadReplacement,glassMaterials,applyGlass,createLook} from './models.js?v=20261019-az';
+import {createPlexus,PLEXUS_PRESETS} from './plexus.js?v=20261019-az';
+import {AZ} from './organs.js?v=20261019-az';
+import {createNebula} from './nebula.js?v=20261019-az';
+import {buildVesselNetwork} from './vessels.js?v=20261019-az';
+import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261019-az';
+import {initProcessFlow} from './process-flow.js?v=20261019-az';
+import {healthMetrics,cardMarkup,legendMarkup,metricsSentence,countUp,resetCounts,accentFor,inkFor} from './health.js?v=20261019-az';
 const $=s=>document.querySelector(s);
 const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver','CAPEX','Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs','R2R','Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'), fine=matchMedia('(hover: hover) and (pointer: fine)');
-const skeletonOpacity=.6; // 1 = solid bones; lower values make the skeleton more see-through
+const skeletonOpacity=.35; // 1 = solid bones; lower values make the skeleton more see-through
 const hbLegend=document.getElementById('hb-legend');
-let renderer,scene,camera,heart,bones,skull,ready=false,expanded=false,separation=0,separationTarget=0,selected=null,hover=null,animation=0,last=0,time=0,w=1,h=1,mobile=false,drag=null,lastTrigger=null;
+let renderer,scene,camera,heart,heartLook,nebula=null,bones,skull,pointMax=64,ready=false,expanded=false,separation=0,separationTarget=0,selected=null,hover=null,animation=0,last=0,time=0,w=1,h=1,mobile=false,drag=null,lastTrigger=null;
 let sceneInView=true;
 const sceneObserver=new IntersectionObserver(([entry])=>sceneInView=entry.isIntersecting);sceneObserver.observe($('#section-1'));
 const autoTurnAxis=new T.Vector3(0,1,0),autoTurnStep=new T.Quaternion(),autoTurnSpeed=Math.PI/30;
@@ -21,7 +24,7 @@ function ease(x){ // Skill's cubic-bezier(.77,0,.175,1), inverted on its x axis.
 }
 let detail=null;
 // The canvas always matches #experience (its CSS height, not the window), so DOM and 3D share one coordinate space.
-function fitCanvas(){const nw=innerWidth,nh=$('#experience').clientHeight||Math.max(innerHeight,640);if(nw===w&&nh===h)return false;w=nw;h=nh;mobile=w<768;renderer.setSize(w,h);const half=1.10;camera.left=-half*w/h;camera.right=half*w/h;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();return true;}
+function fitCanvas(){const nw=innerWidth,nh=$('#experience').clientHeight||Math.max(innerHeight,640);if(nw===w&&nh===h)return false;w=nw;h=nh;mobile=w<768;renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.5:1.75));renderer.setSize(w,h);const half=1.10;camera.left=-half*w/h;camera.right=half*w/h;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();return true;}
 function resize(){fitCanvas();if(ready){buildConnections();retarget(true);}}
 // Zoomed-in layout: measure the HUD, title and controls, then give the organ the largest free square,
 // with the process cards in columns beside it (wide screens) or in rows above and below it (narrow ones).
@@ -60,44 +63,22 @@ function close(){if(!selected)return;selected=null;$('#scene').setAttribute('ari
 function buildConnections(){organs.forEach((o,index)=>{
  if(o.vein){scene.remove(o.vein);o.vein.geometry.dispose();o.vein.material.dispose();}
  const origin=heart.position.clone().add(new T.Vector3(0,.02,.035));
- const geometry=buildVesselNetwork(origin,o.home,separatedPosition(o),1,o.side,index*31+7);
+ const geometry=buildVesselNetwork(origin,o.home,separatedPosition(o),3,o.side,index*31+7);
       const uniforms = {
         uSeparation: { value: 0 },
         uTime: { value: 0 },
         uHoverOffset: { value: new T.Vector3() },
       };
-      const material = new T.MeshPhysicalMaterial({
-        color: '#ad566c',
-        transparent: true,
-        opacity: 0.46,
-        roughness: 0.26,
-        metalness: 0,
-        depthWrite: false,
-        side: T.DoubleSide,
-        envMapIntensity: 0.25,
-      });
+      // AstraZeneca line bundles: gold strands that turn mulberry near the heart (brand Picture4), unlit so the hex stays exact.
+      const material = new T.MeshBasicMaterial({ color: AZ.gold, transparent: true, opacity: 0.55, depthWrite: false, side: T.DoubleSide, toneMapped: false });
       material.onBeforeCompile = (shader) => {
-        Object.assign(shader.uniforms, uniforms);
-        shader.vertexShader =
-          'attribute vec3 expandedPosition; attribute vec3 expandedNormal; attribute float branchSeed; uniform float uSeparation; uniform vec3 uHoverOffset; varying float vPath; varying float vBranch;\n' +
-          shader.vertexShader;
-        shader.vertexShader = shader.vertexShader.replace(
-          '#include <beginnormal_vertex>',
-          '#include <beginnormal_vertex>\nobjectNormal = normalize(mix(normal,expandedNormal,uSeparation));',
-        );
-        shader.vertexShader = shader.vertexShader.replace(
-          '#include <begin_vertex>',
-          '#include <begin_vertex>\ntransformed = mix(position,expandedPosition,uSeparation) + uHoverOffset * smoothstep(0.45,1.0,uv.x); vPath=uv.x; vBranch=branchSeed;',
-        );
-        shader.fragmentShader =
-          'uniform float uTime; varying float vPath; varying float vBranch;\n' +
-          shader.fragmentShader;
-        shader.fragmentShader = shader.fragmentShader.replace(
-          '#include <color_fragment>',
-          '#include <color_fragment>\nfloat flow = 0.5 + 0.5*sin(vPath*10.0-uTime*3.8+vBranch*2.3); diffuseColor.rgb *= 0.7+0.4*flow; diffuseColor.a *= 0.5+0.5*flow;',
-        );
+        Object.assign(shader.uniforms, uniforms, { uMulberry: { value: new T.Color(AZ.mulberry) } });
+        shader.vertexShader = 'attribute vec3 expandedPosition; attribute float branchSeed; uniform float uSeparation; uniform vec3 uHoverOffset; varying float vPath; varying float vBranch;\n' + shader.vertexShader;
+        shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\ntransformed = mix(position,expandedPosition,uSeparation) + uHoverOffset * smoothstep(0.45,1.0,uv.x); vPath=uv.x; vBranch=branchSeed;');
+        shader.fragmentShader = 'uniform float uTime; uniform vec3 uMulberry; varying float vPath; varying float vBranch;\n' + shader.fragmentShader;
+        shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', '#include <color_fragment>\nfloat flow = 0.5 + 0.5*sin(vPath*10.0-uTime*3.8+vBranch*2.3);\ndiffuseColor.rgb = mix(uMulberry, diffuseColor.rgb, smoothstep(0.0,0.4,vPath)) * (0.85+0.3*flow);\ndiffuseColor.a *= 0.55+0.45*flow;');
       };
-      material.customProgramCacheKey = () => 'gfs-branching-vessels-v1';
+      material.customProgramCacheKey = () => 'gfs-branching-vessels-az';
       const mesh = new T.Mesh(geometry, material);
       mesh.frustumCulled = false;
 
@@ -105,22 +86,42 @@ function buildConnections(){organs.forEach((o,index)=>{
 });}
 function fail(error){console.error(error);$('#loading').hidden=false;$('#load-message').textContent='The anatomy could not load. Please retry in a WebGL-enabled browser.';$('#retry').hidden=false;}
 async function init(){try{
-renderer=new T.WebGLRenderer({canvas:$('#scene'),antialias:true,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0x331c41,0);renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.3;
+renderer=new T.WebGLRenderer({canvas:$('#scene'),antialias:true,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0xECEFEE,0);renderer.toneMapping=T.NeutralToneMapping;renderer.toneMappingExposure=1;pointMax=renderer.getContext().getParameter(renderer.getContext().ALIASED_POINT_SIZE_RANGE)[1]||64;
 scene=new T.Scene();camera=new T.OrthographicCamera(-1,1,1,-1,.01,20);camera.position.set(0,.86,5);camera.lookAt(0,.86,0);
-scene.add(new T.HemisphereLight(0xfff4ed,0x765580,2.2));const light=new T.DirectionalLight(0xfff5ee,3);light.position.set(-2,3,4);scene.add(light);const rim=new T.DirectionalLight(0xe9d3e8,1.6);rim.position.set(3,2,-2);scene.add(rim);
+scene.add(new T.HemisphereLight(0xffffff,0x9DB0AC,1.6));const light=new T.DirectionalLight(0xffffff,2.2);light.position.set(-2,3,4);scene.add(light);const rim=new T.DirectionalLight(0xE6E0EE,1.0);rim.position.set(3,2,-2);scene.add(rim);
 bones=new T.Group();scene.add(bones);
+nebula=createNebula({mobile:innerWidth<768});scene.add(nebula.mesh);
+
 const [atlasResponse,bodyResponse,processResponse]=await Promise.all([fetch('./data/anatomy/atlas.json'),fetch('./data/anatomy/body.bin.gz'),fetch('./data/processes.json')]);if(!processResponse.ok)throw Error('Process data missing');const processData=await processResponse.json();if(hbLegend)hbLegend.innerHTML=legendMarkup('Draft figures for review');if(!atlasResponse.ok||!bodyResponse.ok)throw Error('Atlas missing');const atlas=await atlasResponse.json();const zip=await bodyResponse.arrayBuffer();const buffer=await new Response(new Blob([zip]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();if(buffer.byteLength!==atlas.bytes)throw Error('Incomplete atlas');
 const grouped=new Map(),homes=new Map();for(const part of atlas.parts){const bounds=new T.Box3(new T.Vector3(...part.bounds[0]),new T.Vector3(...part.bounds[1]));if(!homes.has(part.group))homes.set(part.group,bounds);else homes.get(part.group).union(bounds);if(!['skeleton','heart'].includes(part.group))continue;const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,part.positions,part.vertexCount*3),3));g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,part.normals,part.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,part.indices,part.indexCount),1));const id=part.group==='skeleton'&&part.bounds[0][1]>1.45?'skull':part.group;if(!grouped.has(id))grouped.set(id,[]);grouped.get(id).push(g);}
-for(const [id,pieces]of grouped){const geo=mergeGeometries(pieces,false);pieces.forEach(g=>g.dispose());const mat=new T.MeshPhysicalMaterial({color:id==='heart'?0xc72e66:0xe1ddd2,roughness:.45,metalness:.02,clearcoat:.16,depthTest:false,transparent:true,opacity:1});const mesh=new T.Mesh(geo,mat);mesh.renderOrder=id==='heart'?11:-1/* skeleton draws first, behind organs, vessels and heart */;if(id==='heart'){geo.computeBoundingBox();const c=geo.boundingBox.getCenter(new T.Vector3());geo.translate(-c.x,-c.y,-c.z);mesh.position.copy(c);heart=mesh;heart.position.z=.23;scene.add(mesh);}else{bones.add(mesh);if(id==='skull')skull=mesh;}}
-for(const [id,name,organ,side,row,size] of configs){const {model,geometry,network}=await loadReplacement(id);geometry.computeBoundingBox();const visibleBounds=geometry.boundingBox.clone();const root=new T.Group();root.add(model);root.updateMatrixWorld(true);const box=visibleBounds;const center=box.getCenter(new T.Vector3());model.position.sub(center);const max=Math.max(...box.getSize(new T.Vector3()).toArray());model.scale.multiplyScalar(1/max);model.position.multiplyScalar(1/max);const home=homes.get(id).getCenter(new T.Vector3());home.z=Math.max(home.z,.13);if(id==='brain')home.z=.015;root.position.copy(home);root.scale.setScalar(size);scene.add(root);
-const label=document.createElement('button');const m=healthMetrics(TOWER_HEALTH[id]);label.className=`label ${side<0?'left':'right'}${m?' card':''}`;if(m)label.style.setProperty('--accent-c',accentFor(id));label.innerHTML=`<small>${organ}</small><strong>${name}</strong>${m?cardMarkup(m,120+row*70+(side>0?35:0)):''}<span class="cta">Explore tower<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>`;label.setAttribute('aria-label',`Explore ${name}, ${organ}.${m?' '+metricsSentence(m):''}`);$('#labels').append(label);
-const o={id,name,organ,side,row,size,root,home,label,m,hb:label.querySelector('.hb'),hbOn:false,from:home.clone(),to:home.clone(),fromScale:size,toScale:size,start:0,duration:0,fromQuat:new T.Quaternion(),toQuat:new T.Quaternion(),hoverAmount:0};root.traverse(m=>{if(m.isMesh)m.userData.organ=o;});label.onclick=()=>select(o,label);label.onpointerenter=()=>{if(fine.matches)hover=o;};label.onpointerleave=()=>{hover=null;};
+for(const [id,pieces]of grouped){const geo=mergeGeometries(pieces,false);pieces.forEach(g=>g.dispose());
+ if(id==='heart'){
+  // Gold glass heart with a mulberry core and a dense plexus (brand Picture4). It sits in front of the lungs (z .33).
+  geo.computeBoundingBox();const c=geo.boundingBox.getCenter(new T.Vector3());geo.translate(-c.x,-c.y,-c.z);const unit=Math.max(...geo.boundingBox.getSize(new T.Vector3()).toArray());
+  heartLook=createLook();const glass=glassMaterials({face:'#F7C95A',base:AZ.gold,shadow:AZ.mulberry,highlight:AZ.white,ink:.7,backAlpha:.3},unit,heartLook);
+  const mesh=new T.Mesh(geo);applyGlass(mesh,glass,11);mesh.children.find(m=>m.material===glass.back).renderOrder=-.5;
+  mesh.add(createPlexus({meshes:[mesh],unit,seed:77,lineColor:AZ.gold,dotColor:AZ.mulberry,look:heartLook,preset:PLEXUS_PRESETS.heart,scale:innerWidth<768?.5:1}));
+  mesh.position.copy(c);mesh.position.z=.33;heart=mesh;scene.add(mesh);
+ }else{
+  // Ghost skeleton: pale lilac, faint, drawn first (behind the organs).
+  const mesh=new T.Mesh(geo,new T.MeshStandardMaterial({color:0xD9CCE6,roughness:.55,metalness:0,depthTest:false,depthWrite:false,transparent:true,opacity:1}));mesh.renderOrder=-1;bones.add(mesh);if(id==='skull')skull=mesh;
+ }}
+for(const [id,name,organ,side,row,size] of configs){const {model,geometry,network,look,plexus}=await loadReplacement(id);geometry.computeBoundingBox();const visibleBounds=geometry.boundingBox.clone();const root=new T.Group();root.add(model);root.updateMatrixWorld(true);const box=visibleBounds;const center=box.getCenter(new T.Vector3());model.position.sub(center);const max=Math.max(...box.getSize(new T.Vector3()).toArray());model.scale.multiplyScalar(1/max);model.position.multiplyScalar(1/max);const home=homes.get(id).getCenter(new T.Vector3());home.z=Math.max(home.z,.13);if(id==='brain')home.z=.015;root.position.copy(home);root.scale.setScalar(size);scene.add(root);
+const label=document.createElement('button');const m=healthMetrics(TOWER_HEALTH[id]);label.className=`label ${side<0?'left':'right'}${m?' card':''}`;if(m){label.style.setProperty('--accent-c',accentFor(id));label.style.setProperty('--accent-ink',inkFor(id));}label.innerHTML=`<small>${organ}</small><strong>${name}</strong>${m?cardMarkup(m,120+row*70+(side>0?35:0)):''}<span class="cta">Explore tower<svg class="ico ico-ne" aria-hidden="true"><use href="#i-ne"/></svg></span>`;label.setAttribute('aria-label',`Explore ${name}, ${organ}.${m?' '+metricsSentence(m):''}`);$('#labels').append(label);
+const o={id,name,organ,side,row,size,root,home,label,m,look,plexus,hb:label.querySelector('.hb'),hbOn:false,from:home.clone(),to:home.clone(),fromScale:size,toScale:size,start:0,duration:0,fromQuat:new T.Quaternion(),toQuat:new T.Quaternion(),hoverAmount:0};root.traverse(m=>{if(m.isMesh)m.userData.organ=o;});label.onclick=()=>select(o,label);label.onpointerenter=()=>{if(fine.matches)hover=o;};label.onpointerleave=()=>{hover=null;};
 o.processNeurons=createProcessNeurons(o,network,processData.towers.find(t=>t.id===id).processes,$('#process-neurons'));geometry.dispose();organs.push(o);$('#load-message').textContent=`Preparing ${organ.toLowerCase()}…`;}
 initProcessFlow(processData);
-ready=true;resize();$('#loading').hidden=true;addEventListener('resize',resize);new ResizeObserver(()=>{if($('#experience').clientHeight!==h)resize();}).observe($('#experience'));frame(performance.now());
+ready=true;resize();$('#loading').hidden=true;{// ?still=<organ id>[&sep=0..1]: clean brand stills for slides (UI hidden, organ framed as in the zoomed view).
+ const q=new URLSearchParams(location.search);if(q.has('still')||q.has('sep')){document.body.dataset.still='true';const o=organs.find(o=>o.id===q.get('still'));if(o)select(o);else setSeparation(Number(q.get('sep')||0));}}addEventListener('resize',resize);new ResizeObserver(()=>{if($('#experience').clientHeight!==h)resize();}).observe($('#experience'));frame(performance.now());
 }catch(error){fail(error);}}
 function frame(now){if(!sceneInView){last=now;animation=requestAnimationFrame(frame);return;}const dt=Math.min((now-last)/1000,.05);last=now;time+=dt;separation=reduced.matches?separationTarget:T.MathUtils.lerp(separation,separationTarget,1-Math.exp(-dt*12));if(Math.abs(separation-separationTarget)<.0001)separation=separationTarget;const beat=reduced.matches?1:1.12+Math.pow(Math.max(0,Math.sin(time*6)),8)*.035;heart.scale.setScalar(beat);
-const bodyAlpha=selected?0:1;for(const mesh of bones.children){const target=(mesh===skull?T.MathUtils.lerp(.20,1,separation):1)*skeletonOpacity;mesh.material.opacity+=(target*bodyAlpha-mesh.material.opacity)*Math.min(1,dt*10);mesh.visible=mesh.material.opacity>.01;}heart.visible=!selected;
+const bodyAlpha=selected?0:1;
+{// Dark starry nebula backdrop behind the whole stage.
+ const U=nebula.uniforms,pr=renderer.getPixelRatio();U.uResolution.value.set(w*pr,h*pr);U.uPixelRatio.value=pr;U.uTime.value=reduced.matches?0:time;
+ // Stronger oval behind the body, or behind the organ in the zoomed view.
+ let cx=w/2,cy=h/2,size=.8*h;if(selected&&detail){cx=detail.cx;cy=detail.cy;size=detail.D*1.25;}U.uCentre.value.lerp(new T.Vector3(cx,cy,size),U.uCentre.value.z?Math.min(1,dt*6):1);
+ U.uGlow.value=selected?.18:.28*(1-T.MathUtils.smoothstep(separation,0,.6))+.12;}
+for(const mesh of bones.children){const target=(mesh===skull?T.MathUtils.lerp(.45,1,separation):1)*skeletonOpacity;mesh.material.opacity+=(target*bodyAlpha-mesh.material.opacity)*Math.min(1,dt*10);mesh.visible=mesh.material.opacity>.01;}heart.visible=!selected;heartLook.uTime.value=reduced.matches?0:time;heartLook.uPixelRatio.value=renderer.getPixelRatio();heartLook.uPointMax.value=pointMax;heartLook.uSize.value=T.MathUtils.clamp(.6*h/2.2*.02,1.5,4);heartLook.uPlexus.value=.55;
 for(const o of organs){const t=o.duration?Math.min(1,(now-o.start)/o.duration):1;const e=ease(t);if(!selected&&(!o.flight||t===1)){o.flight=false;o.root.position.copy(overviewTarget(o));o.root.scale.setScalar(overviewScale(o));}else{o.root.position.lerpVectors(o.from,o.to,e);o.root.scale.setScalar(T.MathUtils.lerp(o.fromScale,o.toScale,e));}if(t<1||selected!==o)o.root.quaternion.slerpQuaternions(o.fromQuat,o.toQuat,e);else if(o.rotationTarget){
  // Advance from the current angle so releasing a drag never restarts the turn.
  if(!reduced.matches&&!drag){
@@ -130,6 +131,10 @@ for(const o of organs){const t=o.duration?Math.min(1,(now-o.start)/o.duration):1
 }o.hoverAmount+=((hover===o&&!selected?1:0)-o.hoverAmount)*Math.min(1,dt*10);if(!reduced.matches){o.root.position.y+=Math.sin(time*2.1)*.008*o.hoverAmount;if(!selected)o.root.rotation.z=Math.sin(time*1.6)*.045*o.hoverAmount;}
 o.root.visible=!selected||selected===o;o.vein.visible=!selected;
 o.vesselUniforms.uSeparation.value=separation;
+{const L=o.look;
+{p.copy(o.root.position).project(camera);const ox=(p.x+1)*w/2,oy=(1-p.y)*h/2,show=o.root.visible?1:0;
+ nebula.uniforms.uOrgan.value[organs.indexOf(o)].set(ox,oy,o.root.scale.x*h/2.2*.85,show);nebula.uniforms.uOrganCol.value[organs.indexOf(o)].set(accentFor(o.id));
+ L.uOnDark.value=.6*show;}L.uPlexus.value=selected?.55:T.MathUtils.lerp(.35,.55,separation);L.uTime.value=reduced.matches?0:time;L.uPixelRatio.value=renderer.getPixelRatio();L.uPointMax.value=pointMax;L.uSize.value=T.MathUtils.clamp(.0115*o.root.scale.x*h/2.2,1.5,8);}
 o.vesselUniforms.uTime.value=time*(reduced.matches?.2:1);
 o.vesselUniforms.uHoverOffset.value.copy(o.root.position).sub(overviewTarget(o));
 const visible=separation>.55&&!selected;const labelAlpha=T.MathUtils.smoothstep(separation,.55,.9);
