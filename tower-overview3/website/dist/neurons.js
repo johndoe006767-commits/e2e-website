@@ -14,7 +14,9 @@ export function createNeuronNetwork(brain, corticalMeshes, options = {}) {
   brain.updateMatrixWorld(true);
   const raycaster = new THREE.Raycaster();
   const center = new THREE.Vector3(0, options.generic ? 0 : 0.25, 0);
-  const glowColor = new THREE.Color(options.color || '#ff263d').multiplyScalar(2.8);
+  // AstraZeneca restyle: soft dots and lines in the tower's shadow colour, normal blending (reads on the light page).
+  const nodeColor = new THREE.Color(options.color || '#3C1053');
+  const coreColor = new THREE.Color(options.core || '#FFFFFF');
   // Keep every lobe of a lung in the same network, but never join the pair.
   // Each group also gets its own projection origin and raycast targets so a
   // connection cannot accidentally snap onto the opposite organ.
@@ -83,24 +85,21 @@ export function createNeuronNetwork(brain, corticalMeshes, options = {}) {
   const neurons = [];
   const links = new THREE.Group();
   network.add(links);
-  const filament = new THREE.MeshBasicMaterial({
-    color: glowColor, transparent: true, opacity: 0.62,
-    blending: THREE.AdditiveBlending, depthWrite: false, depthTest: true,
-  });
-  const connection = filament.clone();
-  connection.opacity = 0.25;
+  const filament = new THREE.MeshBasicMaterial({ color: coreColor, transparent: true, opacity: 0.95, depthWrite: false, depthTest: true, toneMapped: false });
+  const connection = new THREE.MeshBasicMaterial({ color: nodeColor, transparent: true, opacity: 0.7, depthWrite: false, depthTest: true, toneMapped: false });
   const membrane = new THREE.ShaderMaterial({
-    uniforms: { glowColor: { value: glowColor } },
-    transparent: true, depthWrite: false, depthTest: true,
-    blending: THREE.AdditiveBlending, side: THREE.DoubleSide,
-    vertexShader: `varying vec3 n; varying vec3 eye;
-      void main(){vec4 p=modelViewMatrix*vec4(position,1.0);
-      n=normalize(normalMatrix*normal);eye=-p.xyz;gl_Position=projectionMatrix*p;}`,
-    fragmentShader: `uniform vec3 glowColor; varying vec3 n; varying vec3 eye;
-      void main(){float rim=pow(1.0-clamp(abs(dot(normalize(n),normalize(eye))),0.0,1.0),2.2);
-      gl_FragColor=vec4(glowColor,0.07+rim*0.38);}`,
+    uniforms: { glowColor: { value: nodeColor } },
+    transparent: true, depthWrite: false, depthTest: true, toneMapped: false,
+    blending: THREE.NormalBlending, side: THREE.FrontSide,
+    vertexShader: `varying vec3 n;
+      void main(){n=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    fragmentShader: `uniform vec3 glowColor; varying vec3 n;
+      void main(){float rim=pow(1.0-clamp(abs(n.z),0.0,1.0),2.0);
+      gl_FragColor=vec4(mix(glowColor,vec3(1.0),0.25*(1.0-rim)),0.55+rim*0.4);
+      #include <colorspace_fragment>
+      }`,
   });
-  const somaGeometry = new THREE.SphereGeometry(0.043, 20, 14);
+  const somaGeometry = new THREE.SphereGeometry(0.034, 20, 14);
   const nucleusGeometry = new THREE.SphereGeometry(0.013, 12, 8);
   function tube(points, radius, mat, parent, segments = 12) {
     const curve = new THREE.CatmullRomCurve3(points);
@@ -125,28 +124,11 @@ export function createNeuronNetwork(brain, corticalMeshes, options = {}) {
     neuron.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), anchor.normal);
     neuron.userData.direction = direction;
     const soma = new THREE.Mesh(somaGeometry, membrane);
-    soma.scale.set(1.05, 0.82, 0.9);
     soma.renderOrder = 6;
     neuron.add(soma);
     const nucleus = new THREE.Mesh(nucleusGeometry, filament);
     nucleus.renderOrder = 6;
     neuron.add(nucleus);
-    // Fine dendrites bifurcate into tapered terminals around a translucent soma.
-    for (let branch = 0; branch < 6; branch++) {
-      const angle = branch / 6 * Math.PI * 2 + random() * 0.45;
-      const length = 0.12 + random() * 0.085;
-      const direction = new THREE.Vector3(Math.cos(angle), Math.sin(angle), (random() - 0.5) * 0.8);
-      const bend = new THREE.Vector3(-direction.y, direction.x, 0).multiplyScalar((random() - 0.5) * 0.06);
-      const middle = direction.clone().multiplyScalar(length * 0.55).add(bend);
-      const end = direction.clone().multiplyScalar(length);
-      tube([direction.clone().multiplyScalar(0.025), middle, end], 0.0032, filament, neuron);
-      for (const side of [-1, 1]) {
-        const tip = end.clone().add(new THREE.Vector3(
-          Math.cos(angle + side * 0.7), Math.sin(angle + side * 0.7), (random() - 0.5) * 0.4,
-        ).multiplyScalar(0.055 + random() * 0.045));
-        tube([middle, end.clone().lerp(tip, 0.35), tip], 0.0015, filament, neuron, 8);
-      }
-    }
     neuron.rotateZ(random() * Math.PI);
     network.add(neuron);
     neurons.push(neuron);

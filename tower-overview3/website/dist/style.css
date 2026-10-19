@@ -58,18 +58,6 @@ header{justify-content:flex-start;padding:25px 32px}header img{width:120px}foote
  .flow-heading h2{font-size:26px;max-width:100%}
 }
 
-/* Clinical Lab Background */
-body {
-  background: linear-gradient(rgba(26, 11, 34, 0.65), rgba(26, 11, 34, 0.65)),
-              url('assets/lab-bg.jpg') no-repeat center center fixed !important;
-  background-size: cover !important;
-}
-
-canvas {
-  background: transparent !important;
-}
-
-
 /* Tower health bars (data/tower-metrics.json): step mix, pain points and TPIs on each organ card. */
 :root{--hb-man:#da1b25;--hb-hyb:#d47a06;--hb-auto:#2f6fce;--hb-pain:#d52538;--hb-tpi:#1a8749;--hb-track:rgba(255,255,255,.12);--hb-tbc:#8f7799}
 .label.card{width:clamp(178px,15vw,226px);padding:9px 14px 10px;border:1px solid color-mix(in srgb,var(--accent-c,#cabbcf) 58%,transparent);border-radius:12px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent-c,#cabbcf) 15%,rgba(40,22,54,.86)),rgba(40,22,54,.86) 70%);box-shadow:0 12px 30px rgba(12,4,20,.38);text-align:left;white-space:normal;line-height:1.2;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
@@ -660,3 +648,41 @@ body,button,input,select,textarea{font-family:'Inter',Arial,Helvetica,sans-serif
 @media(max-width:767px) and (max-height:720px){.hb-legend{bottom:42px;gap:3px 8px;font-size:8.5px}footer{bottom:8px}}
 #flow-back .ico,.handoff-close-btn .ico{margin-right:6px}
 .modal-tabs::-webkit-scrollbar{display:none}
+
+/* ===== AstraZeneca brand light theme (ppt material/). Measured values: website/AZ-BRAND-STYLE.md =====
+   The colleague's telemetry HUD and the modal keep their dark look: their tokens are scoped back below. */
+:root{color-scheme:light;--bg:#ECEFEE;--text:#3F4444;--muted:#59605F;--accent:#830051;--line:rgba(63,68,68,.22);--hover:rgba(63,68,68,.06);--card:rgba(255,255,255,.74);--hb-track:rgba(63,68,68,.12);--hb-tbc:#9DB0AC}
+#tower-telemetry-hud,.handoff-overlay{--accent:#f1a3bc;--line:#8f7799;--hover:#ffffff0b}
+body{background:#ECEFEE}
+/* Brand platinum field (radial, lighter at the centre) with the lab photo kept faintly behind a light veil. */
+body::before,body::after{content:'';position:fixed;inset:0;pointer-events:none}
+body::before{z-index:-2;background:radial-gradient(ellipse 70% 60% at 50% 42%,#F7F8F8 0%,#F4F6F5 12%,#ECEFEE 60%,#DEE4E3 88%,#D3DBDA 100%)}
+body::after{z-index:-1;background:url('assets/lab-bg.jpg') center/cover no-repeat;opacity:.18;filter:saturate(.5) brightness(1.2)}
+canvas{background:transparent!important}
+button{border-color:var(--line)}
+@media(hover:hover) and (pointer:fine){button:hover{background:var(--hover)}}
+header img{filter:none;opacity:1}
+.load-body{background:linear-gradient(0deg,transparent,rgba(63,68,68,.14),transparent)}
+#assembly::-webkit-slider-runnable-track{background:#9DB0AC}
+#assembly::-moz-range-track{background:#9DB0AC}
+#assembly::-webkit-slider-thumb{background:#830051}
+#assembly::-moz-range-thumb{background:#830051}
+.process-name{border-color:#D3DBDA;background:#FFFFFF;color:#3F4444;box-shadow:0 3px 14px rgba(63,68,68,.12)}
+#detail .process-plus{border-color:#D3DBDA;background:#FFFFFF;color:#3F4444}
+#detail .process-plus[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+@media(hover:hover) and (pointer:fine){#detail .process-plus:hover{background:#F3E6EE}}
+.process-leader{background:rgba(131,0,81,.4)}
+.label.card{border-color:color-mix(in srgb,var(--accent-c,#9DB0AC) 55%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--accent-c,#9DB0AC) 14%,var(--card)),var(--card) 70%);box-shadow:0 10px 28px rgba(63,68,68,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.label.card:hover{background:linear-gradient(180deg,color-mix(in srgb,var(--accent-c,#9DB0AC) 22%,rgba(255,255,255,.86)),rgba(255,255,255,.86) 70%)}
+.label.card small{color:var(--accent-ink,var(--text));font-weight:600}
+.hb-pill.hb-tbc b{background:rgba(63,68,68,.1)}
+.site-credits{position:absolute;right:16px;bottom:8px;z-index:2;font-size:10px;color:var(--muted);text-decoration:none}
+.site-credits:hover{color:var(--accent)}
+body[data-detail=true] .site-credits{visibility:hidden}
+/* ?still= capture mode: UI hidden; #detail children keep their boxes so the organ framing is unchanged */
+body[data-still=true] header,body[data-still=true] footer,body[data-still=true] #labels,body[data-still=true] #hb-legend,body[data-still=true] .keyboard-organ{display:none!important}body[data-still=true] #detail>*{visibility:hidden}
+/* Faint dark starry nebula over the light page (nebula.js): page text stays dark; the cards are dark glass with light text */
+body[data-bg=page] .label.card{--text:#f6f1f5;--muted:#cabbcf;--accent:#f1a3bc;--hb-track:rgba(255,255,255,.14);color:#f6f1f5;background:linear-gradient(180deg,color-mix(in srgb,var(--accent-c,#9DB0AC) 16%,rgba(40,22,54,.84)),rgba(40,22,54,.84) 70%);box-shadow:0 12px 30px rgba(12,4,20,.3)}
+body[data-bg=page] .label.card small{color:color-mix(in srgb,var(--accent-c) 55%,#fff)}
+body[data-bg=page] .label.card:hover{background:linear-gradient(180deg,color-mix(in srgb,var(--accent-c,#9DB0AC) 24%,rgba(40,22,54,.92)),rgba(40,22,54,.92) 70%)}
+body[data-bg=page] #section-1{--text:#1F2424;--muted:#2E3434}

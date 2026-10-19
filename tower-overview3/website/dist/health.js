@@ -1,10 +1,9 @@
 // Overview tower cards: the manual / semi-automated / automated step mix, pain points and TPIs.
 // The numbers come from TOWER_HEALTH in scene.js, the same figures the zoomed-in vital-signs panel shows.
-import {organs} from './organs.js';
+import {towerColors, AZ} from './organs.js?v=20261019-az';
 
-const ACCENT = Object.fromEntries(organs.map(o => [o.id, o.color]));
-ACCENT.brain = '#d89daf';
-export const accentFor = id => ACCENT[id] || '#cabbcf';
+export const accentFor = id => towerColors[id]?.base || AZ.platinum;
+export const inkFor = id => towerColors[id]?.cardText || AZ.graphite;
 
 const whole = value => Number.isInteger(value) && value >= 0 ? value : null;
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
