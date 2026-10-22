@@ -1,14 +1,16 @@
 import * as T from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {loadReplacement,glassMaterials,applyGlass,createLook} from './models.js?v=20261019-az';
-import {createPlexus,PLEXUS_PRESETS} from './plexus.js?v=20261019-az';
-import {AZ} from './organs.js?v=20261019-az';
-import {createNebula} from './nebula.js?v=20261019-az';
-import {buildVesselNetwork} from './vessels.js?v=20261019-az';
-import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261019-az';
-import {initProcessFlow} from './process-flow.js?v=20261019-az';
-import {healthMetrics,cardMarkup,legendMarkup,metricsSentence,countUp,resetCounts,accentFor,inkFor} from './health.js?v=20261019-az';
+import {loadReplacement,glassMaterials,applyGlass,createLook} from './models.js?v=20261023-o2c10';
+import {createPlexus,PLEXUS_PRESETS} from './plexus.js?v=20261023-o2c10';
+import {AZ} from './organs.js?v=20261023-o2c10';
+import {createNebula} from './nebula.js?v=20261023-o2c10';
+import {buildVesselNetwork} from './vessels.js?v=20261023-o2c10';
+import {createProcessNeurons,updateProcessNeurons} from './process-neurons.js?v=20261023-o2c10';
+import {initProcessFlow} from './process-flow.js?v=20261023-o2c10';
+import {createJourney} from './journey.js?v=20261023-o2c10';
+import {healthMetrics,cardMarkup,legendMarkup,metricsSentence,countUp,resetCounts,accentFor,inkFor} from './health.js?v=20261023-o2c10';
 const $=s=>document.querySelector(s);
+const journey=createJourney({maps:{intestines:'./data/maps/o2c.json'}});window.__journey=journey;
 const configs=[['brain','FP&A Commercial','Brain',-1,0,.18],['liver','CAPEX','Liver',-1,1,.25],['kidneys','Controlling','Kidneys',-1,2,.23],['spleen','Tax','Spleen',-1,3,.12],['lungs','R2R','Lungs',1,0,.32],['stomach','P2P','Stomach',1,1,.17],['pancreas','FP&A Operations','Pancreas',1,2,.20],['intestines','O2C','Intestines',1,3,.29]];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'), fine=matchMedia('(hover: hover) and (pointer: fine)');
 const skeletonOpacity=.35; // 1 = solid bones; lower values make the skeleton more see-through
@@ -24,21 +26,26 @@ function ease(x){ // Skill's cubic-bezier(.77,0,.175,1), inverted on its x axis.
 }
 let detail=null;
 // The canvas always matches #experience (its CSS height, not the window), so DOM and 3D share one coordinate space.
-function fitCanvas(){const nw=innerWidth,nh=$('#experience').clientHeight||Math.max(innerHeight,640);if(nw===w&&nh===h)return false;w=nw;h=nh;mobile=w<768;renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.5:1.75));renderer.setSize(w,h);const half=1.10;camera.left=-half*w/h;camera.right=half*w/h;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();return true;}
+function fitCanvas(){const nw=document.documentElement.clientWidth||innerWidth,nh=$('#experience').clientHeight||Math.max(innerHeight,640);if(nw===w&&nh===h)return false;w=nw;h=nh;mobile=w<768;renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.5:1.75));renderer.setSize(w,h);const half=1.10;camera.left=-half*w/h;camera.right=half*w/h;camera.top=half;camera.bottom=-half;camera.updateProjectionMatrix();return true;}
 function resize(){fitCanvas();if(ready){buildConnections();retarget(true);}}
 // Zoomed-in layout: measure the HUD, title and controls, then give the organ the largest free square,
 // with the process cards in columns beside it (wide screens) or in rows above and below it (narrow ones).
 function detailLayout(){
   const box=$('#experience').getBoundingClientRect(),rel=el=>{const r=el.getBoundingClientRect();return {l:r.left-box.left,t:r.top-box.top,r:r.right-box.left,b:r.bottom-box.top};};
-  const hud=rel($('#tower-telemetry-hud')),title=rel($('.detail-title')),tools=rel($('.rotate-tools'));
+  // The vital-signs panel scales with the window (about a third of its width on wide screens), and the organ is a quarter of the panel's width.
+  const panel=$('#tower-telemetry-hud');
+  let hudScale=1;if(w>=1100){hudScale=Math.max(1,Math.min(w*.32/panel.offsetWidth,(h-130)/panel.offsetHeight));panel.style.setProperty('--hud-s',hudScale.toFixed(3));}else panel.style.removeProperty('--hud-s');
+  // From the unscaled layout box (offset* ignores transforms): right edge fixed, vertically centred (top:50% + translateY(-50%)).
+  let hud=rel(panel);if(w>=1100){const ow=panel.offsetWidth,oh=panel.offsetHeight,r=panel.offsetLeft+ow,cy=panel.offsetTop;hud={l:r-ow*hudScale,r,t:cy-oh*hudScale/2,b:cy+oh*hudScale/2};}
+  const title=rel($('.detail-title')),tools=rel($('.rotate-tools'));
   const beside=hud.l>w/2,gap=20,pad=beside?24:16;
   const L=pad,R=beside?hud.l-24:w-pad,top=beside?72:hud.b+14,bottom=Math.min(title.t,tools.t)-12,W=R-L,H=bottom-top;
   const host=$('#process-neurons'),nodes=selected.processNeurons.nodes;
   const tallest=cw=>{host.style.setProperty('--card-w',`${cw}px`);let m=0;for(const n of nodes){const was=n.label.hidden;n.label.hidden=false;m=Math.max(m,n.label.offsetHeight);n.label.hidden=was;}return m;};
-  const colW=Math.round(Math.max(170,Math.min(250,W*.22))),colD=Math.min(H*.94,W-2*(colW+gap),760);
-  const rowW=Math.floor(Math.min(300,(W-12)/2)),rowH=tallest(rowW),rowD=Math.min(W,H-2*(rowH+12),760);
+  const organD=(hud.r-hud.l)/4,colW=Math.round(Math.max(170,Math.min(Math.max(250,w*.174),W*.22)))/* grows with the window above 1440px, so big screens keep the same proportions */,colD=Math.min(H*.94,W-2*(colW+gap),760,organD);
+  const rowW=Math.floor(Math.min(300,(W-12)/2)),rowH=tallest(rowW),rowD=Math.min(W,H-2*(rowH+12),760,organD);
   let l;
-  if(colD>=rowD*.85&&colD>=160){
+  if(colD>=rowD*.85&&W-2*(colW+gap)>=organD){
     const D=colD,x0=L+(W-(2*colW+2*gap+D))/2;
     l={mode:'columns',cw:colW,D,cx:x0+colW+gap+D/2,cy:top+H/2,T:top,B:bottom,leftX:x0,rightX:x0+colW+2*gap+D};
   }else{
@@ -57,8 +64,8 @@ function overviewScale(o){return T.MathUtils.lerp(o.size,mobile?.17:.23,separati
 function retarget(instant=false){detail=selected?detailLayout():null;for(const o of organs){o.flight=true;o.from=o.root.position.clone();o.to=selected===o?detail.target.clone():overviewTarget(o);o.fromScale=o.root.scale.x;o.toScale=selected===o?detail.scale:overviewScale(o);o.start=performance.now();o.duration=instant||reduced.matches?0:700;o.fromQuat=o.root.quaternion.clone();o.toQuat=new T.Quaternion();} }
 function setSeparation(value){if(!ready||selected)return;separationTarget=T.MathUtils.clamp(value,0,1);expanded=separationTarget>.5;$('#assembly').value=String(Math.round(separationTarget*1000));}
 function setView(value){setSeparation(value?1:0);}
-function select(o,trigger){if(!ready||selected)return;lastTrigger=trigger||o.label;$('#process-status').textContent='';selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';$('#detail').hidden=false;if(fitCanvas())buildConnections();$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);setupHUDInteractions();$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',`${o.name} ${o.organ}. Scroll to rotate left or right. Drag or use arrow keys to rotate in all directions.`);retarget();}
-function close(){if(!selected)return;selected=null;$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;if(fitCanvas())buildConnections();retarget();lastTrigger?.focus({preventScroll:true});}
+function select(o,trigger){if(!ready||selected)return;lastTrigger=trigger||o.label;$('#process-status').textContent='';selected=o;o.rotationTarget=new T.Quaternion();hover=null;document.body.dataset.detail='true';$('#detail').hidden=false;const hasMap=!document.body.dataset.still&&journey.open(o.id);$('#scene').style.touchAction=hasMap?'pan-y':'';if(fitCanvas())buildConnections();$('#organ-name').textContent=o.organ;$('#tower-name').textContent=o.name;updateTelemetryHUD(o.id);setupHUDInteractions();$('#back').focus({preventScroll:true});$('#scene').tabIndex=0;$('#scene').setAttribute('aria-label',hasMap?`${o.name} ${o.organ}. Drag or use arrow keys to rotate. Scroll down to follow the Order to Cash process map.`:`${o.name} ${o.organ}. Scroll to rotate left or right. Drag or use arrow keys to rotate in all directions.`);retarget();}
+function close(){if(!selected)return;selected=null;journey.close();$('#process-section').hidden=true;$('#scene').style.touchAction='';$('#scene').setAttribute('aria-label','Skeleton, heart and eight finance organs');document.body.dataset.detail='false';$('#detail').hidden=true;if(fitCanvas())buildConnections();retarget();lastTrigger?.focus({preventScroll:true});}
 // Exact tapered Catmull-Rom tubes and traveling flow shader from tower-overview2.
 function buildConnections(){organs.forEach((o,index)=>{
  if(o.vein){scene.remove(o.vein);o.vein.geometry.dispose();o.vein.material.dispose();}
@@ -112,7 +119,7 @@ const o={id,name,organ,side,row,size,root,home,label,m,look,plexus,hb:label.quer
 o.processNeurons=createProcessNeurons(o,network,processData.towers.find(t=>t.id===id).processes,$('#process-neurons'));geometry.dispose();organs.push(o);$('#load-message').textContent=`Preparing ${organ.toLowerCase()}…`;}
 initProcessFlow(processData);
 ready=true;resize();$('#loading').hidden=true;{// ?still=<organ id>[&sep=0..1]: clean brand stills for slides (UI hidden, organ framed as in the zoomed view).
- const q=new URLSearchParams(location.search);if(q.has('still')||q.has('sep')){document.body.dataset.still='true';const o=organs.find(o=>o.id===q.get('still'));if(o)select(o);else setSeparation(Number(q.get('sep')||0));}}addEventListener('resize',resize);new ResizeObserver(()=>{if($('#experience').clientHeight!==h)resize();}).observe($('#experience'));frame(performance.now());
+ const q=new URLSearchParams(location.search);if(q.has('still')||q.has('sep')){document.body.dataset.still='true';const o=organs.find(o=>o.id===q.get('still'));if(o)select(o);else setSeparation(Number(q.get('sep')||0));}}addEventListener('resize',resize);new ResizeObserver(()=>{if($('#experience').clientHeight!==h||document.documentElement.clientWidth!==w)resize();}).observe($('#experience'));frame(performance.now());
 }catch(error){fail(error);}}
 function frame(now){if(!sceneInView){last=now;animation=requestAnimationFrame(frame);return;}const dt=Math.min((now-last)/1000,.05);last=now;time+=dt;separation=reduced.matches?separationTarget:T.MathUtils.lerp(separation,separationTarget,1-Math.exp(-dt*12));if(Math.abs(separation-separationTarget)<.0001)separation=separationTarget;const beat=reduced.matches?1:1.12+Math.pow(Math.max(0,Math.sin(time*6)),8)*.035;heart.scale.setScalar(beat);
 const bodyAlpha=selected?0:1;
@@ -145,9 +152,9 @@ renderer.render(scene,camera);animation=requestAnimationFrame(frame);}
 function hit(event){const rect=$('#scene').getBoundingClientRect();pointer.set((event.clientX-rect.left)/w*2-1,-(event.clientY-rect.top)/h*2+1);ray.setFromCamera(pointer,camera);return ray.intersectObjects(organs.map(o=>o.root),true).find(x=>x.object.visible&&x.object.userData.organ)?.object.userData.organ;}
 $('#assembly').addEventListener('input',e=>setSeparation(Number(e.target.value)/1000));$('#back').onclick=close;$('#retry').onclick=()=>location.reload();$('#reset').onclick=()=>{if(selected){selected.fromQuat=selected.root.quaternion.clone();selected.toQuat.identity();selected.rotationTarget.identity();selected.from.copy(selected.root.position);selected.fromScale=selected.root.scale.x;selected.start=performance.now();selected.duration=reduced.matches?0:250;}};
 // Wheel/trackpad progress is continuous and reversible; no document scroll listener.
-$('#experience').addEventListener('wheel',e=>{if(e.ctrlKey||!ready)return;e.preventDefault();const unit=e.deltaMode===1?16:e.deltaMode===2?h:1;const delta=T.MathUtils.clamp(e.deltaY*unit,-120,120);if(selected){selected.rotationTarget.premultiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),delta*.006));}else setSeparation(separationTarget+delta/1800);},{passive:false});
+$('#experience').addEventListener('wheel',e=>{if(e.ctrlKey||!ready||(selected&&journey.active))return;e.preventDefault();const unit=e.deltaMode===1?16:e.deltaMode===2?h:1;const delta=T.MathUtils.clamp(e.deltaY*unit,-120,120);if(selected){selected.rotationTarget.premultiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),delta*.006));}else setSeparation(separationTarget+delta/1800);},{passive:false});
 const canvas=$('#scene');canvas.addEventListener('pointerdown',e=>{if(!ready||e.button!==0)return;if(selected)selected.rotationTarget.copy(selected.root.quaternion);drag={x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!ready)return;if(drag&&selected){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(dy*.009,dx*.009,0)));selected.rotationTarget.copy(selected.root.quaternion);selected.duration=0;drag.x=e.clientX;drag.y=e.clientY;}else if(drag&&!selected&&e.pointerType==='touch'){setSeparation(separationTarget+(drag.y-e.clientY)/650);drag.x=e.clientX;drag.y=e.clientY;}else if(!selected&&fine.matches){hover=hit(e);canvas.style.cursor=hover?'pointer':'default';}});canvas.addEventListener('pointerup',e=>{if(drag&&!selected&&Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)<6){const o=hit(e);if(o)select(o);}drag=null;if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);});canvas.addEventListener('pointercancel',()=>drag=null);canvas.addEventListener('lostpointercapture',()=>drag=null);canvas.addEventListener('pointerleave',()=>hover=null);
-addEventListener('keydown',e=>{if(e.key==='Escape')close();if(selected&&e.target===canvas&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();selected.duration=0;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(e.key==='ArrowUp'?-.15:e.key==='ArrowDown'?.15:0,e.key==='ArrowLeft'?-.15:e.key==='ArrowRight'?.15:0,0)));selected.rotationTarget.copy(selected.root.quaternion);}});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!(selected&&journey.active&&journey.back()))close();if(selected&&e.target===canvas&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();selected.duration=0;selected.root.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(e.key==='ArrowUp'?-.15:e.key==='ArrowDown'?.15:0,e.key==='ArrowLeft'?-.15:e.key==='ArrowRight'?.15:0,0)));selected.rotationTarget.copy(selected.root.quaternion);}});
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();cancelAnimationFrame(animation);fail(new Error('WebGL context lost'));});
 // Keyboard users can explore each organ in either view, without visual label overlap.
 for(const config of configs){const b=document.createElement('button');b.textContent=`Explore ${config[1]}`;b.className='keyboard-organ';b.onclick=()=>{const o=organs.find(o=>o.id===config[0]);if(o)select(o,b);};$('#experience').append(b);}

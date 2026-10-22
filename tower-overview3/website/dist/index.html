@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ECEFEE"><title>Finance towers | AstraZeneca</title><link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="style.css?v=20261019-az"><link rel="stylesheet" href="process-flow.css?v=20261019-az"><script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ECEFEE"><title>Finance towers | AstraZeneca</title><link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="style.css?v=20261023-o2c10"><link rel="stylesheet" href="process-flow.css?v=20261023-o2c10"><link rel="stylesheet" href="journey.css?v=20261023-o2c10"><script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script></head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol><symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8M3 3v5h5"/></symbol><symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 7h15M16 3l4 4-4 4M20 17H5M8 13l-4 4 4 4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol><symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3 2 20h20zM12 9v5M12 17.5v.1"/></symbol></svg>
 <section id="section-1" aria-label="Finance anatomy"><header><img src="./assets/astrazeneca.svg" alt="AstraZeneca" width="120" height="30"></header>
 <main id="experience" aria-label="Interactive finance anatomy"><canvas id="scene" aria-label="Skeleton, heart and eight finance organs"></canvas><div id="labels"></div><div id="hb-legend" class="hb-legend" aria-hidden="true"></div>
@@ -75,7 +75,26 @@
 <ol id="flow-activities" class="testing-flow infusion-flow"></ol>
 <div class="infusion-end"><div id="flow-brain" class="infusion-model infusion-brain" role="img" aria-label="Organ receiving the process flow"></div></div>
 </div></div></section>
-<script type="module" src="scene.js?v=20261019-az"></script>
+<section id="journey" hidden data-mode="asis" data-f="all" aria-labelledby="journey-title">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="jr-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="rgba(63,68,68,.7)"/></marker><marker id="jr-arrow-ai" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0070c0"/></marker></defs></svg>
+<div class="jr-spacer"><div class="jr-viewport">
+<div class="jr-bg" aria-hidden="true"></div><div class="jr-stars" aria-hidden="true"></div><div class="jr-fx" aria-hidden="true"></div>
+<div class="jr-rail">
+<button id="journey-back" class="jr-back" type="button" aria-label="Back to the organ"><svg class="ico" aria-hidden="true"><use href="#i-left"/></svg><span class="lbl">Back to the organ</span></button>
+<h2 id="journey-title" class="jr-title">Order to Cash <span>process map</span></h2>
+<ol class="jr-progress" aria-label="Journey stations"></ol>
+<div class="jr-seg jr-mode" role="group" aria-label="Map version"><button type="button" data-mode="asis" aria-pressed="true">As-Is</button><button type="button" data-mode="tobe" aria-pressed="false">AI suggested</button></div>
+<button type="button" class="jr-legend-btn" aria-expanded="false" aria-controls="jr-legend">Legend</button>
+<i class="jr-meter" aria-hidden="true"></i></div>
+<div id="jr-legend" class="jr-legend" hidden></div>
+<div class="jr-foot"><div class="jr-seg jr-filters" role="group" aria-label="Filter steps"><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="man" aria-pressed="false"><i style="--c:var(--jr-man)"></i>Manual</button><button type="button" data-f="hyb" aria-pressed="false"><i style="--c:var(--jr-hyb)"></i>Semi</button><button type="button" data-f="auto" aria-pressed="false"><i style="--c:var(--jr-auto)"></i>Auto</button><button type="button" data-f="pain" aria-pressed="false"><i style="--c:var(--jr-pain);border-radius:50%"></i>Pain points</button><button type="button" data-f="tpi" aria-pressed="false"><i style="--c:var(--jr-tpi)"></i>TPI</button></div><p class="jr-status" role="status" aria-live="polite"></p><p class="jr-hint">Scroll to travel · click any step for the detail · Esc to go back</p></div>
+<div class="jr-track"></div>
+<aside class="jr-drawer" hidden aria-label="Details"></aside>
+
+<div class="jr-loading" role="status" hidden></div>
+</div></div>
+</section>
+<script type="module" src="scene.js?v=20261023-o2c10"></script>
 
 <section id="telemetry-detail-modal" class="handoff-overlay" hidden aria-modal="true" role="dialog">
   <div class="handoff-backdrop"></div>

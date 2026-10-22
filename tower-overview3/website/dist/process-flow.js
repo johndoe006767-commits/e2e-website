@@ -1,5 +1,5 @@
-import {createFlowModel} from './flow-models.js?v=20261019-az';
-import {organs} from './organs.js?v=20261019-az';
+import {createFlowModel} from './flow-models.js?v=20261023-o2c10';
+import {organs} from './organs.js?v=20261023-o2c10';
 const $=s=>document.querySelector(s);
 // Native-DOM port of e2e-draft1's ActivityInfusion. The document replaces its dialog scroll host.
 export function initProcessFlow(data){
@@ -31,7 +31,7 @@ export function initProcessFlow(data){
  function draw(){
   frame=0;if(section.hidden||!rows.length)return;layout();
   const rect=root.getBoundingClientRect(),start=connections.start?.y??136,finish=end.offsetTop+(connections.end?.y??32);
-  const atBottom=scrollY>0&&scrollY+innerHeight>=document.documentElement.scrollHeight-3;
+  const atBottom=section.getBoundingClientRect().bottom<=innerHeight+3||(scrollY>0&&scrollY+innerHeight>=document.documentElement.scrollHeight-3);
   const leading=atBottom?finish:Math.max(start,Math.min(finish,innerHeight*.56-rect.top));
   const length=track.getTotalLength();let lo=0,hi=length;
   for(let i=0;i<15;i++){const mid=(lo+hi)/2;if(track.getPointAtLength(mid).y<leading)lo=mid;else hi=mid;}

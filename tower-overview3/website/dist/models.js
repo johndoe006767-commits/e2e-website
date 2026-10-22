@@ -3,9 +3,9 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
-import { organs, loadOrganGeometry, colorsFor } from './organs.js?v=20261019-az';
-import { createNeuronNetwork } from './neurons.js?v=20261019-az';
-import { createPlexus, PLEXUS_PRESETS } from './plexus.js?v=20261019-az';
+import { organs, loadOrganGeometry, colorsFor } from './organs.js?v=20261023-o2c10';
+import { createNeuronNetwork } from './neurons.js?v=20261023-o2c10';
+import { createPlexus, PLEXUS_PRESETS } from './plexus.js?v=20261023-o2c10';
 export const replacementModels = new Map();
 
 // ---------- AstraZeneca glass (brand images Picture1-5) ----------

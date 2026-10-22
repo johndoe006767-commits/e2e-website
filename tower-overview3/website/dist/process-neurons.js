@@ -5,7 +5,10 @@ import * as T from 'three';
 export function createProcessNeurons(organ, group, processes, host) {
   group.visible = false;
   const neurons=group.children.filter(child=>/^Neuron \d+$/.test(child.name));
-  if(neurons.length!==processes.length)throw new Error('Process and neuron counts must match');
+  if(neurons.length<processes.length)throw new Error('More processes than neurons');
+  // a tower can list fewer processes than its organ has neurons: hide the spares and the connections that run to them
+  neurons.slice(processes.length).forEach(n=>{n.visible=false;});
+  group.traverse(m=>{if(m.userData.ends?.some(i=>i>=processes.length))m.visible=false;});
   const nodes = processes.map((process, i) => {
     const neuron=neurons[i];
     neuron.userData.processId=process.id;
