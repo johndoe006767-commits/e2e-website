@@ -42,7 +42,32 @@ Use `?sep=0` for the assembled body and `?sep=1` for the separated view.
 
 For high resolution, take a browser screenshot at 2× device scale. `scripts/qa/shoot.mjs` does this with `--query still=lungs --sizes 1920x1080`.
 
+## O2C process map journey (journey.js, journey.css)
+When the intestines (O2C) are zoomed in, scrolling down leads to the manager's O2C process map (`D2P_O2C_Process_Map_v15_AI_suggested (1).html` at the repo root). It is laid out as one horizontal track: scrolling down moves it sideways, from phase 1 to phase 6, then Handoffs.
+- The geometry is the manager's own. `node scripts/o2c-map/extract.mjs` runs that page's renderer headlessly and writes `dist/data/maps/o2c.json`. Every box, diamond, pill and arrow therefore sits where the original puts it, and only the skin is ours. Re-run the extractor whenever the manager's file changes; `--check` asserts the counts.
+- Skin:
+  - gold phase headers, which turn blue in the AI view;
+  - white glass step boxes, with the execution colour on the left edge and number badge;
+  - purple decision diamonds;
+  - mulberry triggers;
+  - gold output documents;
+  - partner pills in each tower's own colour, and platinum for outside parties.
+- The As-Is / AI suggested switch "heals" the map: the gold sweep moves left to right, changed steps re-colour, red "!" becomes green "✔", and AI nodes fade in. Under reduced motion the swap is instant. The AI view adds three stations: AI opportunities, the pain-point register and related TPIs.
+- Every step, decision and card opens a detail card on click or Enter. Esc closes it.
+- **Condition skin (sick → healed).** The journey sits on a dark night sky. The As-Is map is the organ unwell:
+  - mulberry/magenta glass panels with a fever glow, and a header gradient from mulberry to gold carrying an irregular heartbeat trace;
+  - steps with an untreated pain point throb with a red halo;
+  - flow pulses are slow and uneven in red, and rework loops show in red.
+
+  The AI suggested map is the organ healed:
+  - navy/light-blue glass fades in phase by phase, and the heartbeat steadies;
+  - steps changed by AI glow light blue, and changes that address a pain point glow lime;
+  - the flow runs steady and bright.
+
+  Content is identical in both. Only the classes `ai-on` and `healed` (set in `paint()`) and the CSS block "Condition skin" in `journey.css` drive the look.
+- Tunables are at the top of `journey.js`: `MIN_SCALE` (0.85; a station never shrinks below this, and taller ones dip down as you scroll), `GAIN` (travel per scroll pixel) and `GAP` (space between stations).
+
 ## QA
-`node scripts/qa/shoot.mjs --out qa-out/<name>` captures screenshots at six sizes. It also records draw calls and frame times, and checks that the process cards don't overlap the HUD.
+`node scripts/qa/shoot.mjs --out qa-out/<name>` captures screenshots at six sizes. It also records draw calls and frame times, and checks that the process cards don't overlap the HUD. Journey states: `--states journey:SOC-01,journey-ai:ai-opps` (a station id or progress 0–1); add `--click "<node id>" --click-state <state>` to open a detail card.
 
 Overview at the time of the restyle: about 74 draw calls (was ~1,362), 60 fps on an AMD Radeon 740M.

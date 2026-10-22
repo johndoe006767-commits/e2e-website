@@ -1,6 +1,6 @@
 // Overview tower cards: the manual / semi-automated / automated step mix, pain points and TPIs.
 // The numbers come from TOWER_HEALTH in scene.js, the same figures the zoomed-in vital-signs panel shows.
-import {towerColors, AZ} from './organs.js?v=20261019-az';
+import {towerColors, AZ} from './organs.js?v=20261023-o2c10';
 
 export const accentFor = id => towerColors[id]?.base || AZ.platinum;
 export const inkFor = id => towerColors[id]?.cardText || AZ.graphite;

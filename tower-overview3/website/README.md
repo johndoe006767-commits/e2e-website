@@ -8,6 +8,8 @@ Keep its terminal window open; press Control+C to stop the server.
 
 - `dist/`: the complete editable website, including HTML, CSS, JavaScript, required assets, data, and licenses. Local preview and Sites use these same files.
 - `scripts/serve.py`: the local HTTP server and browser launcher.
+- `scripts/o2c-map/extract.mjs`: regenerates `dist/data/maps/o2c.json` (the O2C process-map journey) from the manager's map HTML at the repo root. Run `node scripts/o2c-map/extract.mjs`, then `--check`.
+- `scripts/qa/shoot.mjs`: headless-Chrome screenshots and checks.
 - `.openai/hosting.json`: Sites hosting configuration.
 
 No build, npm install, or external project folder is required. Edit the files in `dist/` directly.

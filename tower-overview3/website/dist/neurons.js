@@ -101,9 +101,10 @@ export function createNeuronNetwork(brain, corticalMeshes, options = {}) {
   });
   const somaGeometry = new THREE.SphereGeometry(0.034, 20, 14);
   const nucleusGeometry = new THREE.SphereGeometry(0.013, 12, 8);
-  function tube(points, radius, mat, parent, segments = 12) {
+  function tube(points, radius, mat, parent, segments = 12, ends = null) {
     const curve = new THREE.CatmullRomCurve3(points);
     const mesh = new THREE.Mesh(new THREE.TubeGeometry(curve, segments, radius, 5, false), mat);
+    if (ends) mesh.userData.ends = ends;
     mesh.renderOrder = 5;
     parent.add(mesh);
   }
@@ -172,7 +173,7 @@ export function createNeuronNetwork(brain, corticalMeshes, options = {}) {
     }
     points[0].copy(neurons[a].position);
     points[32].copy(neurons[b].position);
-    tube(points, 0.003, connection, links, 96);
+    tube(points, 0.003, connection, links, 96, [a, b]);
   }
   return network;
 }

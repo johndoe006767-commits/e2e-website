@@ -82,6 +82,20 @@ const LAYOUT = `(() => { const R = el => { const r = el.getBoundingClientRect();
     if (Math.min(a.r, b.r) - Math.max(a.x, b.x) > 1 && Math.min(a.b, b.b) - Math.max(a.y, b.y) > 1) overlaps.push(keys[i] + '/' + keys[j]); }
   return {mode: items.hud ? (items.hud.x > innerWidth / 2 ? 'columns' : 'rows') : null, overlaps, off, cards: keys.filter(k => k.startsWith('card')).length}; })()`;
 
+// Journey: nodes overlapping within one phase (beyond designed pill bands), clipped text, and what is on screen.
+const JOURNEY_LAYOUT = `(() => { const j = window.__journey; if (!j) return null; const st = j.state();
+  const vis = el => !el.closest('.off') && !el.closest('.jr-off') && el.getBoundingClientRect().width > 0;
+  const overlaps = [], overflow = [];
+  for (const ph of document.querySelectorAll('#journey .jr-phase')) {
+    const els = [...ph.querySelectorAll(':scope > .jr-it')].filter(vis).map(e => ({id: e.dataset.id || e.querySelector('[data-id]')?.dataset.id || e.className, r: (e.querySelector('.nd') || e).getBoundingClientRect()}));
+    for (let i = 0; i < els.length; i++) for (let k = i + 1; k < els.length; k++) { const a = els[i].r, b = els[k].r;
+      if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 2 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 2) overlaps.push(els[i].id + ' / ' + els[k].id); }
+  }
+  for (const e of document.querySelectorAll('#journey .jr-head h3, #journey .jr-rail button, #journey .jr-title')) if (vis(e) && e.scrollWidth > e.clientWidth + 1) overflow.push((e.textContent || '').trim().slice(0, 40));
+  const rail = document.querySelector('#journey .jr-rail'); if (rail && rail.scrollWidth > rail.clientWidth + 1) overflow.push('rail ' + rail.scrollWidth + '>' + rail.clientWidth);
+  const inView = st.stations.filter(s => { const r = j.stationRect(s.id); return r && r.right > 0 && r.left < innerWidth; }).map(s => s.id);
+  return {sky: window.__journeySky || null, mode: st.mode, scale: Math.round(st.s * 1000) / 1000, trackW: Math.round(st.trackW), pathLen: Math.round(st.pathLen), docH: document.documentElement.scrollHeight, inView, overlaps, overflow, hScroll: document.documentElement.scrollWidth > innerWidth}; })()`;
+
 const report = {base, query, reducedMotion: !flag('motion'), runs: []};
 for (const size of sizes) {
   const mobile = size.endsWith('m'); const [W, H] = size.replace('m', '').split('x').map(Number);
@@ -97,13 +111,24 @@ for (const size of sizes) {
     if (kind === 'separated') await js(`(() => { const a = document.querySelector('#assembly'); a.value = '1000'; a.dispatchEvent(new Event('input', {bubbles: true})); })()`);
     if (kind === 'assembled') await js(`(() => { const a = document.querySelector('#assembly'); a.value = '0'; a.dispatchEvent(new Event('input', {bubbles: true})); })()`);
     if (kind === 'detail' || kind === 'flow') await js(`document.querySelectorAll('#labels .label')[${Number(arg1)}]?.click()`);
+    if (kind === 'journey' || kind === 'journey-ai') {
+      // zoom O2C (label 7) once, then travel; the organ stays selected between journey states
+      if (!(await js(`!!window.__journey?.active`))) { await js(`document.querySelectorAll('#labels .label')[7]?.click()`); await sleep(3500); }
+      await js(`window.__journey.ready()`);
+      await js(`window.__journey.setMode('${kind === 'journey-ai' ? 'tobe' : 'asis'}')`); await sleep(flag('motion') ? 2600 : 300);
+      const target = /^[\d.]+$/.test(arg1) ? Number(arg1) : JSON.stringify(arg1);
+      await js(`window.__journey.go(${target}, {instant: true})`); await sleep(700);
+      const click = arg('click', ''); if (click && state === arg('click-state', '')) { await js(`document.querySelector('#journey [data-id="${click}"]')?.click()`); await sleep(600); }
+    }
     await sleep(kind === 'detail' || kind === 'flow' ? 3500 : 2500);
-    if (kind === 'flow') { await js(`document.querySelector('#process-neurons .process-plus')?.click()`); await sleep(3500); }
+    if (kind === 'flow') { await js(`(document.querySelector('[data-process-id="intestines-1"] .process-plus')||document.querySelector('#process-neurons .process-plus'))?.click()`); await sleep(3500); }
     const entry = {metrics: await js(METRICS)};
     if (kind === 'detail') entry.layout = await js(LAYOUT);
+    if (kind.startsWith('journey')) entry.journey = await js(JOURNEY_LAYOUT);
     if (kind === 'flow') entry.flow = await js(`(() => { const s = document.querySelector('#process-section'); const c = document.querySelector('#flow-brain canvas'); return {shown: !!s && !s.hidden, organCanvas: !!c && c.width > 0}; })()`);
     entry.file = await shot(`${size}-${state.replace(':', '-')}`);
     run.states[state] = entry;
+    if (kind.startsWith('journey') && !states[states.indexOf(state) + 1]?.startsWith('journey')) { await js(`scrollTo(0, 0)`); await sleep(400); await js(`document.querySelector('#back')?.click()`); await sleep(1500); }
     if (kind === 'flow') { await js(`document.querySelector('#flow-back')?.click()`); await sleep(1500); }
     if (kind === 'detail' || kind === 'flow') { await js(`document.querySelector('#back')?.click()`); await sleep(1500); }
   }

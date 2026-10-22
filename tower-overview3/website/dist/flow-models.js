@@ -1,8 +1,8 @@
 import * as T from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
-import {replacementModels} from './models.js?v=20261019-az';
-import {colorsFor} from './organs.js?v=20261019-az';
+import {replacementModels} from './models.js?v=20261023-o2c10';
+import {colorsFor} from './organs.js?v=20261023-o2c10';
 
 // Same rounded IV-bag geometry as e2e-draft1's process endpoint.
 function roundedGeometry(w,h,d,r){
@@ -12,7 +12,7 @@ function roundedGeometry(w,h,d,r){
  for(let i=0;i<p.count;i++){v.fromBufferAttribute(p,i);inside.copy(v).clamp(negative,limit);v.sub(inside).normalize().multiplyScalar(r).add(inside);p.setXYZ(i,v.x,v.y,v.z);}
  g.computeVertexNormals();return g;
 }
-export function createFlowModel(host,kind,onConnection){
+export function createFlowModel(host,kind,onConnection,{zoom=1}={}){
  const renderer=new T.WebGLRenderer({alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.94;
  host.append(renderer.domElement);renderer.domElement.setAttribute('aria-hidden','true');
  const scene=new T.Scene(),camera=new T.PerspectiveCamera(32,1,.1,30);camera.position.z=7;
@@ -52,7 +52,7 @@ export function createFlowModel(host,kind,onConnection){
    for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z]){
     distance=Math.max(distance,z+Math.abs(x)/(tan*camera.aspect*.8),z+Math.abs(y)/(tan*.8));
    }
-   camera.position.z=distance;
+   camera.position.z=distance/zoom;
    point=bounds.getCenter(new T.Vector3());point.y=bounds.max.y*.96;
   }
   camera.updateProjectionMatrix();camera.updateMatrixWorld(true);renderer.render(scene,camera);
